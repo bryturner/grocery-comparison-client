@@ -9,8 +9,8 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   gap: 0.5rem;
-  border: 0.5px solid gray;
-  border-radius: 8px;
+  border: 0.5px solid black;
+  border-radius: 2px;
   align-items: center;
   padding: 0.5rem;
 `;
@@ -19,6 +19,7 @@ const Title = styled.p``;
 
 const SearchInput = styled.input`
   padding: 0.2rem;
+  border: none;
 `;
 
 function SearchBox() {
