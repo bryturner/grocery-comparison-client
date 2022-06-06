@@ -22,12 +22,17 @@ const SearchInput = styled.input`
   border: none;
 `;
 
-function SearchBox() {
+function SearchBox({ setSearchQuery, searchQuery }) {
   return (
     <Container>
       <Title>Find product:</Title>
       <Wrapper>
-        <SearchInput placeholder="Search by name" />
+        <SearchInput
+          type="search"
+          placeholder="Search by name"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
         <Search style={{ color: "black", fontSize: 16 }} />
       </Wrapper>
     </Container>
