@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Product from "../Product/Product";
-import ProductList from "../Product/ProductList";
-import { BORDER } from "../../constants/styles";
+
+import { BORDER, LIST } from "../../constants/styles";
+import { useContext } from "react";
+import ProductsContext from "../../contexts/ProductsContext";
 
 const Container = styled.div`
   grid-column: 3 / -1;
@@ -13,17 +15,18 @@ const Title = styled.h2`
   margin-bottom: 1.2rem;
 `;
 
-const ListContainer = styled.div`
+const ProductList = styled.ul`
   ${[BORDER.MAIN]}
+  ${[LIST.PRODUCT]}
 `;
 
 function FavoritesList() {
+  const { favoritesList } = useContext(ProductsContext);
+
   return (
     <Container>
       <Title>Favorites List</Title>
-      <ListContainer>
-        <ProductList />
-      </ListContainer>
+      <ProductList></ProductList>
     </Container>
   );
 }

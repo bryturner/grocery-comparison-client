@@ -1,14 +1,15 @@
 import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
-import ComparisonPage from "../pages/ComparisonPage";
+import { Route, Routes } from "react-router-dom";
+import Home from "../pages/HomePage";
+import { ProductsContextProvider } from "../contexts/ProductsContext";
 
 function Router() {
   return (
-    <>
+    <ProductsContextProvider>
       <Routes>
-        <Route path="/" element={<ComparisonPage />} />
+        <Route path="/" element={<Home />} />
       </Routes>
-    </>
+    </ProductsContextProvider>
   );
 }
 

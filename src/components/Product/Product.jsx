@@ -1,5 +1,7 @@
 import { Add, FavoriteBorderOutlined } from "@mui/icons-material";
+import { useContext } from "react";
 import styled from "styled-components";
+import ProductsContext from "../../contexts/ProductsContext";
 
 const Container = styled.li``;
 const Wrapper = styled.div`
@@ -7,17 +9,29 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: flex-end;
 `;
-const Title = styled.p``;
+const Title = styled.p`
+  flex: 2;
+`;
 
-const Price = styled.p``;
+const Price = styled.p`
+  flex: 1;
+  text-align: center;
+`;
 
-const Amount = styled.p``;
+const Amount = styled.p`
+  flex: 1;
+  text-align: center;
+`;
 
-const Increment = styled.p``;
+const Increment = styled.p`
+  flex: 1;
+  text-align: center;
+`;
 
 const ButtonContainer = styled.div`
   display: flex;
   gap: 0.8rem;
+  /* flex: 1; */
 `;
 
 const Button = styled.button`
@@ -29,13 +43,27 @@ const Button = styled.button`
 `;
 
 function Product({ product }) {
+  const { favoritesList, setFavoritesList } = useContext(ProductsContext);
+
+  const formatTitle = (title) => {
+    let formattedTitle = title;
+    if (title.includes("Naturaplan")) {
+      formattedTitle = title.replace("Naturaplan", "");
+    }
+
+    if (title.includes("ca.")) {
+      formattedTitle = title.slice(0, title.indexOf("ca."));
+    }
+
+    return formattedTitle;
+  };
   return (
     <Container>
       <Wrapper>
-        <Title>Apples</Title>
-        <Increment>3.60/1kg</Increment>
-        <Amount>1kg</Amount>
-        <Price>3.60</Price>
+        <Title>{formatTitle(product.title)}</Title>
+        <Increment>{product.incrementString}</Increment>
+        {/* <Amount>{product.quantityString}</Amount> */}
+        <Price>{product.price.toFixed(2)}</Price>
         <ButtonContainer>
           <Button>
             <FavoriteBorderOutlined />
