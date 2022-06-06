@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import ProductList from "../Product/ProductList";
+import { LIST } from "../../constants/styles";
+import Product from "../Product/Product";
 
 const Container = styled.li`
   display: flex;
@@ -11,13 +12,17 @@ const StoreName = styled.h3`
   border-bottom: 1px solid black;
 `;
 
-const ListItem = styled.li``;
+const ProductList = styled.ul`
+  ${[LIST.PRODUCT]}
+`;
 
 function GroceryListItem({ storeName }) {
   return (
     <Container>
       <StoreName>{storeName}</StoreName>
-      <ProductList />
+      <ProductList>
+        <Product />
+      </ProductList>
     </Container>
   );
 }
