@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import GroceryList from "../components/Lists/GroceryList";
-import CategoryFilter from "../components/Inputs/CategoryFilter/CategoryFilter";
-
-import SearchBox from "../components/Inputs/SelectBox/SearchBox";
-import Sort from "../components/Inputs/Sort/Sort";
-import Store from "../components/Store/Store";
-import FavoritesList from "../components/Lists/FavoritesList";
 import { useState } from "react";
-import { user, storeNames } from "../assets/data";
+
+import CategoryFilter from "../components/CategoryFilter/CategoryFilter";
+import GroceryList from "../components/GroceryList/GroceryList";
+import SearchBox from "../components/SearchBox/SearchBox";
+import Sort from "../components/Sort/Sort";
+import StoreList from "../components/StoreList/StoreList";
+import FavoritesList from "../components/FavoritesList/FavoritesList";
+import { user, storeNames, allProducts } from "../assets/data";
 
 const Container = styled.div`
   padding: 2rem;
@@ -46,6 +46,7 @@ const ListButton = styled.button`
 `;
 
 function HomePage() {
+  const [products, setProducts] = useState(allProducts);
   const [category, setCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -56,15 +57,14 @@ function HomePage() {
         <CategoryFilter setCategory={setCategory} />
         <SearchBox setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
         <Sort />
-
-        {/* <Filter /> */}
       </InputsContainer>
       <Grid>
         {storeNames.map((storeName) => (
-          <Store
+          <StoreList
             storeName={storeName}
             category={category}
             searchQuery={searchQuery}
+            products={products}
             key={storeName}
           />
         ))}

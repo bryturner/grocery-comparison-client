@@ -21,7 +21,7 @@ const ProductList = styled.ul`
   height: 20rem;
 `;
 
-function Store({ storeName, category, searchQuery }) {
+function StoreList({ storeName, category, searchQuery }) {
   const [products, setProducts] = useState(allProducts);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
@@ -58,4 +58,4 @@ function Store({ storeName, category, searchQuery }) {
   );
 }
 
-export default Store;
+export default StoreList;
