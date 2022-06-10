@@ -1,7 +1,7 @@
 import { Add, FavoriteBorderOutlined } from "@mui/icons-material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
-import ProductsContext from "../../contexts/ProductsContext";
+import { user } from "../../assets/data";
 
 const Container = styled.li``;
 const Wrapper = styled.div`
@@ -43,7 +43,7 @@ const Button = styled.button`
 `;
 
 function Product({ product }) {
-  const { favoritesList, setFavoritesList } = useContext(ProductsContext);
+  const [favoritesList, setFavoritesList] = useState(user.favoritesList);
 
   const formatTitle = (title) => {
     let formattedTitle = title;
@@ -62,7 +62,6 @@ function Product({ product }) {
       <Wrapper>
         <Title>{formatTitle(product.title)}</Title>
         <Increment>{product.incrementString}</Increment>
-        {/* <Amount>{product.quantityString}</Amount> */}
         <Price>{product.price.toFixed(2)}</Price>
         <ButtonContainer>
           <Button>

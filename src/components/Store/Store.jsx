@@ -53,11 +53,6 @@ function Store({ storeName, category, searchQuery }) {
           : products
               .filter((product) => product.storeName === storeName)
               .map((product, i) => <Product product={product} key={i} />)}
-        {/* {products
-          .filter((product) => product.storeName === storeName)
-          .map((product, i) => (
-            <Product product={product} key={i} />
-          ))} */}
       </ProductList>
     </Container>
   );

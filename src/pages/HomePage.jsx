@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import GroceryList from "../components/Lists/GroceryList";
-import CategoryFilter from "../components/Inputs/CategoryFilter";
+import CategoryFilter from "../components/Inputs/CategoryFilter/CategoryFilter";
 
-import SearchBox from "../components/Inputs/SearchBox";
-import Sort from "../components/Inputs/Sort";
+import SearchBox from "../components/Inputs/SelectBox/SearchBox";
+import Sort from "../components/Inputs/Sort/Sort";
 import Store from "../components/Store/Store";
 import FavoritesList from "../components/Lists/FavoritesList";
 import { useState } from "react";

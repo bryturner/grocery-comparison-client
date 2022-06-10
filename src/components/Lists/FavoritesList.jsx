@@ -2,8 +2,6 @@ import styled from "styled-components";
 import Product from "../Product/Product";
 
 import { BORDER, LIST } from "../../constants/styles";
-import { useContext } from "react";
-import ProductsContext from "../../contexts/ProductsContext";
 
 const Container = styled.div`
   grid-column: 3 / -1;
@@ -21,8 +19,6 @@ const ProductList = styled.ul`
 `;
 
 function FavoritesList() {
-  const { favoritesList } = useContext(ProductsContext);
-
   return (
     <Container>
       <Title>Favorites List</Title>
