@@ -2,7 +2,7 @@ import axios from "axios";
 import { BrowserRouter } from "react-router-dom";
 
 import Router from "./routes/Router";
-import GlobalStyles from "./assets/GlobalStyles";
+import GlobalStyles from "./GlobalStyles";
 
 axios.defaults.withCredentials = true;
 function App() {

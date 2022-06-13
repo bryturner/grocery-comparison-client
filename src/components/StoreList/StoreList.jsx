@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 import { BORDER, LIST } from "../../constants/styles";
 import Product from "../Product/Product";
-import { allProducts } from "../../assets/data";
 
 const Container = styled.div`
   padding: 1rem 0;
@@ -21,8 +20,16 @@ const ProductList = styled.ul`
   height: 20rem;
 `;
 
-function StoreList({ storeName, category, searchQuery }) {
-  const [products, setProducts] = useState(allProducts);
+function StoreList({
+  storeName,
+  category,
+  searchQuery,
+  products,
+  favorites,
+  setFavorites,
+  groceryList,
+  setGroceryList,
+}) {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const filterProducts = () => {
@@ -49,10 +56,28 @@ function StoreList({ storeName, category, searchQuery }) {
         {category
           ? filteredProducts
               .filter((product) => product.storeName === storeName)
-              .map((product, i) => <Product product={product} key={i} />)
+              .map((product, i) => (
+                <Product
+                  product={product}
+                  key={i}
+                  favorites={favorites}
+                  setFavorites={setFavorites}
+                  groceryList={groceryList}
+                  setGroceryList={setGroceryList}
+                />
+              ))
           : products
               .filter((product) => product.storeName === storeName)
-              .map((product, i) => <Product product={product} key={i} />)}
+              .map((product, i) => (
+                <Product
+                  product={product}
+                  key={i}
+                  favorites={favorites}
+                  setFavorites={setFavorites}
+                  groceryList={groceryList}
+                  setGroceryList={setGroceryList}
+                />
+              ))}
       </ProductList>
     </Container>
   );

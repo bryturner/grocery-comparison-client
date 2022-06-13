@@ -8,21 +8,38 @@ const Container = styled.div`
   align-self: stretch;
 `;
 
-const Title = styled.h2`
+const Header = styled.h2`
   text-align: center;
   margin-bottom: 1.2rem;
 `;
 
-const ProductList = styled.ul`
+const List = styled.ul`
   ${[BORDER.MAIN]}
   ${[LIST.PRODUCT]}
 `;
 
-function FavoritesList() {
+const FavoritesText = styled.p`
+  text-align: center;
+`;
+
+function FavoritesList({ favorites, groceryList }) {
   return (
     <Container>
-      <Title>Favorites List</Title>
-      <ProductList></ProductList>
+      <Header>Favorites List</Header>
+      <List>
+        {Object.keys(favorites).length === 0 ? (
+          <FavoritesText>Add to favorites</FavoritesText>
+        ) : (
+          Object.values(favorites).map((product, i) => (
+            <Product
+              product={product}
+              favorites={favorites}
+              groceryList={groceryList}
+              key={i}
+            />
+          ))
+        )}
+      </List>
     </Container>
   );
 }

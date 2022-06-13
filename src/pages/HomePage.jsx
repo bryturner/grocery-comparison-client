@@ -7,7 +7,8 @@ import SearchBox from "../components/SearchBox/SearchBox";
 import Sort from "../components/Sort/Sort";
 import StoreList from "../components/StoreList/StoreList";
 import FavoritesList from "../components/FavoritesList/FavoritesList";
-import { user, storeNames, allProducts } from "../assets/data";
+import { user, storeNames, allProducts } from "../data";
+import { userItemsOnLists } from "../__mocks__/user";
 
 const Container = styled.div`
   padding: 2rem;
@@ -46,7 +47,11 @@ const ListButton = styled.button`
 `;
 
 function HomePage() {
+  // favorites list not passing through props...
+
   const [products, setProducts] = useState(allProducts);
+  const [favorites, setFavorites] = useState(user.favoritesList);
+  const [groceryList, setGroceryList] = useState(user.groceryList);
   const [category, setCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -65,12 +70,16 @@ function HomePage() {
             category={category}
             searchQuery={searchQuery}
             products={products}
+            favorites={favorites}
+            setFavorites={setFavorites}
+            groceryList={groceryList}
+            setGroceryList={setGroceryList}
             key={storeName}
           />
         ))}
 
-        {/* <GroceryList /> */}
-        <FavoritesList />
+        <GroceryList favorites={favorites} groceryList={groceryList} />
+        <FavoritesList favorites={favorites} groceryList={groceryList} />
         <ButtonContainer>
           <ListButton>Save list</ListButton>
           <ListButton>Share list</ListButton>

@@ -1,7 +1,7 @@
-import { Add, FavoriteBorderOutlined } from "@mui/icons-material";
-import { useContext, useState } from "react";
+import { Add, FavoriteBorderOutlined, Favorite } from "@mui/icons-material";
+import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { user } from "../../assets/data";
+import { user } from "../../data";
 
 const Container = styled.li``;
 const Wrapper = styled.div`
@@ -42,30 +42,62 @@ const Button = styled.button`
   justify-content: center;
 `;
 
-function Product({ product }) {
-  const [favoritesList, setFavoritesList] = useState(user.favoritesList);
-
+function Product({
+  product,
+  favorites,
+  setFavorites,
+  groceryList,
+  setGroceryList,
+}) {
+  // Use to remove unnecessary words from titles
   const formatTitle = (title) => {
     let formattedTitle = title;
     if (title.includes("Naturaplan")) {
       formattedTitle = title.replace("Naturaplan", "");
     }
-
     if (title.includes("ca.")) {
       formattedTitle = title.slice(0, title.indexOf("ca."));
     }
-
     return formattedTitle;
   };
+
+  const [userFavorite, setUserFavorite] = useState(product.userFavorite);
+
+  const handleFavoriteClick = (id) => {
+    if (userFavorite) {
+      const newFavorites = favorites;
+      delete newFavorites[id];
+      const updatedFavorites = (prevState) => {
+        return { ...prevState, ...newFavorites };
+      };
+      setFavorites(updatedFavorites);
+    }
+    if (!userFavorite) setFavorites({ ...favorites, [id]: product });
+  };
+
+  const checkFavorites = useCallback(() => {
+    if (!favorites[product._id]) setUserFavorite(false);
+    if (favorites[product._id]) setUserFavorite(true);
+  }, [product, favorites, setUserFavorite]);
+
+  useEffect(() => {
+    checkFavorites();
+  }, [checkFavorites]);
+
   return (
     <Container>
       <Wrapper>
-        <Title>{formatTitle(product.title)}</Title>
-        <Increment>{product.incrementString}</Increment>
-        <Price>{product.price.toFixed(2)}</Price>
+        <Title data-testid="product-title">{product.title}</Title>
+        <Increment data-testid="product-increment">
+          {product.incrementString}
+        </Increment>
+        <Price data-testid="product-price">{product.price.toFixed(2)}</Price>
         <ButtonContainer>
-          <Button>
-            <FavoriteBorderOutlined />
+          <Button
+            aria-label="favorite"
+            onClick={() => handleFavoriteClick(product._id)}
+          >
+            {userFavorite ? <Favorite /> : <FavoriteBorderOutlined />}
           </Button>
           <Button>
             <Add />
