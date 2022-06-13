@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Product from "../Product";
 import {
@@ -112,16 +112,32 @@ describe("Product displaying correct icons based on state", () => {
     expect(screen.getByTestId("FavoriteIcon")).toBeInTheDocument();
   });
 
-  //   test("should render product with remove icon", () => {
-  //     render(
-  //       <Product
-  //         product={testProductOnGroceryList}
-  //         favorites={{}}
-  //         setFavorites={mockedFavorites}
-  //         groceryList={{}}
-  //         setGroceryList={mockedGroceryList}
-  //       />
-  //     );
-  //     expect(screen.getByTestId("RemoveIcon")).toBeInTheDocument();
-  //   });
+  test("should render product with remove icon", () => {
+    render(
+      <Product
+        product={testProductOnGroceryList}
+        favorites={userItemsOnLists.favoritesList}
+        setFavorites={mockedFavorites}
+        groceryList={userItemsOnLists.groceryList}
+        setGroceryList={mockedGroceryList}
+      />
+    );
+    expect(screen.getByTestId("RemoveIcon")).toBeInTheDocument();
+  });
+});
+
+describe("Product button icons change on click event", () => {
+  test("should call handle favorites function", () => {
+    render(
+      <Product
+        product={testProduct}
+        favorites={userEmptyLists.favoritesList}
+        setFavorites={mockedFavorites}
+        groceryList={userEmptyLists.groceryList}
+        setGroceryList={mockedGroceryList}
+      />
+    );
+    fireEvent.click(screen.getByRole("button", { name: "favorite" }));
+    expect(mockedFavorites).toHaveBeenCalled();
+  });
 });

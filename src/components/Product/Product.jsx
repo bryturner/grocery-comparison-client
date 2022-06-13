@@ -1,4 +1,9 @@
-import { Add, FavoriteBorderOutlined, Favorite } from "@mui/icons-material";
+import {
+  Add,
+  Remove,
+  FavoriteBorderOutlined,
+  Favorite,
+} from "@mui/icons-material";
 import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { user } from "../../data";
@@ -11,6 +16,11 @@ const Wrapper = styled.div`
 `;
 const Title = styled.p`
   flex: 2;
+`;
+
+const Store = styled.p`
+  flex: 1;
+  text-align: center;
 `;
 
 const Price = styled.p`
@@ -48,6 +58,7 @@ function Product({
   setFavorites,
   groceryList,
   setGroceryList,
+  displayStoreName,
 }) {
   // Use to remove unnecessary words from titles
   const formatTitle = (title) => {
@@ -62,6 +73,7 @@ function Product({
   };
 
   const [userFavorite, setUserFavorite] = useState(product.userFavorite);
+  const [onGroceryList, setOnGroceryList] = useState(product.onGroceryList);
 
   const handleFavoriteClick = (id) => {
     if (userFavorite) {
@@ -75,19 +87,45 @@ function Product({
     if (!userFavorite) setFavorites({ ...favorites, [id]: product });
   };
 
+  const handleGroceryListClick = (id) => {
+    if (onGroceryList) {
+      const newGroceryList = groceryList;
+      delete newGroceryList[id];
+      const updatedGroceryList = (prevState) => {
+        return { ...prevState, ...newGroceryList };
+      };
+      setGroceryList(updatedGroceryList);
+    }
+    if (!onGroceryList) setGroceryList({ ...groceryList, [id]: product });
+  };
+
   const checkFavorites = useCallback(() => {
     if (!favorites[product._id]) setUserFavorite(false);
     if (favorites[product._id]) setUserFavorite(true);
   }, [product, favorites, setUserFavorite]);
 
+  const checkGroceryList = useCallback(() => {
+    if (!groceryList[product._id]) setOnGroceryList(false);
+    if (groceryList[product._id]) setOnGroceryList(true);
+  }, [product, groceryList, setOnGroceryList]);
+
   useEffect(() => {
     checkFavorites();
   }, [checkFavorites]);
+
+  useEffect(() => {
+    checkGroceryList();
+  }, [checkGroceryList]);
 
   return (
     <Container>
       <Wrapper>
         <Title data-testid="product-title">{product.title}</Title>
+        {displayStoreName ? (
+          <Store data-testid="product-store">{product.storeName}</Store>
+        ) : (
+          <></>
+        )}
         <Increment data-testid="product-increment">
           {product.incrementString}
         </Increment>
@@ -99,8 +137,11 @@ function Product({
           >
             {userFavorite ? <Favorite /> : <FavoriteBorderOutlined />}
           </Button>
-          <Button>
-            <Add />
+          <Button
+            aria-label="grocery-list"
+            onClick={() => handleGroceryListClick(product._id)}
+          >
+            {onGroceryList ? <Remove /> : <Add />}
           </Button>
         </ButtonContainer>
       </Wrapper>

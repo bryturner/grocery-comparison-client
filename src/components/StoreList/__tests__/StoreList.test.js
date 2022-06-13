@@ -1,7 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, getByRole, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import StoreList from "../StoreList";
 import { allProducts } from "../../../__mocks__/products";
+import { userEmptyLists } from "../../../__mocks__/user";
 
 const mockedFavorites = jest.fn();
 const mockedGroceryList = jest.fn();
@@ -56,3 +57,23 @@ describe("StoreList", () => {
     expect(screen.getAllByRole("listitem").length).toBe(5);
   });
 });
+
+// describe("Products on store list", () => {
+//   test("should display filled favorite icon", () => {
+//     render(
+//       <StoreList
+//         storeName="Coop"
+//         category={"all"}
+//         searchQuery={""}
+//         products={allProducts}
+//         favorites={userEmptyLists.favoritesList}
+//         groceryList={userEmptyLists.groceryList}
+//         setFavorites={mockedFavorites}
+//         setGroceryList={mockedGroceryList}
+//       />
+//     );
+
+//     fireEvent.click(screen.getByRole("button", { name: "favorite" }));
+//     expect(screen.getByTestId("FavoriteIcon")).toBeInTheDocument();
+//   });
+// });

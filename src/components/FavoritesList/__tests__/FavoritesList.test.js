@@ -9,7 +9,7 @@ describe("FavoritesList", () => {
     expect(screen.getByRole("list")).toBeInTheDocument();
   });
 
-  test("should render an empty favorites list", () => {
+  test("should render an empty favorites list with text", () => {
     render(
       <FavoritesList
         favorites={userEmptyLists.favoritesList}
