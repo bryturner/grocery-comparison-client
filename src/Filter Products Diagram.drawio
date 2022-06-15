@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-06-15T08:14:26.119Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36" etag="Ocn13D6I9l8GYIgedH_e" version="15.9.4" type="github" pages="4">
+<mxfile host="app.diagrams.net" modified="2022-06-15T15:37:15.536Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36" etag="7-6_FKfYAMtR1gqD76UY" version="15.9.4" type="github" pages="5">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="At page load all actions">
     <mxGraphModel dx="1426" dy="1516" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="980" pageHeight="690" math="0" shadow="0">
       <root>
@@ -458,6 +458,97 @@
         </mxCell>
         <mxCell id="gKSusM-zNOTIbq969v2C-27" value="Store list order is reverted to original order" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="kgiIkx2p7KQdM61MY78I-1">
           <mxGeometry x="200" y="460" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="PdlFtr_QWR4QwXnpe5bL" name="DB setup">
+    <mxGraphModel dx="946" dy="646" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="980" pageHeight="690" math="0" shadow="0">
+      <root>
+        <mxCell id="gXQntKjG9dKZ7W0SXcRk-0" />
+        <mxCell id="gXQntKjG9dKZ7W0SXcRk-1" parent="gXQntKjG9dKZ7W0SXcRk-0" />
+        <mxCell id="3aViyYniEX1iSWWhYljI-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="gXQntKjG9dKZ7W0SXcRk-1" source="3aViyYniEX1iSWWhYljI-0" target="3aViyYniEX1iSWWhYljI-4">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="125" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="gXQntKjG9dKZ7W0SXcRk-1" source="3aViyYniEX1iSWWhYljI-0" target="3aViyYniEX1iSWWhYljI-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="gXQntKjG9dKZ7W0SXcRk-1" source="3aViyYniEX1iSWWhYljI-0" target="3aViyYniEX1iSWWhYljI-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="490" y="120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-0" value="Users Collection" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="160" y="100" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="gXQntKjG9dKZ7W0SXcRk-1" source="3aViyYniEX1iSWWhYljI-2" target="3aViyYniEX1iSWWhYljI-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-2" value="Favorites List" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="430" y="210" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="gXQntKjG9dKZ7W0SXcRk-1" source="3aViyYniEX1iSWWhYljI-3" target="3aViyYniEX1iSWWhYljI-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-3" value="Grocery List" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="280" y="210" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-4" value="&lt;blockquote style=&quot;margin: 0 0 0 40px ; border: none ; padding: 0px&quot;&gt;&lt;/blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;span&gt;&amp;nbsp;- _id&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px ; border: none ; padding: 0px&quot;&gt;&lt;/blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;span&gt;&amp;nbsp;- First name&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;blockquote style=&quot;margin: 0 0 0 40px ; border: none ; padding: 0px&quot;&gt;&lt;/blockquote&gt;&lt;span&gt;&lt;div&gt;&lt;span&gt;&amp;nbsp;- Email/Username&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;&lt;span&gt;&lt;div&gt;&lt;span&gt;&amp;nbsp;- Password&lt;/span&gt;&lt;/div&gt;&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;align=left;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="60" y="210" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="gXQntKjG9dKZ7W0SXcRk-1" source="3aViyYniEX1iSWWhYljI-15">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="955" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-15" value="Products Collection" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="880" y="80" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-16" value="Array of products on grocery list" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="280" y="290" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-18" value="Use db indices to compare products on user lists to products on store lists in order to mark them as favorited or saved on grocery list" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="270" y="30" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-20" value="Array of products on favorites list" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="430" y="290" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-24" value="Product Category" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="880" y="210" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="gXQntKjG9dKZ7W0SXcRk-1" source="3aViyYniEX1iSWWhYljI-25" target="3aViyYniEX1iSWWhYljI-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="gXQntKjG9dKZ7W0SXcRk-1" source="3aViyYniEX1iSWWhYljI-25" target="3aViyYniEX1iSWWhYljI-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-25" value="&amp;nbsp;- _id&lt;br&gt;&amp;nbsp;- Title&lt;br&gt;&amp;nbsp;- Category&lt;br&gt;&amp;nbsp;- Price&lt;br&gt;&amp;nbsp;-&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;align=left;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="880" y="325" width="150" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-26" value="Products Collection" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="1170" y="225" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-27" value="Products are most commonly accessed through a dropdown filter based on the grocery category (fruits, meats, etc)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="670" y="120" width="240" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-29" value="Search box input value filters products based on title displayed in store lists" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="860" y="520" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-30" value="Should reference both the grocery list and favorites list in order to toggle button icons on each product element if on either list. Uses db supplied _id as lookup" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="540" y="390" width="190" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="3aViyYniEX1iSWWhYljI-34" value="Products will be sorted into arrays based on the store name associated with each product" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="gXQntKjG9dKZ7W0SXcRk-1">
+          <mxGeometry x="1125" y="337.5" width="185" height="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
