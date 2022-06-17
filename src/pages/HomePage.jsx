@@ -47,8 +47,6 @@ const ListButton = styled.button`
 `;
 
 function HomePage() {
-  // favorites list not passing through props...
-
   const [products, setProducts] = useState(allProducts);
   const [favorites, setFavorites] = useState(user.favoritesList);
   const [groceryList, setGroceryList] = useState(user.groceryList);

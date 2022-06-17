@@ -56,10 +56,10 @@ function StoreList({
         {category
           ? filteredProducts
               .filter((product) => product.storeName === storeName)
-              .map((product, i) => (
+              .map((product) => (
                 <Product
                   product={product}
-                  key={i}
+                  key={product._id}
                   favorites={favorites}
                   setFavorites={setFavorites}
                   groceryList={groceryList}
@@ -68,10 +68,10 @@ function StoreList({
               ))
           : products
               .filter((product) => product.storeName === storeName)
-              .map((product, i) => (
+              .map((product) => (
                 <Product
                   product={product}
-                  key={i}
+                  key={product._id}
                   favorites={favorites}
                   setFavorites={setFavorites}
                   groceryList={groceryList}

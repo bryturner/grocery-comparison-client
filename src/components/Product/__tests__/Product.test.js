@@ -1,4 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  renderHook,
+  screen,
+} from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Product from "../Product";
 import {
@@ -8,6 +14,7 @@ import {
   testProductOnGroceryList,
 } from "../../../__mocks__/products";
 import { userItemsOnLists, userEmptyLists } from "../../../__mocks__/user";
+import userEvent from "@testing-library/user-event";
 
 const mockedFavorites = jest.fn();
 const mockedGroceryList = jest.fn();
