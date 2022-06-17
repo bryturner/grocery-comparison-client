@@ -6,14 +6,20 @@ import {
 } from "@mui/icons-material";
 import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-import { user } from "../../data";
+import SelectProductButton from "../buttons/SelectProductButton/SelectProductButton";
 
-const Container = styled.li``;
-const Wrapper = styled.div`
+const Container = styled.li`
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
   align-items: flex-end;
 `;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex: 6;
+  position: relative;
+`;
+
 const Title = styled.p`
   flex: 2;
 `;
@@ -28,11 +34,6 @@ const Price = styled.p`
   text-align: center;
 `;
 
-const Amount = styled.p`
-  flex: 1;
-  text-align: center;
-`;
-
 const Increment = styled.p`
   flex: 1;
   text-align: center;
@@ -41,7 +42,6 @@ const Increment = styled.p`
 const ButtonContainer = styled.div`
   display: flex;
   gap: 0.8rem;
-  /* flex: 1; */
 `;
 
 const Button = styled.button`
@@ -59,21 +59,19 @@ function Product({
   groceryList,
   setGroceryList,
   displayStoreName,
+  selectedProduct,
+  setSelectedProduct,
 }) {
-  // Use to remove unnecessary words from titles
-  const formatTitle = (title) => {
-    let formattedTitle = title;
-    if (title.includes("Naturaplan")) {
-      formattedTitle = title.replace("Naturaplan", "");
-    }
-    if (title.includes("ca.")) {
-      formattedTitle = title.slice(0, title.indexOf("ca."));
-    }
-    return formattedTitle;
-  };
-
   const [userFavorite, setUserFavorite] = useState(product.userFavorite);
   const [onGroceryList, setOnGroceryList] = useState(product.onGroceryList);
+
+  //   const handleProductClicked = () => {
+  //     if (selectedProduct === product) {
+  //       setSelectedProduct(undefined);
+  //     } else {
+  //       setSelectedProduct(product);
+  //     }
+  //   };
 
   const handleFavoriteClick = (id) => {
     if (userFavorite) {
@@ -99,52 +97,57 @@ function Product({
     if (!onGroceryList) setGroceryList({ ...groceryList, [id]: product });
   };
 
-  const checkFavorites = useCallback(() => {
-    if (!favorites[product._id]) setUserFavorite(false);
-    if (favorites[product._id]) setUserFavorite(true);
-  }, [product, favorites, setUserFavorite]);
+  //   const checkFavorites = useCallback(() => {
+  //     if (!favorites[product._id]) setUserFavorite(false);
+  //     if (favorites[product._id]) setUserFavorite(true);
+  //   }, [product, favorites, setUserFavorite]);
 
-  const checkGroceryList = useCallback(() => {
-    if (!groceryList[product._id]) setOnGroceryList(false);
-    if (groceryList[product._id]) setOnGroceryList(true);
-  }, [product, groceryList, setOnGroceryList]);
+  //   const checkGroceryList = useCallback(() => {
+  //     if (!groceryList[product._id]) setOnGroceryList(false);
+  //     if (groceryList[product._id]) setOnGroceryList(true);
+  //   }, [product, groceryList, setOnGroceryList]);
 
-  useEffect(() => {
-    checkFavorites();
-  }, [checkFavorites]);
+  //   useEffect(() => {
+  //     checkFavorites();
+  //   }, [checkFavorites]);
 
-  useEffect(() => {
-    checkGroceryList();
-  }, [checkGroceryList]);
+  //   useEffect(() => {
+  //     checkGroceryList();
+  //   }, [checkGroceryList]);
 
   return (
     <Container>
-      <Wrapper>
+      <TextContainer>
+        {/* <SelectProductButton
+          product={product}
+          selectedProduct={selectedProduct}
+          handleProductClicked={handleProductClicked}
+        /> */}
         <Title data-testid="product-title">{product.title}</Title>
-        {displayStoreName ? (
+        {/* {displayStoreName ? (
           <Store data-testid="product-store">{product.storeName}</Store>
         ) : (
           <></>
-        )}
+        )} */}
         <Increment data-testid="product-increment">
-          {product.incrementString}
+          {product.increment.incrStr}
         </Increment>
         <Price data-testid="product-price">{product.price.toFixed(2)}</Price>
-        <ButtonContainer>
-          <Button
-            aria-label="favorite"
-            onClick={() => handleFavoriteClick(product._id)}
-          >
-            {userFavorite ? <Favorite /> : <FavoriteBorderOutlined />}
-          </Button>
-          <Button
-            aria-label="grocery-list"
-            onClick={() => handleGroceryListClick(product._id)}
-          >
-            {onGroceryList ? <Remove /> : <Add />}
-          </Button>
-        </ButtonContainer>
-      </Wrapper>
+      </TextContainer>
+      <ButtonContainer>
+        <Button
+          aria-label="favorite"
+          onClick={() => handleFavoriteClick(product._id)}
+        >
+          {userFavorite ? <Favorite /> : <FavoriteBorderOutlined />}
+        </Button>
+        <Button
+          aria-label="grocery-list"
+          onClick={() => handleGroceryListClick(product._id)}
+        >
+          {onGroceryList ? <Remove /> : <Add />}
+        </Button>
+      </ButtonContainer>
     </Container>
   );
 }

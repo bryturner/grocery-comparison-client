@@ -20,10 +20,9 @@ function CategoryFilter({ setCategory }) {
       <Label htmlFor="category-filter">Category:</Label>
       <CategorySelect
         id="category-filter"
-        defaultValue="all"
+        defaultValue="fruechte-gemuese"
         onChange={(e) => setCategory(e.target.value)}
       >
-        <CategoryOption value="all">All</CategoryOption>
         <CategoryOption value="fruechte-gemuese">
           Fr&uuml;chte &amp; Gem&uuml;se
         </CategoryOption>

@@ -1,21 +1,26 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import CategoryFilter from "../components/CategoryFilter/CategoryFilter";
 import GroceryList from "../components/GroceryList/GroceryList";
 import SearchBox from "../components/SearchBox/SearchBox";
-import Sort from "../components/Sort/Sort";
 import StoreList from "../components/StoreList/StoreList";
 import FavoritesList from "../components/FavoritesList/FavoritesList";
-import { user, storeNames, allProducts } from "../data";
-import { userItemsOnLists } from "../__mocks__/user";
+import {
+  user,
+  storeNames,
+  allProducts,
+  testProducts,
+  testUser1,
+} from "../data";
+import { compareTwoProductTitles } from "../helpers";
 
 const Container = styled.div`
   padding: 2rem;
 `;
 
 const Header = styled.h1`
-  font-size: 4.8rem;
+  font-size: 4rem;
   text-align: center;
 `;
 
@@ -47,19 +52,51 @@ const ListButton = styled.button`
 `;
 
 function HomePage() {
-  const [products, setProducts] = useState(allProducts);
+  const [user, setUser] = useState(testUser1);
+  const [products, setProducts] = useState(testProducts);
   const [favorites, setFavorites] = useState(user.favoritesList);
   const [groceryList, setGroceryList] = useState(user.groceryList);
-  const [category, setCategory] = useState("all");
+  const [category, setCategory] = useState("fruechte-gemuese");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(undefined);
+
+  //   const findBestMatch = () => {
+  //     if (selectedProduct === undefined) {
+  //       setProducts(testProducts);
+  //       return;
+  //     }
+
+  //     let bestMatchingProducts = [];
+  //     const selectedTitle = selectedProduct.title;
+
+  //     products
+  //       .map((product) => {
+  //         const similarityRating = compareTwoProductTitles(
+  //           selectedTitle,
+  //           product.title
+  //         );
+  //         return { similarityRating: similarityRating, product: product };
+  //       })
+  //       .sort((a, b) => b.similarityRating - a.similarityRating)
+  //       .forEach((product) => {
+  //         if (product.similarityRating > 0.25) {
+  //           bestMatchingProducts.push(product.product);
+  //         }
+  //       });
+
+  //     setProducts(bestMatchingProducts);
+  //   };
+
+  //   useEffect(() => {
+  //     findBestMatch();
+  //   }, [selectedProduct]);
 
   return (
     <Container>
-      <Header>Comparisons</Header>
+      <Header>Compare Grocery Products</Header>
       <InputsContainer>
         <CategoryFilter setCategory={setCategory} />
         <SearchBox setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
-        <Sort />
       </InputsContainer>
       <Grid>
         {storeNames.map((storeName) => (
@@ -72,12 +109,14 @@ function HomePage() {
             setFavorites={setFavorites}
             groceryList={groceryList}
             setGroceryList={setGroceryList}
+            selectedProduct={selectedProduct}
+            setSelectedProduct={setSelectedProduct}
             key={storeName}
           />
         ))}
 
-        <GroceryList favorites={favorites} groceryList={groceryList} />
-        <FavoritesList favorites={favorites} groceryList={groceryList} />
+        {/* <GroceryList favorites={favorites} groceryList={groceryList} />
+        <FavoritesList favorites={favorites} groceryList={groceryList} /> */}
         <ButtonContainer>
           <ListButton>Save list</ListButton>
           <ListButton>Share list</ListButton>

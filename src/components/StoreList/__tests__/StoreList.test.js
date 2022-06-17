@@ -1,8 +1,8 @@
-import { fireEvent, getByRole, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import StoreList from "../StoreList";
-import { allProducts } from "../../../__mocks__/products";
 import { userEmptyLists } from "../../../__mocks__/user";
+import { testProducts } from "../../../__mocks__/testProductsList";
 
 const mockedFavorites = jest.fn();
 const mockedGroceryList = jest.fn();
@@ -12,7 +12,7 @@ describe("StoreList", () => {
     render(
       <StoreList
         storeName="Coop"
-        category={"all"}
+        category={"fruechte-gemuese"}
         searchQuery={""}
         products={[]}
         favorites={{}}
@@ -29,9 +29,9 @@ describe("StoreList", () => {
     render(
       <StoreList
         storeName=""
-        category={"all"}
+        category={"fruechte-gemuese"}
         searchQuery={""}
-        products={allProducts}
+        products={testProducts}
         favorites={{}}
         groceryList={{}}
         setFavorites={mockedFavorites}
@@ -45,9 +45,9 @@ describe("StoreList", () => {
     render(
       <StoreList
         storeName="Coop"
-        category={"all"}
+        category={"fruechte-gemuese"}
         searchQuery={""}
-        products={allProducts}
+        products={testProducts}
         favorites={{}}
         groceryList={{}}
         setFavorites={mockedFavorites}

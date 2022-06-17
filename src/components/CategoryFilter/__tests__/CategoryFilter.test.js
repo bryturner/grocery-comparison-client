@@ -12,10 +12,10 @@ describe("CategorySelect", () => {
     expect(selectElement).toBeInTheDocument();
   });
 
-  test("should display default value as 'all' ", () => {
+  test("should display default value as 'fruechte-gemuese' ", () => {
     render(<CategoryFilter setCategory={mockedCategorySelect} />);
     const selectElement = screen.getByRole("combobox");
-    expect(selectElement.value).toBe("all");
+    expect(selectElement.value).toBe("fruechte-gemuese");
   });
 
   test("should allow user to change category", () => {
@@ -34,13 +34,15 @@ describe("CategorySelect", () => {
 describe("CategoryOption", () => {
   test("should correctly set default value", () => {
     render(<CategoryFilter setCategory={mockedCategorySelect} />);
-    const optionElement = screen.getByRole("option", { name: "All" });
+    const optionElement = screen.getByRole("option", {
+      name: /Früchte & Gemüse/i,
+    });
     expect(optionElement.selected).toBe(true);
   });
 
   test("should display the correct number of options", () => {
     render(<CategoryFilter setCategory={mockedCategorySelect} />);
     const optionElements = screen.getAllByRole("option");
-    expect(optionElements.length).toBe(10);
+    expect(optionElements.length).toBe(9);
   });
 });

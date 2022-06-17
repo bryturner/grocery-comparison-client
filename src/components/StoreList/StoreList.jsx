@@ -29,15 +29,19 @@ function StoreList({
   setFavorites,
   groceryList,
   setGroceryList,
+  selectedProduct,
+  setSelectedProduct,
 }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const filterProducts = () => {
     let filteredProds = [];
+
     for (let i = 0; i < products.length; i++) {
       const product = products[i];
+
       if (
-        product.productCategory.includes(category) &&
+        product.categories.includes(category) &&
         product.title.toLowerCase().includes(searchQuery.toLowerCase())
       ) {
         filteredProds.push(product);
@@ -59,11 +63,13 @@ function StoreList({
               .map((product) => (
                 <Product
                   product={product}
-                  key={product._id}
                   favorites={favorites}
                   setFavorites={setFavorites}
                   groceryList={groceryList}
                   setGroceryList={setGroceryList}
+                  selectedProduct={selectedProduct}
+                  setSelectedProduct={setSelectedProduct}
+                  key={product._id}
                 />
               ))
           : products
@@ -71,11 +77,13 @@ function StoreList({
               .map((product) => (
                 <Product
                   product={product}
-                  key={product._id}
                   favorites={favorites}
                   setFavorites={setFavorites}
                   groceryList={groceryList}
                   setGroceryList={setGroceryList}
+                  selectedProduct={selectedProduct}
+                  setSelectedProduct={setSelectedProduct}
+                  key={product._id}
                 />
               ))}
       </ProductList>
