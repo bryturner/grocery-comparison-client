@@ -7,85 +7,127 @@ import {
 } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Product from "../Product";
-import {
-  allProducts,
-  testProduct,
-  testProductOnFavorites,
-  testProductOnGroceryList,
-} from "../../../__mocks__/products";
-import { userItemsOnLists, userEmptyLists } from "../../../__mocks__/user";
-import userEvent from "@testing-library/user-event";
+
+// Testing with new product db schema
+import { testProduct } from "../../../__mocks__/testProduct";
+import { testUser1, testUser2 } from "../../../__mocks__/users";
 
 const mockedFavorites = jest.fn();
 const mockedGroceryList = jest.fn();
+const mockedSelectedProduct = jest.fn();
 
 describe("Product and product text content", () => {
   test("should render product", () => {
     render(
       <Product
         product={testProduct}
-        favorites={userEmptyLists.favoritesList}
-        setFavorites={mockedFavorites}
-        groceryList={userEmptyLists.groceryList}
+        user={testUser1}
+        userFavoritesList={[]}
+        setUserFavoritesList={mockedFavorites}
+        groceryList={[]}
         setGroceryList={mockedGroceryList}
+        selectedProduct={undefined}
+        setSelectedProduct={mockedSelectedProduct}
       />
     );
     expect(screen.getByRole("listitem")).toBeInTheDocument();
   });
 
-  test("should render product title", () => {
+  test("should render product title 'Zucchetti'", () => {
     render(
       <Product
         product={testProduct}
-        favorites={userEmptyLists.favoritesList}
-        setFavorites={mockedFavorites}
-        groceryList={userEmptyLists.groceryList}
+        user={testUser1}
+        userFavoritesList={[]}
+        setUserFavoritesList={mockedFavorites}
+        groceryList={[]}
         setGroceryList={mockedGroceryList}
+        selectedProduct={undefined}
+        setSelectedProduct={mockedSelectedProduct}
       />
     );
-    expect(screen.getByTestId("product-title").textContent).toBe(
-      "Migros Bananen"
-    );
+    expect(screen.getByTestId("product-title").textContent).toBe("Zucchetti");
   });
 
-  test("should render product increment measurement", () => {
+  test("should render product increment measurement as '0.64/1kg'", () => {
     render(
       <Product
         product={testProduct}
-        favorites={userEmptyLists.favoritesList}
-        setFavorites={mockedFavorites}
-        groceryList={userEmptyLists.groceryList}
+        user={testUser1}
+        userFavoritesList={[]}
+        setUserFavoritesList={mockedFavorites}
+        groceryList={[]}
         setGroceryList={mockedGroceryList}
+        selectedProduct={undefined}
+        setSelectedProduct={mockedSelectedProduct}
       />
     );
     expect(screen.getByTestId("product-increment").textContent).toBe(
-      "2.80/1kg"
+      "0.64/1kg"
     );
   });
 
-  test("should render product price as number string with 2 decimal places", () => {
+  test("should render product price as '3.20'", () => {
     render(
       <Product
         product={testProduct}
-        favorites={userEmptyLists.favoritesList}
-        setFavorites={mockedFavorites}
-        groceryList={userEmptyLists.groceryList}
+        user={testUser1}
+        userFavoritesList={[]}
+        setUserFavoritesList={mockedFavorites}
+        groceryList={[]}
         setGroceryList={mockedGroceryList}
+        selectedProduct={undefined}
+        setSelectedProduct={mockedSelectedProduct}
       />
     );
-    expect(screen.getByTestId("product-price").textContent).toBe("2.80");
+    expect(screen.getByTestId("product-price").textContent).toBe("3.20");
   });
 });
 
-describe("Product displaying correct icons based on state", () => {
-  test("should render product with favorites border outlined icon", () => {
+describe("Product displaying correct icons", () => {
+  test("should render product with favorites icon filled **testUser1**", () => {
     render(
       <Product
         product={testProduct}
-        favorites={userEmptyLists.favoritesList}
-        setFavorites={mockedFavorites}
-        groceryList={userEmptyLists.groceryList}
+        user={testUser1}
+        userFavoritesList={testUser1.lists.favorites}
+        setUserFavoritesList={mockedFavorites}
+        groceryList={[]}
         setGroceryList={mockedGroceryList}
+        selectedProduct={undefined}
+        setSelectedProduct={mockedSelectedProduct}
+      />
+    );
+    expect(screen.getByTestId("FavoriteIcon")).toBeInTheDocument();
+  });
+
+  test("should render product with remove icon **testUser1**", () => {
+    render(
+      <Product
+        product={testProduct}
+        user={testUser1}
+        userFavoritesList={[]}
+        setUserFavoritesList={mockedFavorites}
+        groceryList={testUser1.lists.grocList}
+        setGroceryList={mockedGroceryList}
+        selectedProduct={undefined}
+        setSelectedProduct={mockedSelectedProduct}
+      />
+    );
+    expect(screen.getByTestId("RemoveIcon")).toBeInTheDocument();
+  });
+
+  test("should render product with favorites icon filled **testUser2**", () => {
+    render(
+      <Product
+        product={testProduct}
+        user={testUser2}
+        userFavoritesList={testUser2.lists.favorites}
+        setUserFavoritesList={mockedFavorites}
+        groceryList={[]}
+        setGroceryList={mockedGroceryList}
+        selectedProduct={undefined}
+        setSelectedProduct={mockedSelectedProduct}
       />
     );
     expect(
@@ -93,58 +135,27 @@ describe("Product displaying correct icons based on state", () => {
     ).toBeInTheDocument();
   });
 
-  test("should render product with add icon", () => {
+  test("should render product with add icon **testUser2**", () => {
     render(
       <Product
         product={testProduct}
-        favorites={userEmptyLists.favoritesList}
-        setFavorites={mockedFavorites}
-        groceryList={userEmptyLists.groceryList}
+        user={testUser2}
+        userFavoritesList={[]}
+        setUserFavoritesList={mockedFavorites}
+        groceryList={testUser2.lists.grocList}
         setGroceryList={mockedGroceryList}
+        selectedProduct={undefined}
+        setSelectedProduct={mockedSelectedProduct}
       />
     );
     expect(screen.getByTestId("AddIcon")).toBeInTheDocument();
   });
-
-  test("should render product with favorites icon filled", () => {
-    render(
-      <Product
-        product={testProductOnFavorites}
-        favorites={userItemsOnLists.favoritesList}
-        setFavorites={mockedFavorites}
-        groceryList={userItemsOnLists.groceryList}
-        setGroceryList={mockedGroceryList}
-      />
-    );
-    expect(screen.getByTestId("FavoriteIcon")).toBeInTheDocument();
-  });
-
-  test("should render product with remove icon", () => {
-    render(
-      <Product
-        product={testProductOnGroceryList}
-        favorites={userItemsOnLists.favoritesList}
-        setFavorites={mockedFavorites}
-        groceryList={userItemsOnLists.groceryList}
-        setGroceryList={mockedGroceryList}
-      />
-    );
-    expect(screen.getByTestId("RemoveIcon")).toBeInTheDocument();
-  });
 });
 
-describe("Product button icons change on click event", () => {
-  test("should call handle favorites function", () => {
-    render(
-      <Product
-        product={testProduct}
-        favorites={userEmptyLists.favoritesList}
-        setFavorites={mockedFavorites}
-        groceryList={userEmptyLists.groceryList}
-        setGroceryList={mockedGroceryList}
-      />
-    );
-    fireEvent.click(screen.getByRole("button", { name: "favorite" }));
-    expect(mockedFavorites).toHaveBeenCalled();
-  });
-});
+// describe("Product title comparisons", () => {
+//   test("", () => {
+//     render();
+
+//     expect();
+//   });
+// });

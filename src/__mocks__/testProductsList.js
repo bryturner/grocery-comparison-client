@@ -1,18 +1,14 @@
 export const testProducts = [
   {
     _id: "1",
-    store: "Denner",
+    storeName: "Denner",
     title: "Zucchetti",
-    price: 3.2,
+    price: 0.75,
     categories: ["fruechte-gemuese"],
-    increment: {
-      incrPrice: 0.64,
-      incrQty: 100,
-      incrStr: "0.64/100kg",
-    },
-    quantity: { qtyAmount: 500, qtyStr: "500kg" },
-    //  favorites: ["User._id('1234')", "User._id('2222')"],
-    //  grocList: ["User._id('2222')"],
+    increment: { incrPrice: 0.15, incrQty: 100, incrStr: "0.15/100g" },
+    quantity: { qtyAmount: 500, qtyStr: "500g" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "2",
@@ -22,6 +18,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 3.6, incrQty: 1, incrStr: "3.60/1kg" },
     quantity: { qtyAmount: 1, qtyStr: "1kg" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "3",
@@ -31,6 +29,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.68, incrQty: 100, incrStr: "0.68/100kg" },
     quantity: { qtyAmount: 500, qtyStr: "500kg" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "4",
@@ -40,6 +40,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.55, incrQty: 1, incrStr: "0.55/1ST" },
     quantity: { qtyAmount: 1, qtyStr: "1ST" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "5",
@@ -49,6 +51,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.16, incrQty: 100, incrStr: "0.16/100g" },
     quantity: { qtyAmount: 500, qtyStr: "500g" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "6",
@@ -58,6 +62,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 3, incrQty: 100, incrStr: "0.60/100kg" },
     quantity: { qtyAmount: 500, qtyStr: "500kg" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "7",
@@ -67,6 +73,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.2, incrQty: 100, incrStr: "0.20/100g" },
     quantity: { qtyAmount: 500, qtyStr: "500g" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "8",
@@ -76,6 +84,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.45, incrQty: 1, incrStr: "0.45/1ST" },
     quantity: { qtyAmount: 2, qtyStr: "2ST" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "9",
@@ -85,6 +95,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { ncrPrice: 2.8, incrQty: 1, incrStr: "2.80/1kg" },
     quantity: { qtyAmount: 1, qtyStr: "1kg" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "10",
@@ -94,6 +106,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 1.4, incrQty: 1, incrStr: "1.40/1kg" },
     quantity: { qtyAmount: 1, qtyStr: "1kg" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "11",
@@ -103,6 +117,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.6, incrQty: 100, incrStr: "0.60/100kg" },
     quantity: { qtyAmount: 500, qtyStr: "500kg" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "12",
@@ -112,6 +128,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 3.4, incrQty: 1, incrStr: "3.40/1kg" },
     quantity: { qtyAmount: 1, qtyStr: "1kg" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "13",
@@ -121,6 +139,8 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.3, incrQty: 100, incrStr: "0.30/100g" },
     quantity: { qtyAmount: 500, qtyStr: "500g" },
+    favorites: [],
+    grocList: [],
   },
   {
     _id: "14",
@@ -130,5 +150,7 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.15, incrQty: 100, incrStr: "0.15/100g" },
     quantity: { qtyAmount: 500, qtyStr: "500g" },
+    favorites: [],
+    grocList: [],
   },
 ];

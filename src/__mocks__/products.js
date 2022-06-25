@@ -172,26 +172,6 @@ export const allProducts = [
   },
 ];
 
-export const testProduct = {
-  storeName: "Migros",
-  title: "Migros Bananen",
-  brand: "Bio-Fairtrade",
-  incrementPrice: 2.8,
-  incrementQuantity: 1,
-  incrementString: "2.80/1kg",
-  quantityAmount: 1,
-  quantityString: "1kg",
-  price: 2.8,
-  productCategory: ["all", "fruechte-gemuese"],
-  sale: "false",
-  _id: "629dd51cd91cdfa88778db40",
-  createdAt: "2022-06-06T10:21:16.807Z",
-  updatedAt: "2022-06-06T10:21:16.807Z",
-  __v: 0,
-  userFavorite: false,
-  onGroceryList: false,
-};
-
 export const testProductOnFavorites = {
   storeName: "Denner",
   title: "Denner Meat",
