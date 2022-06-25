@@ -1,18 +1,13 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 import CategoryFilter from "../components/CategoryFilter/CategoryFilter";
 import GroceryList from "../components/GroceryList/GroceryList";
 import SearchBox from "../components/SearchBox/SearchBox";
 import StoreList from "../components/StoreList/StoreList";
 import FavoritesList from "../components/FavoritesList/FavoritesList";
-import {
-  user,
-  storeNames,
-  allProducts,
-  testProducts,
-  testUser1,
-} from "../data";
+import { storeNames, testProducts, testUser1, testUser3 } from "../data";
 import { compareTwoProductTitles } from "../helpers";
 
 const Container = styled.div`
@@ -54,42 +49,62 @@ const ListButton = styled.button`
 function HomePage() {
   const [user, setUser] = useState(testUser1);
   const [products, setProducts] = useState(testProducts);
-  const [favorites, setFavorites] = useState(user.favoritesList);
-  const [groceryList, setGroceryList] = useState(user.groceryList);
   const [category, setCategory] = useState("fruechte-gemuese");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(undefined);
 
-  //   const findBestMatch = () => {
-  //     if (selectedProduct === undefined) {
-  //       setProducts(testProducts);
-  //       return;
-  //     }
+  const [groceryList, setGroceryList] = useState(user.lists.grocList);
+  const [userGroceryList, setUserGroceryList] = useState(
+    testUser3.lists.grocList
+  );
+  const [userFavoritesList, setUserFavoritesList] = useState(
+    user.lists.favorites
+  );
 
-  //     let bestMatchingProducts = [];
-  //     const selectedTitle = selectedProduct.title;
+  //  const getProducts = async () => {
+  //    try {
+  //      const productResponse = await axios.get("http://localhost:8000/product");
+  //      setProducts(productResponse.data);
+  //    } catch (err) {
+  //      console.error(err);
+  //      return [];
+  //    }
+  //  };
 
-  //     products
-  //       .map((product) => {
-  //         const similarityRating = compareTwoProductTitles(
-  //           selectedTitle,
-  //           product.title
-  //         );
-  //         return { similarityRating: similarityRating, product: product };
-  //       })
-  //       .sort((a, b) => b.similarityRating - a.similarityRating)
-  //       .forEach((product) => {
-  //         if (product.similarityRating > 0.25) {
-  //           bestMatchingProducts.push(product.product);
-  //         }
-  //       });
+  const findBestMatch = () => {
+    if (selectedProduct === undefined) {
+      setProducts(testProducts);
+      return;
+    }
 
-  //     setProducts(bestMatchingProducts);
-  //   };
+    let bestMatchingProducts = [];
+    const selectedTitle = selectedProduct.title;
+
+    products
+      .map((product) => {
+        const similarityRating = compareTwoProductTitles(
+          selectedTitle,
+          product.title
+        );
+        return { similarityRating: similarityRating, product: product };
+      })
+      .sort((a, b) => b.similarityRating - a.similarityRating)
+      .forEach((product) => {
+        if (product.similarityRating > 0.25) {
+          bestMatchingProducts.push(product.product);
+        }
+      });
+
+    setProducts(bestMatchingProducts);
+  };
+
+  useEffect(() => {
+    findBestMatch();
+  }, [selectedProduct]);
 
   //   useEffect(() => {
-  //     findBestMatch();
-  //   }, [selectedProduct]);
+  //     getProducts();
+  //   }, []);
 
   return (
     <Container>
@@ -105,18 +120,27 @@ function HomePage() {
             category={category}
             searchQuery={searchQuery}
             products={products}
-            favorites={favorites}
-            setFavorites={setFavorites}
+            user={user}
+            userFavoritesList={userFavoritesList}
+            setUserFavoritesList={setUserFavoritesList}
             groceryList={groceryList}
-            setGroceryList={setGroceryList}
+            userGroceryList={userGroceryList}
+            setUserGroceryList={setUserGroceryList}
             selectedProduct={selectedProduct}
             setSelectedProduct={setSelectedProduct}
             key={storeName}
           />
         ))}
 
-        {/* <GroceryList favorites={favorites} groceryList={groceryList} />
-        <FavoritesList favorites={favorites} groceryList={groceryList} /> */}
+        <GroceryList
+          userFavoritesList={userFavoritesList}
+          groceryList={groceryList}
+          products={products}
+          user={user}
+          setUserFavoritesList={setUserFavoritesList}
+          setGroceryList={setGroceryList}
+        />
+        {/* <FavoritesList favorites={favorites} groceryList={groceryList} /> */}
         <ButtonContainer>
           <ListButton>Save list</ListButton>
           <ListButton>Share list</ListButton>

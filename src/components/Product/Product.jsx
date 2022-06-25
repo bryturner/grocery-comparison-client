@@ -54,81 +54,101 @@ const Button = styled.button`
 
 function Product({
   product,
-  favorites,
-  setFavorites,
+  user,
+  userFavoritesList,
+  setUserFavoritesList,
+  userGroceryList,
+  setUserGroceryList,
   groceryList,
   setGroceryList,
-  displayStoreName,
   selectedProduct,
   setSelectedProduct,
 }) {
-  const [userFavorite, setUserFavorite] = useState(product.userFavorite);
-  const [onGroceryList, setOnGroceryList] = useState(product.onGroceryList);
+  const [onFavorites, setOnFavorites] = useState(false);
+  const [onGroceryList, setOnGroceryList] = useState(false);
 
-  //   const handleProductClicked = () => {
-  //     if (selectedProduct === product) {
-  //       setSelectedProduct(undefined);
-  //     } else {
-  //       setSelectedProduct(product);
-  //     }
-  //   };
-
-  const handleFavoriteClick = (id) => {
-    if (userFavorite) {
-      const newFavorites = favorites;
-      delete newFavorites[id];
-      const updatedFavorites = (prevState) => {
-        return { ...prevState, ...newFavorites };
-      };
-      setFavorites(updatedFavorites);
+  const handleProductClicked = () => {
+    if (selectedProduct === product) {
+      setSelectedProduct(undefined);
+    } else {
+      setSelectedProduct(product);
     }
-    if (!userFavorite) setFavorites({ ...favorites, [id]: product });
   };
 
+  //   User favorites list
+  const handleFavoriteClick = (id) => {
+    if (onFavorites) {
+      setOnFavorites(false);
+      setUserFavoritesList(
+        userFavoritesList.filter((favorite) => {
+          return favorite != id;
+        })
+      );
+      // Will be updated in database with put
+      user.lists.favorites = userFavoritesList.filter((favorite) => {
+        return favorite != id;
+      });
+    }
+
+    if (!onFavorites) {
+      setOnFavorites(true);
+      setUserFavoritesList([...userFavoritesList, id]);
+      // Will be updated in database with put
+      user.lists.favorites.push(id);
+    }
+  };
+
+  const checkOnUserFavoritesList = useCallback(() => {
+    if (userFavoritesList.includes(product._id)) {
+      setOnFavorites(true);
+    }
+  }, [userFavoritesList, setOnFavorites]);
+
+  useEffect(() => {
+    checkOnUserFavoritesList();
+  }, [checkOnUserFavoritesList]);
+
+  //   User grocery list
   const handleGroceryListClick = (id) => {
     if (onGroceryList) {
-      const newGroceryList = groceryList;
-      delete newGroceryList[id];
-      const updatedGroceryList = (prevState) => {
-        return { ...prevState, ...newGroceryList };
-      };
-      setGroceryList(updatedGroceryList);
+      setOnGroceryList(false);
+      setGroceryList(
+        groceryList.filter((grocery) => {
+          return (grocery = !id);
+        })
+      );
+      // Will be updated in database with put
+      user.lists.grocList = groceryList.filter((grocery) => {
+        return (grocery = !id);
+      });
     }
-    if (!onGroceryList) setGroceryList({ ...groceryList, [id]: product });
+    if (!onGroceryList) {
+      setOnGroceryList(true);
+      setGroceryList([...groceryList, id]);
+      // Will be updated in database with put
+      user.lists.grocList.push(id);
+    }
   };
 
-  //   const checkFavorites = useCallback(() => {
-  //     if (!favorites[product._id]) setUserFavorite(false);
-  //     if (favorites[product._id]) setUserFavorite(true);
-  //   }, [product, favorites, setUserFavorite]);
+  const checkOnGroceryList = useCallback(() => {
+    if (groceryList.includes(product._id)) {
+      setOnGroceryList(true);
+    }
+  }, [groceryList, setOnGroceryList]);
 
-  //   const checkGroceryList = useCallback(() => {
-  //     if (!groceryList[product._id]) setOnGroceryList(false);
-  //     if (groceryList[product._id]) setOnGroceryList(true);
-  //   }, [product, groceryList, setOnGroceryList]);
-
-  //   useEffect(() => {
-  //     checkFavorites();
-  //   }, [checkFavorites]);
-
-  //   useEffect(() => {
-  //     checkGroceryList();
-  //   }, [checkGroceryList]);
+  useEffect(() => {
+    checkOnGroceryList();
+  }, [checkOnGroceryList]);
 
   return (
     <Container>
       <TextContainer>
-        {/* <SelectProductButton
+        <SelectProductButton
           product={product}
           selectedProduct={selectedProduct}
           handleProductClicked={handleProductClicked}
-        /> */}
+        />
         <Title data-testid="product-title">{product.title}</Title>
-        {/* {displayStoreName ? (
-          <Store data-testid="product-store">{product.storeName}</Store>
-        ) : (
-          <></>
-        )} */}
         <Increment data-testid="product-increment">
           {product.increment.incrStr}
         </Increment>
@@ -139,7 +159,7 @@ function Product({
           aria-label="favorite"
           onClick={() => handleFavoriteClick(product._id)}
         >
-          {userFavorite ? <Favorite /> : <FavoriteBorderOutlined />}
+          {onFavorites ? <Favorite /> : <FavoriteBorderOutlined />}
         </Button>
         <Button
           aria-label="grocery-list"

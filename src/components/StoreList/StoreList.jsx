@@ -17,7 +17,8 @@ const Header = styled.h2`
 const ProductList = styled.ul`
   ${[BORDER.MAIN]}
   ${[LIST.PRODUCT]}
-  height: 20rem;
+  height: 30rem;
+  overflow-y: scroll;
 `;
 
 function StoreList({
@@ -25,8 +26,11 @@ function StoreList({
   category,
   searchQuery,
   products,
-  favorites,
-  setFavorites,
+  user,
+  userFavoritesList,
+  setUserFavoritesList,
+  userGroceryList,
+  setUserGroceryList,
   groceryList,
   setGroceryList,
   selectedProduct,
@@ -53,6 +57,7 @@ function StoreList({
   useEffect(() => {
     category && filterProducts();
   }, [category, products, searchQuery]);
+
   return (
     <Container>
       <Header>{storeName}</Header>
@@ -63,10 +68,13 @@ function StoreList({
               .map((product) => (
                 <Product
                   product={product}
-                  favorites={favorites}
-                  setFavorites={setFavorites}
+                  user={user}
+                  userFavoritesList={userFavoritesList}
+                  setUserFavoritesList={setUserFavoritesList}
                   groceryList={groceryList}
                   setGroceryList={setGroceryList}
+                  userGroceryList={userGroceryList}
+                  setUserGroceryList={setUserGroceryList}
                   selectedProduct={selectedProduct}
                   setSelectedProduct={setSelectedProduct}
                   key={product._id}
@@ -77,10 +85,13 @@ function StoreList({
               .map((product) => (
                 <Product
                   product={product}
-                  favorites={favorites}
-                  setFavorites={setFavorites}
+                  user={user}
+                  userFavoritesList={userFavoritesList}
+                  setUserFavoritesList={setUserFavoritesList}
                   groceryList={groceryList}
                   setGroceryList={setGroceryList}
+                  userGroceryList={userGroceryList}
+                  setUserGroceryList={setUserGroceryList}
                   selectedProduct={selectedProduct}
                   setSelectedProduct={setSelectedProduct}
                   key={product._id}
