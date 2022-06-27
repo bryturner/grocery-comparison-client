@@ -29,8 +29,6 @@ function StoreList({
   user,
   userFavoritesList,
   setUserFavoritesList,
-  userGroceryList,
-  setUserGroceryList,
   groceryList,
   setGroceryList,
   selectedProduct,
@@ -73,8 +71,6 @@ function StoreList({
                   setUserFavoritesList={setUserFavoritesList}
                   groceryList={groceryList}
                   setGroceryList={setGroceryList}
-                  userGroceryList={userGroceryList}
-                  setUserGroceryList={setUserGroceryList}
                   selectedProduct={selectedProduct}
                   setSelectedProduct={setSelectedProduct}
                   key={product._id}
@@ -90,8 +86,6 @@ function StoreList({
                   setUserFavoritesList={setUserFavoritesList}
                   groceryList={groceryList}
                   setGroceryList={setGroceryList}
-                  userGroceryList={userGroceryList}
-                  setUserGroceryList={setUserGroceryList}
                   selectedProduct={selectedProduct}
                   setSelectedProduct={setSelectedProduct}
                   key={product._id}

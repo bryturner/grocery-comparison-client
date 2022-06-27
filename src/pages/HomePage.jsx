@@ -7,7 +7,7 @@ import GroceryList from "../components/GroceryList/GroceryList";
 import SearchBox from "../components/SearchBox/SearchBox";
 import StoreList from "../components/StoreList/StoreList";
 import FavoritesList from "../components/FavoritesList/FavoritesList";
-import { storeNames, testProducts, testUser1, testUser3 } from "../data";
+import { storeNames, testProducts, testUser1 } from "../data";
 import { compareTwoProductTitles } from "../helpers";
 
 const Container = styled.div`
@@ -54,9 +54,7 @@ function HomePage() {
   const [selectedProduct, setSelectedProduct] = useState(undefined);
 
   const [groceryList, setGroceryList] = useState(user.lists.grocList);
-  const [userGroceryList, setUserGroceryList] = useState(
-    testUser3.lists.grocList
-  );
+
   const [userFavoritesList, setUserFavoritesList] = useState(
     user.lists.favorites
   );
@@ -103,7 +101,7 @@ function HomePage() {
   }, [selectedProduct]);
 
   //   useEffect(() => {
-  //     getProducts();
+  //     console.log(groceryList);
   //   }, []);
 
   return (
@@ -123,9 +121,8 @@ function HomePage() {
             user={user}
             userFavoritesList={userFavoritesList}
             setUserFavoritesList={setUserFavoritesList}
+            setGroceryList={setGroceryList}
             groceryList={groceryList}
-            userGroceryList={userGroceryList}
-            setUserGroceryList={setUserGroceryList}
             selectedProduct={selectedProduct}
             setSelectedProduct={setSelectedProduct}
             key={storeName}
@@ -135,12 +132,13 @@ function HomePage() {
         <GroceryList
           userFavoritesList={userFavoritesList}
           groceryList={groceryList}
-          products={products}
-          user={user}
-          setUserFavoritesList={setUserFavoritesList}
           setGroceryList={setGroceryList}
         />
-        {/* <FavoritesList favorites={favorites} groceryList={groceryList} /> */}
+        <FavoritesList
+          userFavoritesList={userFavoritesList}
+          setUserFavoritesList={setUserFavoritesList}
+          groceryList={groceryList}
+        />
         <ButtonContainer>
           <ListButton>Save list</ListButton>
           <ListButton>Share list</ListButton>

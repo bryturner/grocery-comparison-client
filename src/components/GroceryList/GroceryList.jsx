@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import styled from "styled-components";
 import { BORDER, LIST } from "../../constants/styles";
 import Product from "../Product/Product";
-import GroceryListItem from "./GroceryListItem";
 
 const Container = styled.div`
   grid-column: 1 / 3;
@@ -22,17 +21,7 @@ const Text = styled.p`
   text-align: center;
 `;
 
-function GroceryList({
-  groceryList,
-  userFavoritesList,
-  products,
-  user,
-  setGroceryList,
-  setUserFavoritesList,
-}) {
-  useEffect(() => {
-    console.log(groceryList);
-  }, []);
+function GroceryList({ groceryList, setGroceryList, userFavoritesList }) {
   return (
     <Container>
       <Header>Grocery List</Header>
@@ -40,21 +29,17 @@ function GroceryList({
         {groceryList.length === 0 ? (
           <Text>Add to grocery list</Text>
         ) : (
-          products
-            .filter((product) => groceryList.includes(product._id))
-            .map((product) => {
+          groceryList.map((product) => {
+            return (
               <Product
                 product={product}
-                user={user}
-                userFavoritesList={userFavoritesList}
-                setUserFavoritesList={setUserFavoritesList}
                 groceryList={groceryList}
                 setGroceryList={setGroceryList}
-                // selectedProduct={selectedProduct}
-                // setSelectedProduct={setSelectedProduct}
+                userFavoritesList={userFavoritesList}
                 key={product._id}
-              />;
-            })
+              />
+            );
+          })
         )}
       </List>
     </Container>

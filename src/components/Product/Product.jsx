@@ -57,14 +57,12 @@ function Product({
   user,
   userFavoritesList,
   setUserFavoritesList,
-  userGroceryList,
-  setUserGroceryList,
   groceryList,
   setGroceryList,
   selectedProduct,
   setSelectedProduct,
 }) {
-  const [onFavorites, setOnFavorites] = useState(false);
+  const [onFavoritesList, setOnFavoritesList] = useState(false);
   const [onGroceryList, setOnGroceryList] = useState(false);
 
   const handleProductClicked = () => {
@@ -75,64 +73,62 @@ function Product({
     }
   };
 
-  //   User favorites list
+  //  ====== User favorites list  ======
   const handleFavoriteClick = (id) => {
-    if (onFavorites) {
-      setOnFavorites(false);
+    if (onFavoritesList) {
+      setOnFavoritesList(false);
       setUserFavoritesList(
-        userFavoritesList.filter((favorite) => {
-          return favorite != id;
+        userFavoritesList.filter((listProduct) => {
+          return listProduct._id !== id;
         })
       );
-      // Will be updated in database with put
-      user.lists.favorites = userFavoritesList.filter((favorite) => {
-        return favorite != id;
-      });
+      // Local storage access
     }
 
-    if (!onFavorites) {
-      setOnFavorites(true);
-      setUserFavoritesList([...userFavoritesList, id]);
-      // Will be updated in database with put
-      user.lists.favorites.push(id);
+    if (!onFavoritesList) {
+      setOnFavoritesList(true);
+      setUserFavoritesList([...userFavoritesList, product]);
+      // Local storage access
     }
   };
 
   const checkOnUserFavoritesList = useCallback(() => {
-    if (userFavoritesList.includes(product._id)) {
-      setOnFavorites(true);
+    if (
+      userFavoritesList.some((listProduct) => listProduct._id === product._id)
+    ) {
+      setOnFavoritesList(true);
+    } else {
+      setOnFavoritesList(false);
     }
-  }, [userFavoritesList, setOnFavorites]);
+  }, [userFavoritesList, setOnFavoritesList]);
 
   useEffect(() => {
     checkOnUserFavoritesList();
   }, [checkOnUserFavoritesList]);
 
-  //   User grocery list
+  // ===== User grocery list =====
   const handleGroceryListClick = (id) => {
     if (onGroceryList) {
       setOnGroceryList(false);
       setGroceryList(
-        groceryList.filter((grocery) => {
-          return (grocery = !id);
+        groceryList.filter((listProduct) => {
+          return listProduct._id !== id;
         })
       );
-      // Will be updated in database with put
-      user.lists.grocList = groceryList.filter((grocery) => {
-        return (grocery = !id);
-      });
+      // Local storage access
     }
     if (!onGroceryList) {
       setOnGroceryList(true);
-      setGroceryList([...groceryList, id]);
-      // Will be updated in database with put
-      user.lists.grocList.push(id);
+      setGroceryList([...groceryList, product]);
+      // Local storage access
     }
   };
 
   const checkOnGroceryList = useCallback(() => {
-    if (groceryList.includes(product._id)) {
+    if (groceryList.some((listProduct) => listProduct._id === product._id)) {
       setOnGroceryList(true);
+    } else {
+      setOnGroceryList(false);
     }
   }, [groceryList, setOnGroceryList]);
 
@@ -159,7 +155,7 @@ function Product({
           aria-label="favorite"
           onClick={() => handleFavoriteClick(product._id)}
         >
-          {onFavorites ? <Favorite /> : <FavoriteBorderOutlined />}
+          {onFavoritesList ? <Favorite /> : <FavoriteBorderOutlined />}
         </Button>
         <Button
           aria-label="grocery-list"

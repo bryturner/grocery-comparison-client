@@ -204,8 +204,32 @@ export const testUser1 = {
   password: "hashed password",
   //   in db will use Product._id('ID') pattern
   lists: {
-    favorites: ["1"],
-    grocList: ["1"],
+    favorites: [
+      {
+        _id: "1",
+        storeName: "Denner",
+        title: "Zucchetti",
+        price: 0.75,
+        categories: ["fruechte-gemuese"],
+        increment: { incrPrice: 0.15, incrQty: 100, incrStr: "0.15/100g" },
+        quantity: { qtyAmount: 500, qtyStr: "500g" },
+        favorites: [],
+        grocList: [],
+      },
+    ],
+    grocList: [
+      {
+        _id: "1",
+        storeName: "Denner",
+        title: "Zucchetti",
+        price: 0.75,
+        categories: ["fruechte-gemuese"],
+        increment: { incrPrice: 0.15, incrQty: 100, incrStr: "0.15/100g" },
+        quantity: { qtyAmount: 500, qtyStr: "500g" },
+        favorites: [],
+        grocList: [],
+      },
+    ],
   },
 };
 
@@ -217,27 +241,5 @@ export const testUser2 = {
   lists: {
     favorites: ["2"],
     grocList: ["2"],
-  },
-};
-
-export const testUser3 = {
-  _id: "9876",
-  name: "Gary Snail",
-  username: "email@email.com",
-  password: "hashed password",
-  //   in db will use Product._id('ID') pattern
-  lists: {
-    favorites: ["1"],
-    grocList: [
-      {
-        _id: "3",
-        storeName: "Coop",
-        title: "Bio Zucchetti",
-        price: 3.4,
-        categories: ["fruechte-gemuese"],
-        increment: { incrPrice: 0.68, incrQty: 100, incrStr: "0.68/100kg" },
-        quantity: { qtyAmount: 500, qtyStr: "500kg" },
-      },
-    ],
   },
 };

@@ -22,20 +22,25 @@ const FavoritesText = styled.p`
   text-align: center;
 `;
 
-function FavoritesList({ favorites, groceryList }) {
+function FavoritesList({
+  userFavoritesList,
+  setUserFavoritesList,
+  groceryList,
+}) {
   return (
     <Container>
       <Header>Favorites List</Header>
       <List>
-        {Object.keys(favorites).length === 0 ? (
+        {userFavoritesList.length === 0 ? (
           <FavoritesText>Add to favorites</FavoritesText>
         ) : (
-          Object.values(favorites).map((product, i) => (
+          userFavoritesList.map((product) => (
             <Product
               product={product}
-              favorites={favorites}
+              userFavoritesList={userFavoritesList}
+              setUserFavoritesList={setUserFavoritesList}
               groceryList={groceryList}
-              key={i}
+              key={product._id}
             />
           ))
         )}
