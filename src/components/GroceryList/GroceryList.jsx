@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import styled from "styled-components";
-import { BORDER, LIST } from "../../constants/styles";
+import { ListWithBorder } from "../../constants/styles";
 import Product from "../Product/Product";
 
 const Container = styled.div`
@@ -12,10 +11,7 @@ const Header = styled.h2`
   margin-bottom: 1.2rem;
 `;
 
-const List = styled.ul`
-  ${[BORDER.MAIN]}
-  ${[LIST.PRODUCT]}
-`;
+const ProductList = styled(ListWithBorder)``;
 
 const Text = styled.p`
   text-align: center;
@@ -25,7 +21,7 @@ function GroceryList({ groceryList, setGroceryList, userFavoritesList }) {
   return (
     <Container>
       <Header>Grocery List</Header>
-      <List>
+      <ProductList>
         {groceryList.length === 0 ? (
           <Text>Add to grocery list</Text>
         ) : (
@@ -41,7 +37,7 @@ function GroceryList({ groceryList, setGroceryList, userFavoritesList }) {
             );
           })
         )}
-      </List>
+      </ProductList>
     </Container>
   );
 }

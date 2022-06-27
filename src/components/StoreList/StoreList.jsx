@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-
-import { BORDER, LIST } from "../../constants/styles";
+import { ListWithBorder } from "../../constants/styles";
 import Product from "../Product/Product";
 
 const Container = styled.div`
@@ -14,9 +13,7 @@ const Header = styled.h2`
   margin-bottom: 1.2rem;
 `;
 
-const ProductList = styled.ul`
-  ${[BORDER.MAIN]}
-  ${[LIST.PRODUCT]}
+const ProductList = styled(ListWithBorder)`
   height: 30rem;
   overflow-y: scroll;
 `;

@@ -1,11 +1,7 @@
-import {
-  Add,
-  Remove,
-  FavoriteBorderOutlined,
-  Favorite,
-} from "@mui/icons-material";
 import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
+import FavoritesButton from "../buttons/FavoritesButton/FavoritesButton";
+import GroceryListButton from "../buttons/GroceryListButton/GroceryListButton";
 import SelectProductButton from "../buttons/SelectProductButton/SelectProductButton";
 
 const Container = styled.li`
@@ -24,11 +20,6 @@ const Title = styled.p`
   flex: 2;
 `;
 
-const Store = styled.p`
-  flex: 1;
-  text-align: center;
-`;
-
 const Price = styled.p`
   flex: 1;
   text-align: center;
@@ -42,14 +33,6 @@ const Increment = styled.p`
 const ButtonContainer = styled.div`
   display: flex;
   gap: 0.8rem;
-`;
-
-const Button = styled.button`
-  background-color: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 function Product({
@@ -100,7 +83,7 @@ function Product({
     } else {
       setOnFavoritesList(false);
     }
-  }, [userFavoritesList, setOnFavoritesList]);
+  }, [userFavoritesList, setOnFavoritesList, product._id]);
 
   useEffect(() => {
     checkOnUserFavoritesList();
@@ -130,7 +113,7 @@ function Product({
     } else {
       setOnGroceryList(false);
     }
-  }, [groceryList, setOnGroceryList]);
+  }, [groceryList, setOnGroceryList, product._id]);
 
   useEffect(() => {
     checkOnGroceryList();
@@ -151,18 +134,16 @@ function Product({
         <Price data-testid="product-price">{product.price.toFixed(2)}</Price>
       </TextContainer>
       <ButtonContainer>
-        <Button
-          aria-label="favorite"
-          onClick={() => handleFavoriteClick(product._id)}
-        >
-          {onFavoritesList ? <Favorite /> : <FavoriteBorderOutlined />}
-        </Button>
-        <Button
-          aria-label="grocery-list"
-          onClick={() => handleGroceryListClick(product._id)}
-        >
-          {onGroceryList ? <Remove /> : <Add />}
-        </Button>
+        <FavoritesButton
+          product={product}
+          handleFavoriteClick={handleFavoriteClick}
+          onFavoritesList={onFavoritesList}
+        />
+        <GroceryListButton
+          product={product}
+          handleGroceryListClick={handleGroceryListClick}
+          onGroceryList={onGroceryList}
+        />
       </ButtonContainer>
     </Container>
   );

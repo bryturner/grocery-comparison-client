@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Product from "../Product/Product";
 
-import { BORDER, LIST } from "../../constants/styles";
+import { ListWithBorder } from "../../constants/styles";
 
 const Container = styled.div`
   grid-column: 3 / -1;
@@ -13,10 +13,7 @@ const Header = styled.h2`
   margin-bottom: 1.2rem;
 `;
 
-const List = styled.ul`
-  ${[BORDER.MAIN]}
-  ${[LIST.PRODUCT]}
-`;
+const ProductList = styled(ListWithBorder)``;
 
 const FavoritesText = styled.p`
   text-align: center;
@@ -30,7 +27,7 @@ function FavoritesList({
   return (
     <Container>
       <Header>Favorites List</Header>
-      <List>
+      <ProductList>
         {userFavoritesList.length === 0 ? (
           <FavoritesText>Add to favorites</FavoritesText>
         ) : (
@@ -44,7 +41,7 @@ function FavoritesList({
             />
           ))
         )}
-      </List>
+      </ProductList>
     </Container>
   );
 }
