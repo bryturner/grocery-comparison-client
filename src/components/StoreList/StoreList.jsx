@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import { ListWithBorder } from "../../constants/styles";
 import Product from "../Product/Product";
 
@@ -21,38 +20,15 @@ const ProductList = styled(ListWithBorder)`
 function StoreList({
   storeName,
   category,
-  searchQuery,
+  filteredProducts,
   products,
-  user,
-  userFavoritesList,
-  setUserFavoritesList,
+  favoritesList,
+  setFavoritesList,
   groceryList,
   setGroceryList,
   selectedProduct,
   setSelectedProduct,
 }) {
-  const [filteredProducts, setFilteredProducts] = useState([]);
-
-  const filterProducts = () => {
-    let filteredProds = [];
-
-    for (let i = 0; i < products.length; i++) {
-      const product = products[i];
-
-      if (
-        product.categories.includes(category) &&
-        product.title.toLowerCase().includes(searchQuery.toLowerCase())
-      ) {
-        filteredProds.push(product);
-      }
-    }
-    setFilteredProducts(filteredProds);
-  };
-
-  useEffect(() => {
-    category && filterProducts();
-  }, [category, products, searchQuery]);
-
   return (
     <Container>
       <Header>{storeName}</Header>
@@ -63,9 +39,8 @@ function StoreList({
               .map((product) => (
                 <Product
                   product={product}
-                  user={user}
-                  userFavoritesList={userFavoritesList}
-                  setUserFavoritesList={setUserFavoritesList}
+                  favoritesList={favoritesList}
+                  setFavoritesList={setFavoritesList}
                   groceryList={groceryList}
                   setGroceryList={setGroceryList}
                   selectedProduct={selectedProduct}
@@ -78,9 +53,8 @@ function StoreList({
               .map((product) => (
                 <Product
                   product={product}
-                  user={user}
-                  userFavoritesList={userFavoritesList}
-                  setUserFavoritesList={setUserFavoritesList}
+                  favoritesList={favoritesList}
+                  setFavoritesList={setFavoritesList}
                   groceryList={groceryList}
                   setGroceryList={setGroceryList}
                   selectedProduct={selectedProduct}

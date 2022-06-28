@@ -16,8 +16,8 @@ describe("Product and product text content", () => {
       <Product
         product={testProduct}
         user={testUser1}
-        userFavoritesList={[]}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={[]}
+        setFavoritesList={mockedFavorites}
         groceryList={[]}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}
@@ -32,8 +32,8 @@ describe("Product and product text content", () => {
       <Product
         product={testProduct}
         user={testUser1}
-        userFavoritesList={[]}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={[]}
+        setFavoritesList={mockedFavorites}
         groceryList={[]}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}
@@ -48,8 +48,8 @@ describe("Product and product text content", () => {
       <Product
         product={testProduct}
         user={testUser1}
-        userFavoritesList={[]}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={[]}
+        setFavoritesList={mockedFavorites}
         groceryList={[]}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}
@@ -66,8 +66,8 @@ describe("Product and product text content", () => {
       <Product
         product={testProduct}
         user={testUser1}
-        userFavoritesList={[]}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={[]}
+        setFavoritesList={mockedFavorites}
         groceryList={[]}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}
@@ -84,8 +84,8 @@ describe("Product displaying correct icons", () => {
       <Product
         product={testProduct}
         user={testUser1}
-        userFavoritesList={testUser1.lists.favorites}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={testUser1.lists.favorites}
+        setFavoritesList={mockedFavorites}
         groceryList={[]}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}
@@ -100,8 +100,8 @@ describe("Product displaying correct icons", () => {
       <Product
         product={testProduct}
         user={testUser1}
-        userFavoritesList={[]}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={[]}
+        setFavoritesList={mockedFavorites}
         groceryList={testUser1.lists.grocList}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}
@@ -116,8 +116,8 @@ describe("Product displaying correct icons", () => {
       <Product
         product={testProduct}
         user={testUser2}
-        userFavoritesList={testUser2.lists.favorites}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={testUser2.lists.favorites}
+        setFavoritesList={mockedFavorites}
         groceryList={[]}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}
@@ -134,8 +134,8 @@ describe("Product displaying correct icons", () => {
       <Product
         product={testProduct}
         user={testUser2}
-        userFavoritesList={[]}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={[]}
+        setFavoritesList={mockedFavorites}
         groceryList={testUser2.lists.grocList}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}

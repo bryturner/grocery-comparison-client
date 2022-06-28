@@ -195,6 +195,17 @@ export const testProducts = [
     favorites: [],
     grocList: [],
   },
+  {
+    _id: "15",
+    storeName: "Denner",
+    title: "Meat",
+    price: 0.75,
+    categories: ["fleisch-fisch"],
+    increment: { incrPrice: 0.15, incrQty: 100, incrStr: "0.15/100g" },
+    quantity: { qtyAmount: 500, qtyStr: "500g" },
+    favorites: [],
+    grocList: [],
+  },
 ];
 
 export const testUser1 = {

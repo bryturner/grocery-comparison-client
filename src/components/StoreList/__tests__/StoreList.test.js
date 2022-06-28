@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import StoreList from "../StoreList";
 import { testProducts } from "../../../__mocks__/testProductsList";
@@ -20,11 +20,11 @@ describe("StoreList", () => {
       <StoreList
         storeName="Coop"
         category={"fruechte-gemuese"}
-        searchQuery={""}
+        filteredProducts={testProducts}
         products={testProducts}
         user={testUser1}
-        userFavoritesList={[]}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={[]}
+        setFavoritesList={mockedFavorites}
         groceryList={[]}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}
@@ -36,16 +36,16 @@ describe("StoreList", () => {
     expect(screen.getByText(/coop/i)).toBeInTheDocument();
   });
 
-  test("should render a list of products", () => {
+  test("should render a list of fruit and vegetable products", () => {
     render(
       <StoreList
         storeName="Coop"
         category={"fruechte-gemuese"}
-        searchQuery={""}
+        filteredProducts={testProducts}
         products={testProducts}
         user={testUser1}
-        userFavoritesList={[]}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={[]}
+        setFavoritesList={mockedFavorites}
         groceryList={[]}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}
@@ -56,16 +56,16 @@ describe("StoreList", () => {
     expect(screen.getByRole("list")).toBeInTheDocument();
   });
 
-  test("should render products only from given store", () => {
+  test("should render products in the matching store", () => {
     render(
       <StoreList
         storeName="Coop"
         category={"fruechte-gemuese"}
-        searchQuery={""}
+        filteredProducts={testProducts}
         products={testProducts}
         user={testUser1}
-        userFavoritesList={[]}
-        setUserFavoritesList={mockedFavorites}
+        favoritesList={[]}
+        setFavoritesList={mockedFavorites}
         groceryList={[]}
         setGroceryList={mockedGroceryList}
         selectedProduct={undefined}
@@ -76,22 +76,3 @@ describe("StoreList", () => {
     expect(screen.getAllByRole("listitem").length).toBe(5);
   });
 });
-
-// describe("Products on store list", () => {
-//   test("should display filled favorite icon", () => {
-//     render(
-//       <StoreList
-//         storeName="Coop"
-//         category={"all"}
-//         searchQuery={""}
-//         products={allProducts}
-//         favorites={userEmptyLists.favoritesList}
-//         groceryList={userEmptyLists.groceryList}
-//         setFavorites={mockedFavorites}
-//         setGroceryList={mockedGroceryList}
-//       />
-//     );
-
-//     fireEvent.click(screen.getByRole("button", { name: "favorite" }));
-//     expect(screen.getByTestId("FavoriteIcon")).toBeInTheDocument();
-//   });

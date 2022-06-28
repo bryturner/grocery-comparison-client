@@ -9,6 +9,7 @@ import StoreList from "../components/StoreList/StoreList";
 import FavoritesList from "../components/FavoritesList/FavoritesList";
 import { storeNames, testProducts, testUser1 } from "../data";
 import { compareTwoProductTitles } from "../helpers";
+import ListButton from "../components/buttons/ListButton/ListButton";
 
 const Container = styled.div`
   padding: 2rem;
@@ -42,22 +43,15 @@ const ButtonContainer = styled.div`
   grid-column: 1 / 3;
 `;
 
-const ListButton = styled.button`
-  cursor: pointer;
-`;
-
 function HomePage() {
-  const [user, setUser] = useState(testUser1);
   const [products, setProducts] = useState(testProducts);
   const [category, setCategory] = useState("fruechte-gemuese");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(undefined);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
-  const [groceryList, setGroceryList] = useState(user.lists.grocList);
-
-  const [userFavoritesList, setUserFavoritesList] = useState(
-    user.lists.favorites
-  );
+  const [groceryList, setGroceryList] = useState([]);
+  const [favoritesList, setFavoritesList] = useState([]);
 
   //  const getProducts = async () => {
   //    try {
@@ -69,15 +63,48 @@ function HomePage() {
   //    }
   //  };
 
+  const getGroceryList = () => {
+    const groceryListData = JSON.parse(localStorage.getItem("groceryList"));
+    if (!groceryListData) return;
+    setGroceryList(groceryListData);
+  };
+
+  const getFavoritesList = () => {
+    const favoritesListData = JSON.parse(localStorage.getItem("favoritesList"));
+    if (!favoritesListData) return;
+    setFavoritesList(favoritesListData);
+  };
+
+  const handleClearGroceryClick = () => {
+    localStorage.removeItem("groceryList");
+    setGroceryList([]);
+  };
+
+  const handleClearFavoritesListClick = () => {
+    localStorage.removeItem("favoritesList");
+    setFavoritesList([]);
+  };
+
+  const filterProducts = () => {
+    let filteredProds = [];
+    for (let product of products) {
+      if (
+        product.categories.includes(category) &&
+        product.title.toLowerCase().includes(searchQuery.toLowerCase())
+      ) {
+        filteredProds.push(product);
+      }
+    }
+    setFilteredProducts(filteredProds);
+  };
+
   const findBestMatch = () => {
     if (selectedProduct === undefined) {
       setProducts(testProducts);
       return;
     }
-
     let bestMatchingProducts = [];
     const selectedTitle = selectedProduct.title;
-
     products
       .map((product) => {
         const similarityRating = compareTwoProductTitles(
@@ -92,13 +119,21 @@ function HomePage() {
           bestMatchingProducts.push(product.product);
         }
       });
-
     setProducts(bestMatchingProducts);
   };
 
   useEffect(() => {
+    category && filterProducts();
+  }, [category, products, searchQuery]);
+
+  useEffect(() => {
     findBestMatch();
   }, [selectedProduct]);
+
+  useEffect(() => {
+    getGroceryList();
+    getFavoritesList();
+  }, []);
 
   //   useEffect(() => {
   //     console.log(groceryList);
@@ -116,11 +151,10 @@ function HomePage() {
           <StoreList
             storeName={storeName}
             category={category}
-            searchQuery={searchQuery}
+            filteredProducts={filteredProducts}
             products={products}
-            user={user}
-            userFavoritesList={userFavoritesList}
-            setUserFavoritesList={setUserFavoritesList}
+            favoritesList={favoritesList}
+            setFavoritesList={setFavoritesList}
             setGroceryList={setGroceryList}
             groceryList={groceryList}
             selectedProduct={selectedProduct}
@@ -128,20 +162,28 @@ function HomePage() {
             key={storeName}
           />
         ))}
-
         <GroceryList
-          userFavoritesList={userFavoritesList}
+          storeNames={storeNames}
+          favoritesList={favoritesList}
+          setFavoritesList={setFavoritesList}
           groceryList={groceryList}
           setGroceryList={setGroceryList}
         />
         <FavoritesList
-          userFavoritesList={userFavoritesList}
-          setUserFavoritesList={setUserFavoritesList}
+          favoritesList={favoritesList}
+          setFavoritesList={setFavoritesList}
           groceryList={groceryList}
+          setGroceryList={setGroceryList}
         />
         <ButtonContainer>
-          <ListButton>Save list</ListButton>
-          <ListButton>Share list</ListButton>
+          <ListButton
+            handleClick={handleClearGroceryClick}
+            buttonName="Clear Grocery List"
+          />
+          <ListButton
+            handleClick={handleClearFavoritesListClick}
+            buttonName="Clear Favorites List"
+          />
         </ButtonContainer>
       </Grid>
     </Container>

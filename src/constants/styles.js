@@ -8,7 +8,7 @@ export const PrimaryButton = styled.button`
   justify-content: center;
 `;
 
-const List = styled.ul`
+export const List = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -20,16 +20,3 @@ export const ListWithBorder = styled(List)`
   border-radius: 8px;
   padding: 0.5rem;
 `;
-
-export const BORDER = {
-  MAIN: ["border: 2px solid black;", "border-radius: 8px;", "padding: 0.5rem;"],
-};
-
-export const LIST = {
-  PRODUCT: [
-    "list-style: none;",
-    "display: flex;",
-    "flex-direction: column;",
-    "gap: 0.5rem;",
-  ],
-};

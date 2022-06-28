@@ -8,4 +8,13 @@ describe("Homepage", () => {
 
     expect();
   });
+
+  //   test("should only show products with high comparison match", () => {
+  // 	render(<HomePage />);
+  // 	userEvent.selectOptions(
+  // 	  screen.getByRole("combobox"),
+  // 	  screen.getByRole("option", { name: "Fleisch & Fisch" })
+  // 	);
+  // 	expect(screen.getByTestId("product-15")).toBeInTheDocument();
+  //  });
 });

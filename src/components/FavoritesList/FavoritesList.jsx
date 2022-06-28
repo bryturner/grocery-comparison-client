@@ -20,23 +20,25 @@ const FavoritesText = styled.p`
 `;
 
 function FavoritesList({
-  userFavoritesList,
-  setUserFavoritesList,
+  favoritesList,
+  setFavoritesList,
   groceryList,
+  setGroceryList,
 }) {
   return (
     <Container>
       <Header>Favorites List</Header>
       <ProductList>
-        {userFavoritesList.length === 0 ? (
+        {favoritesList.length === 0 ? (
           <FavoritesText>Add to favorites</FavoritesText>
         ) : (
-          userFavoritesList.map((product) => (
+          favoritesList.map((product) => (
             <Product
               product={product}
-              userFavoritesList={userFavoritesList}
-              setUserFavoritesList={setUserFavoritesList}
+              favoritesList={favoritesList}
+              setFavoritesList={setFavoritesList}
               groceryList={groceryList}
+              setGroceryList={setGroceryList}
               key={product._id}
             />
           ))

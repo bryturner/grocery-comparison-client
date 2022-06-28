@@ -37,9 +37,8 @@ const ButtonContainer = styled.div`
 
 function Product({
   product,
-  user,
-  userFavoritesList,
-  setUserFavoritesList,
+  favoritesList,
+  setFavoritesList,
   groceryList,
   setGroceryList,
   selectedProduct,
@@ -57,55 +56,54 @@ function Product({
   };
 
   //  ====== User favorites list  ======
-  const handleFavoriteClick = (id) => {
-    if (onFavoritesList) {
-      setOnFavoritesList(false);
-      setUserFavoritesList(
-        userFavoritesList.filter((listProduct) => {
-          return listProduct._id !== id;
-        })
-      );
-      // Local storage access
-    }
-
-    if (!onFavoritesList) {
-      setOnFavoritesList(true);
-      setUserFavoritesList([...userFavoritesList, product]);
-      // Local storage access
-    }
-  };
+  const handleFavoriteClick = useCallback(
+    (id) => {
+      if (onFavoritesList) {
+        setOnFavoritesList(false);
+        setFavoritesList(
+          favoritesList.filter((listProduct) => {
+            return listProduct._id !== id;
+          })
+        );
+      }
+      if (!onFavoritesList) {
+        setOnFavoritesList(true);
+        setFavoritesList([...favoritesList, product]);
+      }
+    },
+    [favoritesList, onFavoritesList, product, setFavoritesList]
+  );
 
   const checkOnUserFavoritesList = useCallback(() => {
-    if (
-      userFavoritesList.some((listProduct) => listProduct._id === product._id)
-    ) {
+    if (favoritesList.some((listProduct) => listProduct._id === product._id)) {
       setOnFavoritesList(true);
     } else {
       setOnFavoritesList(false);
     }
-  }, [userFavoritesList, setOnFavoritesList, product._id]);
+  }, [favoritesList, setOnFavoritesList, product._id]);
 
   useEffect(() => {
     checkOnUserFavoritesList();
   }, [checkOnUserFavoritesList]);
 
   // ===== User grocery list =====
-  const handleGroceryListClick = (id) => {
-    if (onGroceryList) {
-      setOnGroceryList(false);
-      setGroceryList(
-        groceryList.filter((listProduct) => {
-          return listProduct._id !== id;
-        })
-      );
-      // Local storage access
-    }
-    if (!onGroceryList) {
-      setOnGroceryList(true);
-      setGroceryList([...groceryList, product]);
-      // Local storage access
-    }
-  };
+  const handleGroceryListClick = useCallback(
+    (id) => {
+      if (onGroceryList) {
+        setOnGroceryList(false);
+        setGroceryList(
+          groceryList.filter((listProduct) => {
+            return listProduct._id !== id;
+          })
+        );
+      }
+      if (!onGroceryList) {
+        setOnGroceryList(true);
+        setGroceryList([...groceryList, product]);
+      }
+    },
+    [groceryList, onGroceryList, product, setGroceryList]
+  );
 
   const checkOnGroceryList = useCallback(() => {
     if (groceryList.some((listProduct) => listProduct._id === product._id)) {
@@ -119,8 +117,16 @@ function Product({
     checkOnGroceryList();
   }, [checkOnGroceryList]);
 
+  useEffect(() => {
+    localStorage.setItem("favoritesList", JSON.stringify(favoritesList));
+  }, [handleFavoriteClick, favoritesList]);
+
+  useEffect(() => {
+    localStorage.setItem("groceryList", JSON.stringify(groceryList));
+  }, [handleGroceryListClick, groceryList]);
+
   return (
-    <Container>
+    <Container data-testid={`product-${product._id}`}>
       <TextContainer>
         <SelectProductButton
           product={product}

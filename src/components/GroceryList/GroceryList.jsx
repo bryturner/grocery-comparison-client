@@ -17,7 +17,13 @@ const Text = styled.p`
   text-align: center;
 `;
 
-function GroceryList({ groceryList, setGroceryList, userFavoritesList }) {
+function GroceryList({
+  storeNames,
+  groceryList,
+  setGroceryList,
+  favoritesList,
+  setFavoritesList,
+}) {
   return (
     <Container>
       <Header>Grocery List</Header>
@@ -31,7 +37,8 @@ function GroceryList({ groceryList, setGroceryList, userFavoritesList }) {
                 product={product}
                 groceryList={groceryList}
                 setGroceryList={setGroceryList}
-                userFavoritesList={userFavoritesList}
+                favoritesList={favoritesList}
+                setFavoritesList={setFavoritesList}
                 key={product._id}
               />
             );
