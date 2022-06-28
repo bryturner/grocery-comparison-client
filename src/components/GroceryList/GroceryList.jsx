@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ListWithBorder } from "../../constants/styles";
 import Product from "../Product/Product";
+import GroceryListStore from "./GroceryListStore";
 
 const Container = styled.div`
   grid-column: 1 / 3;
@@ -31,18 +32,24 @@ function GroceryList({
         {groceryList.length === 0 ? (
           <Text>Add to grocery list</Text>
         ) : (
-          groceryList.map((product) => {
-            return (
-              <Product
-                product={product}
-                groceryList={groceryList}
-                setGroceryList={setGroceryList}
-                favoritesList={favoritesList}
-                setFavoritesList={setFavoritesList}
-                key={product._id}
-              />
-            );
-          })
+          storeNames
+            .filter((storeName) => {
+              return groceryList.some(
+                (product) => product.storeName === storeName
+              );
+            })
+            .map((storeName) => {
+              return (
+                <GroceryListStore
+                  storeName={storeName}
+                  groceryList={groceryList}
+                  setGroceryList={setGroceryList}
+                  favoritesList={favoritesList}
+                  setFavoritesList={setFavoritesList}
+                  key={storeName}
+                />
+              );
+            })
         )}
       </ProductList>
     </Container>

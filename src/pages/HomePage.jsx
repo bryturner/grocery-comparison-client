@@ -170,6 +170,7 @@ function HomePage() {
           setGroceryList={setGroceryList}
         />
         <FavoritesList
+          storeNames={storeNames}
           favoritesList={favoritesList}
           setFavoritesList={setFavoritesList}
           groceryList={groceryList}

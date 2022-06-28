@@ -14,7 +14,7 @@ const StoreName = styled.h3`
 
 const ProductList = styled(List)``;
 
-function GroceryListStore({
+function FavoritesListStore({
   storeName,
   groceryList,
   setGroceryList,
@@ -25,7 +25,7 @@ function GroceryListStore({
     <Container>
       <StoreName>{storeName}</StoreName>
       <ProductList>
-        {groceryList
+        {favoritesList
           .filter((product) => product.storeName === storeName)
           .map((product) => {
             return (
@@ -44,4 +44,4 @@ function GroceryListStore({
   );
 }
 
-export default GroceryListStore;
+export default FavoritesListStore;

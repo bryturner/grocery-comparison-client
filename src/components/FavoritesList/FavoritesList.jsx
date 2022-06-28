@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Product from "../Product/Product";
 
 import { ListWithBorder } from "../../constants/styles";
+import FavoritesListStore from "./FavoritesListStore";
 
 const Container = styled.div`
   grid-column: 3 / -1;
@@ -20,6 +21,7 @@ const FavoritesText = styled.p`
 `;
 
 function FavoritesList({
+  storeNames,
   favoritesList,
   setFavoritesList,
   groceryList,
@@ -32,16 +34,24 @@ function FavoritesList({
         {favoritesList.length === 0 ? (
           <FavoritesText>Add to favorites</FavoritesText>
         ) : (
-          favoritesList.map((product) => (
-            <Product
-              product={product}
-              favoritesList={favoritesList}
-              setFavoritesList={setFavoritesList}
-              groceryList={groceryList}
-              setGroceryList={setGroceryList}
-              key={product._id}
-            />
-          ))
+          storeNames
+            .filter((storeName) => {
+              return favoritesList.some(
+                (product) => product.storeName === storeName
+              );
+            })
+            .map((storeName) => {
+              return (
+                <FavoritesListStore
+                  storeName={storeName}
+                  groceryList={groceryList}
+                  setGroceryList={setGroceryList}
+                  favoritesList={favoritesList}
+                  setFavoritesList={setFavoritesList}
+                  key={storeName}
+                />
+              );
+            })
         )}
       </ProductList>
     </Container>
