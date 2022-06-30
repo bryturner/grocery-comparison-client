@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import Product from "../Product/Product";
-
 import { ListWithBorder } from "../../constants/styles";
 import FavoritesListStore from "./FavoritesListStore";
 

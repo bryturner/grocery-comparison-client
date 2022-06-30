@@ -6,8 +6,6 @@ const Container = styled.div`
   gap: 0.5rem;
 `;
 
-const Label = styled.label``;
-
 const CategorySelect = styled.select`
   padding: 0.5rem;
 `;
@@ -17,7 +15,7 @@ const CategoryOption = styled.option``;
 function CategoryFilter({ setCategory }) {
   return (
     <Container>
-      <Label htmlFor="category-filter">Category:</Label>
+      <label htmlFor="category-filter">Category:</label>
       <CategorySelect
         id="category-filter"
         defaultValue="fruechte-gemuese"

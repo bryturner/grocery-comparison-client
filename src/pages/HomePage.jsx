@@ -7,7 +7,7 @@ import GroceryList from "../components/GroceryList/GroceryList";
 import SearchBox from "../components/SearchBox/SearchBox";
 import StoreList from "../components/StoreList/StoreList";
 import FavoritesList from "../components/FavoritesList/FavoritesList";
-import { storeNames, testProducts, testUser1 } from "../data";
+import { storeNames, testProducts } from "../data";
 import { compareTwoProductTitles } from "../helpers";
 import ListButton from "../components/buttons/ListButton/ListButton";
 
@@ -62,6 +62,12 @@ function HomePage() {
   //      return [];
   //    }
   //  };
+
+  //   const productResponse = await axios.get(
+  // 	category
+  // 	  ? `http://localhost:5002/products?category=${category}`
+  // 	  : "http://localhost:5002/products"
+  //  );
 
   const getGroceryList = () => {
     const groceryListData = JSON.parse(localStorage.getItem("groceryList"));

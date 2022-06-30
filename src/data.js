@@ -1,42 +1,3 @@
-export const groceryCategories = [
-  {
-    value: "fruechte-gemuese",
-    displayName: "Fr&uuml;chte &amp; Gem&uuml;se",
-  },
-  {
-    value: "milchprodukte-eier",
-    displayName: "Milchprodukte &amp; Eier",
-  },
-  {
-    value: "fleisch-fisch",
-    displayName: "Fleisch &amp; Fisch",
-  },
-  {
-    value: "brot-backwaren",
-    displayName: "Brot &amp; Backwaren",
-  },
-  {
-    value: "getraenke",
-    displayName: "Getr&auml;nke",
-  },
-  {
-    value: "vorraete",
-    displayName: "Vorr&auml;te",
-  },
-  {
-    value: "suesses-snacks",
-    displayName: "S&uuml;sses &amp; Snacks",
-  },
-  {
-    value: "tiefgekuehlte-produkte",
-    displayName: "Tiefgek&uuml;hlte &amp; Produkte",
-  },
-  {
-    value: "fertiggerichte",
-    displayName: "Fertiggerichte",
-  },
-];
-
 export const storeNames = ["Coop", "Migros", "Denner"];
 
 // !!!!!!! WITH NEW DB STRUCTURE
@@ -49,8 +10,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.15, incrQty: 100, incrStr: "0.15/100g" },
     quantity: { qtyAmount: 500, qtyStr: "500g" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "2",
@@ -60,8 +19,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 3.6, incrQty: 1, incrStr: "3.60/1kg" },
     quantity: { qtyAmount: 1, qtyStr: "1kg" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "3",
@@ -71,8 +28,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.68, incrQty: 100, incrStr: "0.68/100kg" },
     quantity: { qtyAmount: 500, qtyStr: "500kg" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "4",
@@ -82,8 +37,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.55, incrQty: 1, incrStr: "0.55/1ST" },
     quantity: { qtyAmount: 1, qtyStr: "1ST" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "5",
@@ -93,8 +46,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.16, incrQty: 100, incrStr: "0.16/100g" },
     quantity: { qtyAmount: 500, qtyStr: "500g" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "6",
@@ -104,8 +55,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 3, incrQty: 100, incrStr: "0.60/100kg" },
     quantity: { qtyAmount: 500, qtyStr: "500kg" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "7",
@@ -115,8 +64,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.2, incrQty: 100, incrStr: "0.20/100g" },
     quantity: { qtyAmount: 500, qtyStr: "500g" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "8",
@@ -126,8 +73,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.45, incrQty: 1, incrStr: "0.45/1ST" },
     quantity: { qtyAmount: 2, qtyStr: "2ST" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "9",
@@ -137,8 +82,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { ncrPrice: 2.8, incrQty: 1, incrStr: "2.80/1kg" },
     quantity: { qtyAmount: 1, qtyStr: "1kg" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "10",
@@ -148,8 +91,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 1.4, incrQty: 1, incrStr: "1.40/1kg" },
     quantity: { qtyAmount: 1, qtyStr: "1kg" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "11",
@@ -159,8 +100,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.6, incrQty: 100, incrStr: "0.60/100kg" },
     quantity: { qtyAmount: 500, qtyStr: "500kg" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "12",
@@ -170,8 +109,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 3.4, incrQty: 1, incrStr: "3.40/1kg" },
     quantity: { qtyAmount: 1, qtyStr: "1kg" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "13",
@@ -181,8 +118,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.3, incrQty: 100, incrStr: "0.30/100g" },
     quantity: { qtyAmount: 500, qtyStr: "500g" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "14",
@@ -192,8 +127,6 @@ export const testProducts = [
     categories: ["fruechte-gemuese"],
     increment: { incrPrice: 0.15, incrQty: 100, incrStr: "0.15/100g" },
     quantity: { qtyAmount: 500, qtyStr: "500g" },
-    favorites: [],
-    grocList: [],
   },
   {
     _id: "15",
@@ -203,8 +136,6 @@ export const testProducts = [
     categories: ["fleisch-fisch"],
     increment: { incrPrice: 0.15, incrQty: 100, incrStr: "0.15/100g" },
     quantity: { qtyAmount: 500, qtyStr: "500g" },
-    favorites: [],
-    grocList: [],
   },
 ];
 

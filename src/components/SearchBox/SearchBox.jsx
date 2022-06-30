@@ -15,8 +15,6 @@ const Wrapper = styled.div`
   padding: 0.5rem;
 `;
 
-const Label = styled.label``;
-
 const SearchInput = styled.input`
   padding: 0.2rem;
   border: none;
@@ -25,7 +23,7 @@ const SearchInput = styled.input`
 function SearchBox({ setSearchQuery, searchQuery }) {
   return (
     <Container>
-      <Label htmlFor="search-box">Find product:</Label>
+      <label htmlFor="search-box">Find product:</label>
       <Wrapper>
         <SearchInput
           id="search-box"

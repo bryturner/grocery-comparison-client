@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { ListWithBorder } from "../../constants/styles";
-import Product from "../Product/Product";
 import GroceryListStore from "./GroceryListStore";
 
 const Container = styled.div`
