@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { ListWithBorder } from "../../constants/styles";
-import FavoritesListStore from "./FavoritesListStore";
+import UserListButton from "./UserListButton";
+import UserListStore from "./UserListStore";
 
 const Container = styled.div`
-  grid-column: 3 / -1;
-  align-self: stretch;
+  flex: 1;
 `;
 
 const Header = styled.h2`
@@ -14,33 +14,39 @@ const Header = styled.h2`
 
 const ProductList = styled(ListWithBorder)``;
 
-const FavoritesText = styled.p`
+const Text = styled.p`
   text-align: center;
 `;
 
-function FavoritesList({
+function UserList({
+  userList,
+  listTitle,
+  listText,
   storeNames,
   favoritesList,
   setFavoritesList,
   groceryList,
   setGroceryList,
+  handleClearClick,
+  clearButtonName,
 }) {
   return (
     <Container>
-      <Header>Favorites List</Header>
+      <Header>{listTitle} List</Header>
       <ProductList>
-        {favoritesList.length === 0 ? (
-          <FavoritesText>Add to favorites</FavoritesText>
+        {userList.length === 0 ? (
+          <Text>{listText}</Text>
         ) : (
           storeNames
             .filter((storeName) => {
-              return favoritesList.some(
+              return userList.some(
                 (product) => product.storeName === storeName
               );
             })
             .map((storeName) => {
               return (
-                <FavoritesListStore
+                <UserListStore
+                  userList={userList}
                   storeName={storeName}
                   groceryList={groceryList}
                   setGroceryList={setGroceryList}
@@ -52,8 +58,12 @@ function FavoritesList({
             })
         )}
       </ProductList>
+      <UserListButton
+        handleClick={handleClearClick}
+        buttonName={clearButtonName}
+      />
     </Container>
   );
 }
 
-export default FavoritesList;
+export default UserList;

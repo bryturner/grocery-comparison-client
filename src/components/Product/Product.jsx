@@ -6,26 +6,40 @@ import SelectProductButton from "../buttons/SelectProductButton/SelectProductBut
 
 const Container = styled.li`
   display: flex;
+  padding: 0 1rem;
   gap: 1rem;
   align-items: flex-end;
 `;
 
+const Divider = styled.div`
+  border-bottom: 1px solid lightgray;
+  width: 100%;
+  /* height: 0.5rem;
+	padding-bottom: 0.5rem; */
+`;
+
 const TextContainer = styled.div`
   display: flex;
-  flex: 6;
+  flex: 5;
   position: relative;
+  font-size: 1.4rem;
+  font-weight: bold;
 `;
 
 const Title = styled.p`
   flex: 2;
 `;
 
-const Price = styled.p`
+const Increment = styled.p`
   flex: 1;
-  text-align: center;
+  text-align: right;
 `;
 
-const Increment = styled.p`
+const Quantity = styled.p`
+  flex: 1;
+  text-align: left;
+`;
+const Price = styled.p`
   flex: 1;
   text-align: center;
 `;
@@ -43,10 +57,12 @@ function Product({
   setGroceryList,
   selectedProduct,
   setSelectedProduct,
+  onUserStoreList,
 }) {
   const [onFavoritesList, setOnFavoritesList] = useState(false);
   const [onGroceryList, setOnGroceryList] = useState(false);
 
+  //   When product clicked to remove selection -> products revert to default, not products from db
   const handleProductClicked = () => {
     if (selectedProduct === product) {
       setSelectedProduct(undefined);
@@ -126,32 +142,46 @@ function Product({
   }, [handleGroceryListClick, groceryList]);
 
   return (
-    <Container data-testid={`product-${product._id}`}>
-      <TextContainer>
-        <SelectProductButton
+    <>
+      <Container data-testid={`product-${product._id}`}>
+        <TextContainer>
+          {/* <SelectProductButton
           product={product}
           selectedProduct={selectedProduct}
           handleProductClicked={handleProductClicked}
-        />
-        <Title data-testid="product-title">{product.title}</Title>
-        <Increment data-testid="product-increment">
-          {product.increment.incrStr}
-        </Increment>
-        <Price data-testid="product-price">{product.price.toFixed(2)}</Price>
-      </TextContainer>
-      <ButtonContainer>
-        <FavoritesButton
-          product={product}
-          handleFavoriteClick={handleFavoriteClick}
-          onFavoritesList={onFavoritesList}
-        />
-        <GroceryListButton
-          product={product}
-          handleGroceryListClick={handleGroceryListClick}
-          onGroceryList={onGroceryList}
-        />
-      </ButtonContainer>
-    </Container>
+        /> */}
+          <Title data-testid="product-title">
+            {product.title.length > 20
+              ? `${product.title.substring(0, 20)}...`
+              : product.title}
+          </Title>
+          <Increment data-testid="product-increment">
+            {product.incrStr}
+          </Increment>
+          {/* <Quantity>{product.qtyStr}</Quantity> */}
+          <Price data-testid="product-price">{product.price.toFixed(2)}</Price>
+        </TextContainer>
+        <ButtonContainer>
+          <FavoritesButton
+            product={product}
+            handleFavoriteClick={handleFavoriteClick}
+            onFavoritesList={onFavoritesList}
+          />
+          <GroceryListButton
+            product={product}
+            handleGroceryListClick={handleGroceryListClick}
+            onGroceryList={onGroceryList}
+          />
+          <SelectProductButton
+            onUserStoreList={onUserStoreList}
+            product={product}
+            selectedProduct={selectedProduct}
+            handleProductClicked={handleProductClicked}
+          />
+        </ButtonContainer>
+      </Container>
+      <Divider />
+    </>
   );
 }
 

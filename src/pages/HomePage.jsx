@@ -3,16 +3,14 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import CategoryFilter from "../components/CategoryFilter/CategoryFilter";
-import GroceryList from "../components/GroceryList/GroceryList";
 import SearchBox from "../components/SearchBox/SearchBox";
 import StoreList from "../components/StoreList/StoreList";
-import FavoritesList from "../components/FavoritesList/FavoritesList";
 import { storeNames, testProducts } from "../data";
 import { compareTwoProductTitles } from "../helpers";
-import ListButton from "../components/buttons/ListButton/ListButton";
+import UserList from "../components/UserList/UserList";
 
 const Container = styled.div`
-  padding: 2rem;
+  padding: 2rem 4.8rem;
 `;
 
 const Header = styled.h1`
@@ -35,12 +33,10 @@ const Grid = styled.div`
   row-gap: 2rem;
 `;
 
-const ButtonContainer = styled.div`
+const UserListContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  grid-column: 1 / 3;
+  gap: 1rem;
+  grid-column: 1 / -1;
 `;
 
 function HomePage() {
@@ -49,25 +45,22 @@ function HomePage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(undefined);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
   const [groceryList, setGroceryList] = useState([]);
   const [favoritesList, setFavoritesList] = useState([]);
 
-  //  const getProducts = async () => {
-  //    try {
-  //      const productResponse = await axios.get("http://localhost:8000/product");
-  //      setProducts(productResponse.data);
-  //    } catch (err) {
-  //      console.error(err);
-  //      return [];
-  //    }
-  //  };
-
-  //   const productResponse = await axios.get(
-  // 	category
-  // 	  ? `http://localhost:5002/products?category=${category}`
-  // 	  : "http://localhost:5002/products"
-  //  );
+  const getProducts = async () => {
+    try {
+      const productResponse = await axios.get(
+        `http://localhost:8000/product?category=${category}`
+      );
+      setProducts(productResponse.data);
+    } catch (err) {
+      console.error(err);
+      return [];
+      // use test products for app functionality if fetch error
+      // display message: Products being displayed are not real....
+    }
+  };
 
   const getGroceryList = () => {
     const groceryListData = JSON.parse(localStorage.getItem("groceryList"));
@@ -86,27 +79,21 @@ function HomePage() {
     setGroceryList([]);
   };
 
-  const handleClearFavoritesListClick = () => {
+  const handleClearFavoritesClick = () => {
     localStorage.removeItem("favoritesList");
     setFavoritesList([]);
   };
 
   const filterProducts = () => {
-    let filteredProds = [];
-    for (let product of products) {
-      if (
-        product.categories.includes(category) &&
-        product.title.toLowerCase().includes(searchQuery.toLowerCase())
-      ) {
-        filteredProds.push(product);
-      }
-    }
+    const filteredProds = products.filter((product) => {
+      return product.title.toLowerCase().includes(searchQuery.toLowerCase());
+    });
     setFilteredProducts(filteredProds);
   };
 
   const findBestMatch = () => {
     if (selectedProduct === undefined) {
-      setProducts(testProducts);
+      setProducts(products);
       return;
     }
     let bestMatchingProducts = [];
@@ -142,8 +129,8 @@ function HomePage() {
   }, []);
 
   //   useEffect(() => {
-  //     console.log(groceryList);
-  //   }, []);
+  //     getProducts();
+  //   }, [category]);
 
   return (
     <Container>
@@ -168,30 +155,32 @@ function HomePage() {
             key={storeName}
           />
         ))}
-        <GroceryList
-          storeNames={storeNames}
-          favoritesList={favoritesList}
-          setFavoritesList={setFavoritesList}
-          groceryList={groceryList}
-          setGroceryList={setGroceryList}
-        />
-        <FavoritesList
-          storeNames={storeNames}
-          favoritesList={favoritesList}
-          setFavoritesList={setFavoritesList}
-          groceryList={groceryList}
-          setGroceryList={setGroceryList}
-        />
-        <ButtonContainer>
-          <ListButton
-            handleClick={handleClearGroceryClick}
-            buttonName="Clear Grocery List"
+        <UserListContainer>
+          <UserList
+            userList={groceryList}
+            listTitle="Grocery"
+            listText="Click the plus to add to grocery list"
+            storeNames={storeNames}
+            favoritesList={favoritesList}
+            setFavoritesList={setFavoritesList}
+            groceryList={groceryList}
+            setGroceryList={setGroceryList}
+            handleClearClick={handleClearGroceryClick}
+            clearButtonName="Clear grocery list"
           />
-          <ListButton
-            handleClick={handleClearFavoritesListClick}
-            buttonName="Clear Favorites List"
+          <UserList
+            userList={favoritesList}
+            listTitle="Favorites"
+            listText="Click the heart to add to favorites"
+            storeNames={storeNames}
+            favoritesList={favoritesList}
+            setFavoritesList={setFavoritesList}
+            groceryList={groceryList}
+            setGroceryList={setGroceryList}
+            handleClearClick={handleClearFavoritesClick}
+            clearButtonName="Clear favorites list"
           />
-        </ButtonContainer>
+        </UserListContainer>
       </Grid>
     </Container>
   );

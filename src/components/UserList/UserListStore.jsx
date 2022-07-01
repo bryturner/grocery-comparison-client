@@ -12,9 +12,14 @@ const StoreName = styled.h3`
   border-bottom: 1px solid black;
 `;
 
-const ProductList = styled(List)``;
+const ProductList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+`;
 
-function GroceryListStore({
+function UserListStore({
+  userList,
   storeName,
   groceryList,
   setGroceryList,
@@ -25,7 +30,7 @@ function GroceryListStore({
     <Container>
       <StoreName>{storeName}</StoreName>
       <ProductList>
-        {groceryList
+        {userList
           .filter((product) => product.storeName === storeName)
           .map((product) => {
             return (
@@ -35,6 +40,7 @@ function GroceryListStore({
                 setGroceryList={setGroceryList}
                 favoritesList={favoritesList}
                 setFavoritesList={setFavoritesList}
+                onUserStoreList={true}
                 key={product._id}
               />
             );
@@ -44,4 +50,4 @@ function GroceryListStore({
   );
 }
 
-export default GroceryListStore;
+export default UserListStore;

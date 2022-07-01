@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Button = styled.button``;
 
-function ListButton({ handleClick, buttonName }) {
+function UserListButton({ handleClick, buttonName }) {
   return <Button onClick={() => handleClick()}>{buttonName}</Button>;
 }
 
-export default ListButton;
+export default UserListButton;

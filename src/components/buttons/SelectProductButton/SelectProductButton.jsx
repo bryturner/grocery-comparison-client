@@ -1,30 +1,27 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: none;
-  border: ${(props) => (props.selectedBorder ? "1px solid red" : "none")};
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
+  /* border: ${(props) => (props.selectedBorder ? "1px solid red" : "none")}; */
+  display: ${(props) => (props.onUserStoreList ? "none" : "block")};
 `;
 
 function SelectProductButton({
   product,
   selectedProduct,
   handleProductClicked,
+  onUserStoreList,
 }) {
   return (
     <Button
+      onUserStoreList={onUserStoreList}
       aria-label="select-for-comparison"
       selectedBorder={selectedProduct && selectedProduct._id === product._id}
       onClick={() => {
         handleProductClicked();
       }}
-    />
+    >
+      Compare
+    </Button>
   );
 }
 
