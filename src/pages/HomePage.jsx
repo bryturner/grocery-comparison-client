@@ -8,6 +8,7 @@ import StoreList from "../components/StoreList/StoreList";
 import { storeNames, testProducts } from "../data";
 import { compareTwoProductTitles } from "../helpers";
 import UserList from "../components/UserList/UserList";
+import ResetCompareButton from "../components/buttons/ResetCompareButton/ResetCompareButton";
 
 const Container = styled.div`
   padding: 2rem 4.8rem;
@@ -41,12 +42,14 @@ const UserListContainer = styled.div`
 
 function HomePage() {
   const [products, setProducts] = useState(testProducts);
+  const [allProdsInCategory, setAllProdsInCategory] = useState(testProducts);
   const [category, setCategory] = useState("fruechte-gemuese");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(undefined);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [groceryList, setGroceryList] = useState([]);
   const [favoritesList, setFavoritesList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getProducts = async () => {
     try {
@@ -54,9 +57,13 @@ function HomePage() {
         `http://localhost:8000/product?category=${category}`
       );
       setProducts(productResponse.data);
+      // Store all products on initial db call for reset compare click
+      setAllProdsInCategory(productResponse.data);
     } catch (err) {
       console.error(err);
       return [];
+      // setProducts(testProducts);
+      // setAllProdsInCategory(testProducts);
       // use test products for app functionality if fetch error
       // display message: Products being displayed are not real....
     }
@@ -74,6 +81,7 @@ function HomePage() {
     setFavoritesList(favoritesListData);
   };
 
+  //   Handle button clicks
   const handleClearGroceryClick = () => {
     localStorage.removeItem("groceryList");
     setGroceryList([]);
@@ -84,25 +92,34 @@ function HomePage() {
     setFavoritesList([]);
   };
 
+  const handleResetCompareClick = () => {
+    setSelectedProduct(undefined);
+    setProducts(allProdsInCategory);
+  };
+
   const filterProducts = () => {
     const filteredProds = products.filter((product) => {
-      return product.title.toLowerCase().includes(searchQuery.toLowerCase());
+      return product.dictionaryTitle
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase());
     });
     setFilteredProducts(filteredProds);
   };
 
   const findBestMatch = () => {
     if (selectedProduct === undefined) {
-      setProducts(products);
+      setProducts(allProdsInCategory);
+      // getProducts();
       return;
     }
     let bestMatchingProducts = [];
-    const selectedTitle = selectedProduct.title;
+    const selectedTitle = selectedProduct.dictionaryTitle;
+
     products
       .map((product) => {
         const similarityRating = compareTwoProductTitles(
           selectedTitle,
-          product.title
+          product.dictionaryTitle
         );
         return { similarityRating: similarityRating, product: product };
       })
@@ -138,6 +155,7 @@ function HomePage() {
       <InputsContainer>
         <CategoryFilter setCategory={setCategory} />
         <SearchBox setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
+        <ResetCompareButton handleClick={handleResetCompareClick} />
       </InputsContainer>
       <Grid>
         {storeNames.map((storeName) => (
@@ -152,6 +170,7 @@ function HomePage() {
             groceryList={groceryList}
             selectedProduct={selectedProduct}
             setSelectedProduct={setSelectedProduct}
+            isLoading={isLoading}
             key={storeName}
           />
         ))}

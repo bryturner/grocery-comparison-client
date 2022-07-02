@@ -1,8 +1,12 @@
 import styled from "styled-components";
+import { Button } from "../../../constants/styles";
 
-export const Button = styled.button`
+export const CompareButton = styled(Button)`
   /* border: ${(props) => (props.selectedBorder ? "1px solid red" : "none")}; */
+  background-color: ${(props) => (props.selectedBorder ? "green" : "white")};
   display: ${(props) => (props.onUserStoreList ? "none" : "block")};
+  padding: 0.5rem 1.2rem;
+  border-radius: 5px;
 `;
 
 function SelectProductButton({
@@ -12,7 +16,7 @@ function SelectProductButton({
   onUserStoreList,
 }) {
   return (
-    <Button
+    <CompareButton
       onUserStoreList={onUserStoreList}
       aria-label="select-for-comparison"
       selectedBorder={selectedProduct && selectedProduct._id === product._id}
@@ -21,7 +25,7 @@ function SelectProductButton({
       }}
     >
       Compare
-    </Button>
+    </CompareButton>
   );
 }
 

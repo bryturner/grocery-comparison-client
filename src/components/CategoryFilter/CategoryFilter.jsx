@@ -19,7 +19,9 @@ function CategoryFilter({ setCategory }) {
       <CategorySelect
         id="category-filter"
         defaultValue="fruechte-gemuese"
-        onChange={(e) => setCategory(e.target.value)}
+        onChange={(e) => {
+          setCategory(e.target.value);
+        }}
       >
         <CategoryOption value="fruechte-gemuese">
           Fr&uuml;chte &amp; Gem&uuml;se

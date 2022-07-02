@@ -16,7 +16,7 @@ export const IconButton = styled(Button)`
 `;
 
 export const ListWithBorder = styled.ul`
-  border: 2px solid black;
+  border: 2px solid #999;
   border-radius: 8px;
   padding: 1rem 0;
   list-style: none;

@@ -144,16 +144,23 @@ function Product({
   return (
     <>
       <Container data-testid={`product-${product._id}`}>
+        <ButtonContainer>
+          <GroceryListButton
+            product={product}
+            handleGroceryListClick={handleGroceryListClick}
+            onGroceryList={onGroceryList}
+          />
+          <FavoritesButton
+            product={product}
+            handleFavoriteClick={handleFavoriteClick}
+            onFavoritesList={onFavoritesList}
+          />
+        </ButtonContainer>
         <TextContainer>
-          {/* <SelectProductButton
-          product={product}
-          selectedProduct={selectedProduct}
-          handleProductClicked={handleProductClicked}
-        /> */}
           <Title data-testid="product-title">
-            {product.title.length > 20
-              ? `${product.title.substring(0, 20)}...`
-              : product.title}
+            {product.displayTitle.length > 30
+              ? `${product.displayTitle.substring(0, 30)}...`
+              : product.displayTitle}
           </Title>
           <Increment data-testid="product-increment">
             {product.incrStr}
@@ -162,7 +169,7 @@ function Product({
           <Price data-testid="product-price">{product.price.toFixed(2)}</Price>
         </TextContainer>
         <ButtonContainer>
-          <FavoritesButton
+          {/* <FavoritesButton
             product={product}
             handleFavoriteClick={handleFavoriteClick}
             onFavoritesList={onFavoritesList}
@@ -171,7 +178,7 @@ function Product({
             product={product}
             handleGroceryListClick={handleGroceryListClick}
             onGroceryList={onGroceryList}
-          />
+          /> */}
           <SelectProductButton
             onUserStoreList={onUserStoreList}
             product={product}

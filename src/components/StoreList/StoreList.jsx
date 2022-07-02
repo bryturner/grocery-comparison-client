@@ -23,6 +23,7 @@ function StoreList({
   setGroceryList,
   selectedProduct,
   setSelectedProduct,
+  isLoading,
 }) {
   return (
     <Container>
