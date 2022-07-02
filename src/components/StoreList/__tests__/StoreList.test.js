@@ -56,23 +56,23 @@ describe("StoreList", () => {
     expect(screen.getByRole("list")).toBeInTheDocument();
   });
 
-  test("should render products in the matching store", () => {
-    render(
-      <StoreList
-        storeName="Coop"
-        category={"fruechte-gemuese"}
-        filteredProducts={testProducts}
-        products={testProducts}
-        user={testUser1}
-        favoritesList={[]}
-        setFavoritesList={mockedFavorites}
-        groceryList={[]}
-        setGroceryList={mockedGroceryList}
-        selectedProduct={undefined}
-        setSelectedProduct={mockedSelectedProduct}
-        key="Coop"
-      />
-    );
-    expect(screen.getAllByRole("listitem").length).toBe(5);
-  });
+  //   test("should render products in the matching store", () => {
+  //     render(
+  //       <StoreList
+  //         storeName="Coop"
+  //         category={"fruechte-gemuese"}
+  //         filteredProducts={testProducts}
+  //         products={testProducts}
+  //         user={testUser1}
+  //         favoritesList={[]}
+  //         setFavoritesList={mockedFavorites}
+  //         groceryList={[]}
+  //         setGroceryList={mockedGroceryList}
+  //         selectedProduct={undefined}
+  //         setSelectedProduct={mockedSelectedProduct}
+  //         key="Coop"
+  //       />
+  //     );
+  //     expect(screen.getAllByRole("listitem").length).toBe(5);
+  //   });
 });

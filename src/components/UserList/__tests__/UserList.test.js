@@ -1,26 +1,54 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import UserList from "../UserList";
+import { storeNames } from "../../../data";
+import { userEmptyLists } from "../../../__mocks__/userEmptyLists";
 
-test("should render grocery list", () => {
-  render(<UserList />);
-  expect();
+const mockedFavorites = jest.fn();
+const mockedGroceryList = jest.fn();
+const mockedHandleClearClick = jest.fn();
+
+describe("UserList", () => {
+  test("should render user list", () => {
+    render(
+      <UserList
+        userList={userEmptyLists.lists.grocList}
+        listTitle="Grocery"
+        listText="Click the plus to add to grocery list"
+        storeNames={storeNames}
+        favoritesList={userEmptyLists.lists.grocList}
+        setFavoritesList={mockedFavorites}
+        groceryList={userEmptyLists.lists.grocList}
+        setGroceryList={mockedGroceryList}
+        handleClearClick={mockedHandleClearClick}
+        clearButtonName="Clear grocery list"
+      />
+    );
+
+    expect(screen.getByRole("list")).toBeInTheDocument();
+  });
 });
 
-// describe("GroceryList", () => {
-//   test("should render grocery list", () => {
-//     render(<GroceryList favorites={{}} groceryList={{}} />);
-//     expect(screen.getByRole("list")).toBeInTheDocument();
-//   });
+test("should render empty grocery list text", () => {
+  render(
+    <UserList
+      userList={userEmptyLists.lists.grocList}
+      listTitle="Grocery"
+      listText="Click the plus to add to grocery list"
+      storeNames={storeNames}
+      favoritesList={userEmptyLists.lists.grocList}
+      setFavoritesList={mockedFavorites}
+      groceryList={userEmptyLists.lists.grocList}
+      setGroceryList={mockedGroceryList}
+      handleClearClick={mockedHandleClearClick}
+      clearButtonName="Clear grocery list"
+    />
+  );
 
-//   test("should render grocery list and empty grocery list with string", () => {
-//     render(
-//       <GroceryList favorites={{}} groceryList={userEmptyLists.groceryList} />
-//     );
-//     expect(screen.getByText(/add to grocery list/i).textContent).toBe(
-//       "Add to grocery list"
-//     );
-//   });
+  expect(
+    screen.getByText(/click the plus to add to grocery list/i).textContent
+  ).toBe("Click the plus to add to grocery list");
+});
 
 //   test("should render grocery list item with title", () => {
 //     render(
@@ -53,7 +81,6 @@ test("should render grocery list", () => {
 //     );
 //     expect(screen.getByTestId("product-price").textContent).toBe("0.55");
 //   });
-// });
 
 // /////////////////////////////////////////////////////
 
