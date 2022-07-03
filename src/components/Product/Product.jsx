@@ -2,17 +2,17 @@ import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import FavoritesButton from "../buttons/FavoritesButton/FavoritesButton";
 import GroceryListButton from "../buttons/GroceryListButton/GroceryListButton";
-import SelectProductButton from "../buttons/SelectProductButton/SelectProductButton";
+import ProductCompareButton from "./ProductCompareButton";
 
 const Container = styled.li`
   display: flex;
   padding: 0 1rem;
   gap: 1rem;
-  align-items: flex-end;
+  align-items: center;
 `;
 
 const Divider = styled.div`
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid ${(props) => props.theme.color.lightGray};
   width: 100%;
   /* height: 0.5rem;
 	padding-bottom: 0.5rem; */
@@ -22,7 +22,7 @@ const TextContainer = styled.div`
   display: flex;
   flex: 5;
   position: relative;
-  font-size: 1.4rem;
+  font-size: ${(props) => props.theme.fontSize.md};
   font-weight: bold;
 `;
 
@@ -35,10 +35,6 @@ const Increment = styled.p`
   text-align: right;
 `;
 
-const Quantity = styled.p`
-  flex: 1;
-  text-align: left;
-`;
 const Price = styled.p`
   flex: 1;
   text-align: center;
@@ -165,21 +161,10 @@ function Product({
           <Increment data-testid="product-increment">
             {product.incrStr}
           </Increment>
-          {/* <Quantity>{product.qtyStr}</Quantity> */}
           <Price data-testid="product-price">{product.price.toFixed(2)}</Price>
         </TextContainer>
         <ButtonContainer>
-          {/* <FavoritesButton
-            product={product}
-            handleFavoriteClick={handleFavoriteClick}
-            onFavoritesList={onFavoritesList}
-          />
-          <GroceryListButton
-            product={product}
-            handleGroceryListClick={handleGroceryListClick}
-            onGroceryList={onGroceryList}
-          /> */}
-          <SelectProductButton
+          <ProductCompareButton
             onUserStoreList={onUserStoreList}
             product={product}
             selectedProduct={selectedProduct}

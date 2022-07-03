@@ -12,7 +12,23 @@ const Header = styled.h2`
   margin-bottom: 1.2rem;
 `;
 
-const ProductList = styled(ListWithBorder)``;
+const ListContainer = styled.div`
+  border: 2px solid ${(props) => props.theme.color.medGray};
+  border-radius: 8px;
+  padding: 1rem 0;
+  height: 25rem;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const ProductList = styled.ul`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
 
 const Text = styled.p`
   text-align: center;
@@ -33,31 +49,33 @@ function UserList({
   return (
     <Container>
       <Header>{listTitle} List</Header>
-      <ProductList>
-        {userList.length === 0 ? (
-          <Text>{listText}</Text>
-        ) : (
-          storeNames
-            .filter((storeName) => {
-              return userList.some(
-                (product) => product.storeName === storeName
-              );
-            })
-            .map((storeName) => {
-              return (
-                <UserListStore
-                  userList={userList}
-                  storeName={storeName}
-                  groceryList={groceryList}
-                  setGroceryList={setGroceryList}
-                  favoritesList={favoritesList}
-                  setFavoritesList={setFavoritesList}
-                  key={storeName}
-                />
-              );
-            })
-        )}
-      </ProductList>
+      <ListContainer>
+        <ProductList>
+          {userList.length === 0 ? (
+            <Text>{listText}</Text>
+          ) : (
+            storeNames
+              .filter((storeName) => {
+                return userList.some(
+                  (product) => product.storeName === storeName
+                );
+              })
+              .map((storeName) => {
+                return (
+                  <UserListStore
+                    userList={userList}
+                    storeName={storeName}
+                    groceryList={groceryList}
+                    setGroceryList={setGroceryList}
+                    favoritesList={favoritesList}
+                    setFavoritesList={setFavoritesList}
+                    key={storeName}
+                  />
+                );
+              })
+          )}
+        </ProductList>
+      </ListContainer>
       <UserListButton
         handleClick={handleClearClick}
         buttonName={clearButtonName}

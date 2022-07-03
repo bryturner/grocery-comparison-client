@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Button } from "../../../constants/styles";
+import { SecondaryButton } from "../../../constants/styles";
 
-export const ResetButton = styled(Button)``;
+export const ResetButton = styled(SecondaryButton)``;
 
 function ResetCompareButton({ handleClick }) {
   return (

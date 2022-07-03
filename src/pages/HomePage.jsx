@@ -15,7 +15,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.h1`
-  font-size: 4rem;
+  font-size: ${(props) => props.theme.fontSize.hd1};
   text-align: center;
 `;
 
@@ -49,18 +49,21 @@ function HomePage() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [groceryList, setGroceryList] = useState([]);
   const [favoritesList, setFavoritesList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getProducts = async () => {
     try {
+      setIsLoading(true);
       const productResponse = await axios.get(
         `http://localhost:8000/product?category=${category}`
       );
       setProducts(productResponse.data);
       // Store all products on initial db call for reset compare click
       setAllProdsInCategory(productResponse.data);
+      setIsLoading(false);
     } catch (err) {
       console.error(err);
+      setIsLoading(false);
       return [];
       // setProducts(testProducts);
       // setAllProdsInCategory(testProducts);
@@ -95,6 +98,10 @@ function HomePage() {
   const handleResetCompareClick = () => {
     setSelectedProduct(undefined);
     setProducts(allProdsInCategory);
+  };
+
+  const handleLoadClick = () => {
+    setIsLoading(!isLoading);
   };
 
   const filterProducts = () => {
@@ -156,6 +163,7 @@ function HomePage() {
         <CategoryFilter setCategory={setCategory} />
         <SearchBox setSearchQuery={setSearchQuery} searchQuery={searchQuery} />
         <ResetCompareButton handleClick={handleResetCompareClick} />
+        <button onClick={() => handleLoadClick()}>Toggle Load</button>
       </InputsContainer>
       <Grid>
         {storeNames.map((storeName) => (
