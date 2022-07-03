@@ -16,9 +16,8 @@ const Header = styled.h2`
 const ListContainer = styled.div`
   border: 2px solid ${(props) => props.theme.color.medGray};
   border-radius: 8px;
-  padding: 1rem 0;
   height: 25rem;
-  overflow-y: scroll;
+  overflow-y: ${(props) => (props.isLoading ? "hidden" : "scroll")};
   ::-webkit-scrollbar {
     display: none;
   }
@@ -29,8 +28,9 @@ const LoadingWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -70%);
-  opacity: 0.7;
+  transform: translate(-50%, -60%);
+  opacity: ${(props) => (props.isLoading ? "1" : "0")};
+  visibility: ${(props) => (props.isLoading ? "visible" : "hidden")};
 `;
 
 const ProductList = styled.ul`
@@ -38,6 +38,9 @@ const ProductList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 1rem 0;
+  filter: ${(props) => (props.isLoading ? "blur(3px)" : "none")};
+  transition: all 0.1s linear;
 `;
 
 function StoreList({
@@ -56,57 +59,63 @@ function StoreList({
   // !!!! Use Ref
   //   const scrollToTop = () => {
   //     const storeLists = document.querySelectorAll(".list-container");
-  //     if (isLoading) {
-  //       storeLists.scrollTo(0, 0);
-  //     }
+  //     storeLists.forEach((storeList) => {
+  //       if (isLoading) {
+  //         storeList.scrollTo({ top: 0, behavior: "smooth" });
+  //       }
+  //     });
   //   };
-  //   const storeListRef = useRef();
+  //   //   const storeListRef = useRef();
 
   //   useEffect(() => {
-  //     storeListRef.current.scrollTo(0, 0);
+  //     scrollToTop();
   //   }, [isLoading]);
 
   return (
     <Container>
       <Header>{storeName}</Header>
-      <ListContainer>
-        {isLoading ? (
+      <ListContainer isLoading={isLoading} className="list-container">
+        {/* {isLoading ? (
           <LoadingWrapper>
-            <Loading type="bars" color="#333" height="64px" width="64px" />
+            <Loading type="bars" color="#555" height="64px" width="64px" />
           </LoadingWrapper>
         ) : (
-          <ProductList>
-            {category
-              ? filteredProducts
-                  .filter((product) => product.storeName === storeName)
-                  .map((product) => (
-                    <Product
-                      product={product}
-                      favoritesList={favoritesList}
-                      setFavoritesList={setFavoritesList}
-                      groceryList={groceryList}
-                      setGroceryList={setGroceryList}
-                      selectedProduct={selectedProduct}
-                      setSelectedProduct={setSelectedProduct}
-                      key={product._id}
-                    />
-                  ))
-              : products
-                  .filter((product) => product.storeName === storeName)
-                  .map((product) => (
-                    <Product
-                      product={product}
-                      favoritesList={favoritesList}
-                      setFavoritesList={setFavoritesList}
-                      groceryList={groceryList}
-                      setGroceryList={setGroceryList}
-                      selectedProduct={selectedProduct}
-                      setSelectedProduct={setSelectedProduct}
-                      key={product._id}
-                    />
-                  ))}
-          </ProductList>
-        )}
+          <></>
+        )} */}
+        <LoadingWrapper isLoading={isLoading}>
+          <Loading type="bars" color="#555" height="64px" width="64px" />
+        </LoadingWrapper>
+        <ProductList isLoading={isLoading}>
+          {category
+            ? filteredProducts
+                .filter((product) => product.storeName === storeName)
+                .map((product) => (
+                  <Product
+                    product={product}
+                    favoritesList={favoritesList}
+                    setFavoritesList={setFavoritesList}
+                    groceryList={groceryList}
+                    setGroceryList={setGroceryList}
+                    selectedProduct={selectedProduct}
+                    setSelectedProduct={setSelectedProduct}
+                    key={product._id}
+                  />
+                ))
+            : products
+                .filter((product) => product.storeName === storeName)
+                .map((product) => (
+                  <Product
+                    product={product}
+                    favoritesList={favoritesList}
+                    setFavoritesList={setFavoritesList}
+                    groceryList={groceryList}
+                    setGroceryList={setGroceryList}
+                    selectedProduct={selectedProduct}
+                    setSelectedProduct={setSelectedProduct}
+                    key={product._id}
+                  />
+                ))}
+        </ProductList>
       </ListContainer>
     </Container>
   );

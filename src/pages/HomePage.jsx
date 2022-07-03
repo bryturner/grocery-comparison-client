@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import axios from "axios";
 
 import CategoryFilter from "../components/CategoryFilter/CategoryFilter";
@@ -9,9 +9,12 @@ import { storeNames, testProducts } from "../data";
 import { compareTwoProductTitles } from "../helpers";
 import UserList from "../components/UserList/UserList";
 import ResetCompareButton from "../components/buttons/ResetCompareButton/ResetCompareButton";
+// const StoreList = lazy(() => import("../components/StoreList/StoreList"));
+// const UserList = lazy(() => import("../components/UserList/UserList"));
 
 const Container = styled.div`
   padding: 2rem 4.8rem;
+  position: relative;
 `;
 
 const Header = styled.h1`
@@ -53,7 +56,6 @@ function HomePage() {
 
   const getProducts = async () => {
     try {
-      setIsLoading(true);
       const productResponse = await axios.get(
         `http://localhost:8000/product?category=${category}`
       );
@@ -72,6 +74,11 @@ function HomePage() {
     }
   };
 
+  const loadTestData = () => {
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((data) => setProducts({ data }));
+  };
   const getGroceryList = () => {
     const groceryListData = JSON.parse(localStorage.getItem("groceryList"));
     if (!groceryListData) return;
@@ -140,8 +147,8 @@ function HomePage() {
   };
 
   useEffect(() => {
-    category && filterProducts();
-  }, [category, products, searchQuery]);
+    filterProducts();
+  }, [products, searchQuery]);
 
   useEffect(() => {
     findBestMatch();
@@ -153,6 +160,11 @@ function HomePage() {
   }, []);
 
   //   useEffect(() => {
+  //     loadTestData();
+  //   }, []);
+
+  //   useEffect(() => {
+  //     //  setIsLoading(true);
   //     getProducts();
   //   }, [category]);
 
@@ -165,6 +177,7 @@ function HomePage() {
         <ResetCompareButton handleClick={handleResetCompareClick} />
         <button onClick={() => handleLoadClick()}>Toggle Load</button>
       </InputsContainer>
+
       <Grid>
         {storeNames.map((storeName) => (
           <StoreList

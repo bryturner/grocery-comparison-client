@@ -139,7 +139,7 @@ function Product({
 
   return (
     <>
-      <Container data-testid={`product-${product._id}`}>
+      <Container>
         <ButtonContainer>
           <GroceryListButton
             product={product}
