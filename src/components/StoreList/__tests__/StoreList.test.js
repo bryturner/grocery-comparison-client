@@ -3,11 +3,46 @@ import "@testing-library/jest-dom";
 import StoreList from "../StoreList";
 import { testProducts } from "../../../__mocks__/testProductsList";
 import { testUser1, testUser2 } from "../../../__mocks__/users";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../../ThemeProvider/Theme";
 
 const mockedFavorites = jest.fn();
 const mockedGroceryList = jest.fn();
 const mockedSelectedProduct = jest.fn();
 
+const MockStoreList = ({
+  storeName,
+  category,
+  filteredProducts,
+  products,
+  user,
+  favoritesList,
+  setFavoritesList,
+  groceryList,
+  setGroceryList,
+  selectedProduct,
+  setSelectedProduct,
+  key,
+}) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <StoreList
+        storeName={storeName}
+        category={category}
+        filteredProducts={filteredProducts}
+        products={products}
+        user={user}
+        favoritesList={favoritesList}
+        setFavoritesList={setFavoritesList}
+        groceryList={groceryList}
+        setGroceryList={setGroceryList}
+        selectedProduct={selectedProduct}
+        setSelectedProduct={setSelectedProduct}
+        key={key}
+      />
+    </ThemeProvider>
+  );
+};
 test("", () => {
   render();
 
@@ -17,7 +52,7 @@ test("", () => {
 describe("StoreList", () => {
   test("should render store name", () => {
     render(
-      <StoreList
+      <MockStoreList
         storeName="Coop"
         category={"fruechte-gemuese"}
         filteredProducts={testProducts}
@@ -38,7 +73,7 @@ describe("StoreList", () => {
 
   test("should render a list of fruit and vegetable products", () => {
     render(
-      <StoreList
+      <MockStoreList
         storeName="Coop"
         category={"fruechte-gemuese"}
         filteredProducts={testProducts}

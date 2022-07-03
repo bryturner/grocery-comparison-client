@@ -3,15 +3,47 @@ import "@testing-library/jest-dom";
 import UserList from "../UserList";
 import { storeNames } from "../../../data";
 import { userEmptyLists } from "../../../__mocks__/userEmptyLists";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../../ThemeProvider/Theme";
 
 const mockedFavorites = jest.fn();
 const mockedGroceryList = jest.fn();
 const mockedHandleClearClick = jest.fn();
 
+const MockUserList = ({
+  userList,
+  listTitle,
+  listText,
+  storeNames,
+  favoritesList,
+  setFavoritesList,
+  groceryList,
+  setGroceryList,
+  handleClearClick,
+  clearButtonName,
+}) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <UserList
+        userList={userList}
+        listTitle={listTitle}
+        listText={listText}
+        storeNames={storeNames}
+        favoritesList={favoritesList}
+        setFavoritesList={setFavoritesList}
+        groceryList={groceryList}
+        setGroceryList={setGroceryList}
+        handleClearClick={handleClearClick}
+        clearButtonName={clearButtonName}
+      />
+    </ThemeProvider>
+  );
+};
+
 describe("UserList", () => {
   test("should render user list", () => {
     render(
-      <UserList
+      <MockUserList
         userList={userEmptyLists.lists.grocList}
         listTitle="Grocery"
         listText="Click the plus to add to grocery list"
@@ -31,7 +63,7 @@ describe("UserList", () => {
 
 test("should render empty grocery list text", () => {
   render(
-    <UserList
+    <MockUserList
       userList={userEmptyLists.lists.grocList}
       listTitle="Grocery"
       listText="Click the plus to add to grocery list"

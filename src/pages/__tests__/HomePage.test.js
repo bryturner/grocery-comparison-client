@@ -1,10 +1,20 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import HomePage from "../HomePage";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../../components/ThemeProvider/Theme";
+
+const MockHomePage = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <HomePage />
+    </ThemeProvider>
+  );
+};
 
 describe("Homepage", () => {
   test("should only show products with high comparison match", () => {
-    render(<HomePage />);
+    render(<MockHomePage />);
 
     expect();
   });

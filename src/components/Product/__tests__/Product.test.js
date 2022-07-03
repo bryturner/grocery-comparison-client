@@ -6,15 +6,42 @@ import { testProductVeggie } from "../../../__mocks__/testProductVeggie";
 import { testProductMeat } from "../../../__mocks__/testProductMeat";
 import { testUser1 } from "../../../__mocks__/users";
 import { userEmptyLists } from "../../../__mocks__/userEmptyLists";
+import { ThemeProvider } from "styled-components";
+import { theme } from "../../ThemeProvider/Theme";
 
 const mockedFavorites = jest.fn();
 const mockedGroceryList = jest.fn();
 const mockedSelectedProduct = jest.fn();
 
+const MockProduct = ({
+  product,
+  favoritesList,
+  setFavoritesList,
+  groceryList,
+  setGroceryList,
+  selectedProduct,
+  setSelectedProduct,
+  onUserStoreList,
+}) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <Product
+        product={product}
+        favoritesList={favoritesList}
+        setFavoritesList={setFavoritesList}
+        groceryList={groceryList}
+        setGroceryList={setGroceryList}
+        selectedProduct={selectedProduct}
+        setSelectedProduct={setSelectedProduct}
+      />
+    </ThemeProvider>
+  );
+};
+
 describe("Product and product text content", () => {
   test("should render product", () => {
     render(
-      <Product
+      <MockProduct
         product={testProductVeggie}
         user={testUser1}
         favoritesList={[]}
@@ -30,7 +57,7 @@ describe("Product and product text content", () => {
 
   test("should render product title 'Gurke'", () => {
     render(
-      <Product
+      <MockProduct
         product={testProductVeggie}
         user={testUser1}
         favoritesList={[]}
@@ -46,7 +73,7 @@ describe("Product and product text content", () => {
 
   test("should render product increment measurement as '1.70/1ST'", () => {
     render(
-      <Product
+      <MockProduct
         product={testProductVeggie}
         user={testUser1}
         favoritesList={[]}
@@ -64,7 +91,7 @@ describe("Product and product text content", () => {
 
   test("should render product price as '1.70'", () => {
     render(
-      <Product
+      <MockProduct
         product={testProductVeggie}
         user={testUser1}
         favoritesList={[]}
@@ -82,7 +109,7 @@ describe("Product and product text content", () => {
 describe("Product displaying correct icons", () => {
   test("should render product with favorites icon filled **testUser1**", () => {
     render(
-      <Product
+      <MockProduct
         product={testProductVeggie}
         user={testUser1}
         favoritesList={testUser1.lists.favorites}
@@ -98,7 +125,7 @@ describe("Product displaying correct icons", () => {
 
   test("should render product with remove icon **testUser1**", () => {
     render(
-      <Product
+      <MockProduct
         product={testProductMeat}
         user={testUser1}
         favoritesList={[]}
@@ -114,7 +141,7 @@ describe("Product displaying correct icons", () => {
 
   test("should render product with favorites icon filled **userEmptyLists**", () => {
     render(
-      <Product
+      <MockProduct
         product={testProductVeggie}
         user={userEmptyLists}
         favoritesList={userEmptyLists.lists.favorites}
@@ -132,7 +159,7 @@ describe("Product displaying correct icons", () => {
 
   test("should render product with add icon **userEmptyLists**", () => {
     render(
-      <Product
+      <MockProduct
         product={testProductVeggie}
         user={userEmptyLists}
         favoritesList={[]}
