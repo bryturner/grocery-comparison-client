@@ -4,7 +4,7 @@ import axios from "axios";
 
 import CategoryFilter from "../components/CategoryFilter/CategoryFilter";
 import SearchBox from "../components/SearchBox/SearchBox";
-import StoreList from "../components/StoreList/StoreList";
+import StoreList from "../components/StoreLists/StoreList";
 import { storeNames, testProducts } from "../data";
 import { compareTwoProductTitles } from "../helpers";
 import UserList from "../components/UserList/UserList";
