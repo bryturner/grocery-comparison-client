@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import InputLabel from "../Labels/InputLabel";
 
 const Container = styled.div`
   display: flex;
@@ -15,7 +16,7 @@ const CategoryOption = styled.option``;
 function CategoryFilter({ setCategory }) {
   return (
     <Container>
-      <label htmlFor="category-filter">Category:</label>
+      <InputLabel htmlFor="category-filter" title="Category:" />
       <CategorySelect
         id="category-filter"
         defaultValue="fruechte-gemuese"

@@ -1,12 +1,13 @@
 import { Search } from "@mui/icons-material";
-import { useState } from "react";
 import styled from "styled-components";
+import InputLabel from "../Labels/InputLabel";
 
 const Container = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
 `;
+
 const Wrapper = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -21,17 +22,17 @@ const SearchInput = styled.input`
   border: none;
 `;
 
-function SearchBox({ setSearchQuery, searchQuery }) {
+function SearchBox({ setSearchQuery }) {
   return (
     <Container>
-      <label htmlFor="search-box">Find product:</label>
+      <InputLabel htmlFor="search-box" title="Find product:" />
       <Wrapper>
         <SearchInput
           id="search-box"
           type="search"
           placeholder="Search by name"
-          defaultValue={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          defaultValue=""
+          onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
         />
         <Search style={{ color: "black", fontSize: 16 }} />
       </Wrapper>
