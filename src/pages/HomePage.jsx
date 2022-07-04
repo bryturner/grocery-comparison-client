@@ -7,7 +7,7 @@ import SearchBox from "../components/SearchBox/SearchBox";
 import StoreList from "../components/StoreLists/StoreList";
 import { storeNames, testProducts } from "../data";
 import { compareTwoProductTitles } from "../helpers";
-import UserList from "../components/UserList/UserList";
+import UserList from "../components/UserLists/UserList";
 import ResetCompareButton from "../components/buttons/ResetCompareButton/ResetCompareButton";
 // const StoreList = lazy(() => import("../components/StoreList/StoreList"));
 // const UserList = lazy(() => import("../components/UserList/UserList"));
