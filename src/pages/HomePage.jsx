@@ -5,12 +5,14 @@ import axios from "axios";
 import CategoryFilter from "../components/CategoryFilter/CategoryFilter";
 import SearchBox from "../components/SearchBox/SearchBox";
 import StoreList from "../components/StoreLists/StoreList";
-import { storeNames, testProducts } from "../data";
+import { testProducts } from "../data";
 import { compareTwoProductTitles } from "../helpers";
 import UserList from "../components/UserList/UserList";
 import ResetCompareButton from "../components/buttons/ResetCompareButton/ResetCompareButton";
 // const StoreList = lazy(() => import("../components/StoreList/StoreList"));
 // const UserList = lazy(() => import("../components/UserList/UserList"));
+
+const storeTitles = ["Coop", "Migros"];
 
 const Container = styled.div`
   padding: 2rem 4.8rem;
@@ -32,7 +34,7 @@ const InputsContainer = styled.div`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   column-gap: 1rem;
   row-gap: 2rem;
 `;
@@ -59,6 +61,7 @@ function HomePage() {
       const productResponse = await axios.get(
         `http://localhost:8000/product?category=${category}`
       );
+      console.log(productResponse.data);
       setProducts(productResponse.data);
       // Store all products on initial db call for reset compare click
       setAllProdsInCategory(productResponse.data);
@@ -163,10 +166,10 @@ function HomePage() {
   //     loadTestData();
   //   }, []);
 
-  //   useEffect(() => {
-  //     //  setIsLoading(true);
-  //     getProducts();
-  //   }, [category]);
+  useEffect(() => {
+    //  setIsLoading(true);
+    getProducts();
+  }, [category]);
 
   return (
     <Container>
@@ -179,9 +182,9 @@ function HomePage() {
       </InputsContainer>
 
       <Grid>
-        {storeNames.map((storeName) => (
+        {storeTitles.map((storeTitle) => (
           <StoreList
-            storeName={storeName}
+            storeTitle={storeTitle}
             category={category}
             filteredProducts={filteredProducts}
             products={products}
@@ -192,7 +195,7 @@ function HomePage() {
             selectedProduct={selectedProduct}
             setSelectedProduct={setSelectedProduct}
             isLoading={isLoading}
-            key={storeName}
+            key={storeTitle}
           />
         ))}
         <UserListContainer>
@@ -200,7 +203,7 @@ function HomePage() {
             userList={groceryList}
             listTitle="Grocery"
             listText="Click the plus to add to grocery list"
-            storeNames={storeNames}
+            storeTitles={storeTitles}
             favoritesList={favoritesList}
             setFavoritesList={setFavoritesList}
             groceryList={groceryList}
@@ -212,7 +215,7 @@ function HomePage() {
             userList={favoritesList}
             listTitle="Favorites"
             listText="Click the heart to add to favorites"
-            storeNames={storeNames}
+            storeTitles={storeTitles}
             favoritesList={favoritesList}
             setFavoritesList={setFavoritesList}
             groceryList={groceryList}

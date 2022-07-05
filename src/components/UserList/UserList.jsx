@@ -38,7 +38,7 @@ function UserList({
   userList,
   listTitle,
   listText,
-  storeNames,
+  storeTitles,
   favoritesList,
   setFavoritesList,
   groceryList,
@@ -54,22 +54,22 @@ function UserList({
           {userList.length === 0 ? (
             <Text>{listText}</Text>
           ) : (
-            storeNames
-              .filter((storeName) => {
+            storeTitles
+              .filter((storeTitle) => {
                 return userList.some(
-                  (product) => product.storeName === storeName
+                  (product) => product.storeTitle === storeTitle
                 );
               })
-              .map((storeName) => {
+              .map((storeTitle) => {
                 return (
                   <UserListStore
                     userList={userList}
-                    storeName={storeName}
+                    storeTitle={storeTitle}
                     groceryList={groceryList}
                     setGroceryList={setGroceryList}
                     favoritesList={favoritesList}
                     setFavoritesList={setFavoritesList}
-                    key={storeName}
+                    key={storeTitle}
                   />
                 );
               })

@@ -16,7 +16,7 @@ const Header = styled.h2`
 const ListContainer = styled.div`
   border: 2px solid ${(props) => props.theme.color.medGray};
   border-radius: 8px;
-  height: 25rem;
+  height: 40rem;
   overflow-y: ${(props) => (props.isLoading ? "hidden" : "scroll")};
   ::-webkit-scrollbar {
     display: none;
@@ -44,7 +44,7 @@ const ProductList = styled.ul`
 `;
 
 function StoreList({
-  storeName,
+  storeTitle,
   category,
   filteredProducts,
   products,
@@ -73,7 +73,7 @@ function StoreList({
 
   return (
     <Container>
-      <Header>{storeName}</Header>
+      <Header>{storeTitle}</Header>
       <ListContainer isLoading={isLoading} className="list-container">
         {/* {isLoading ? (
           <LoadingWrapper>
@@ -88,7 +88,7 @@ function StoreList({
         <ProductList isLoading={isLoading}>
           {category
             ? filteredProducts
-                .filter((product) => product.storeName === storeName)
+                .filter((product) => product.storeTitle === storeTitle)
                 .map((product) => (
                   <Product
                     product={product}
@@ -102,7 +102,7 @@ function StoreList({
                   />
                 ))
             : products
-                .filter((product) => product.storeName === storeName)
+                .filter((product) => product.storeTitle === storeTitle)
                 .map((product) => (
                   <Product
                     product={product}

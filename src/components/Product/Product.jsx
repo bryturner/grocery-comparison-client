@@ -154,9 +154,10 @@ function Product({
         </ButtonContainer>
         <TextContainer>
           <Title data-testid="product-title">
-            {product.displayTitle.length > 30
+            {/* {product.displayTitle.length > 30
               ? `${product.displayTitle.substring(0, 30)}...`
-              : product.displayTitle}
+              : product.displayTitle} */}
+            {product.title}
           </Title>
           <Increment data-testid="product-increment">
             {product.incrStr}

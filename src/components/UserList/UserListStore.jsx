@@ -20,7 +20,7 @@ const ProductList = styled.ul`
 
 function UserListStore({
   userList,
-  storeName,
+  storeTitle,
   groceryList,
   setGroceryList,
   favoritesList,
@@ -28,10 +28,10 @@ function UserListStore({
 }) {
   return (
     <Container>
-      <StoreName>{storeName}</StoreName>
+      <StoreName>{storeTitle}</StoreName>
       <ProductList>
         {userList
-          .filter((product) => product.storeName === storeName)
+          .filter((product) => product.storeTitle === storeTitle)
           .map((product) => {
             return (
               <Product
