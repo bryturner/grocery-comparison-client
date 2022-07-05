@@ -3,11 +3,11 @@ import styled from "styled-components";
 import CategoryFilter from "../CategoryFilter/CategoryFilter";
 import SearchBox from "../SearchBox/SearchBox";
 import StoreList from "./StoreList";
-import StoreListInputs from "./StoreListInputs.jsx";
+import { storeTitles, testProducts } from "../../data";
 
-const storeNames = ["Coop", "Migros", "Denner"];
-
-const Container = styled.div``;
+const Container = styled.div`
+  margin-bottom: 2rem;
+`;
 
 const InputsContainer = styled.div`
   display: flex;
@@ -25,32 +25,28 @@ const StoresContainer = styled.div`
 `;
 
 // get products, filter, search, reset compare, compare
-function StoreLists() {
-  //   const [products, setProducts] = useState([]);
-  //   const [filteredProducts, setFilteredProducts] = useState([]);
-  //   const [category, setCategory] = useState("fruechte-gemuese");
-  //   const [searchQuery, setSearchQuery] = useState("");
+const StoreLists = () => {
+  const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState("fruechte-gemuese");
+  const [searchResults, setSearchResults] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
-  //   const handleTestClick = () => {
-  //     console.log(products);
-  //   };
+  const fetchTestData = () => {
+    fetch("data.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data.categories[category]);
+      });
+  };
 
-  //   const searchProducts = useCallback(() => {
-  //     const queriedProducts = products.filter((product) => {
-  //       return product.dictionaryTitle.toLowerCase().includes(searchQuery);
-  //     });
-  //     setFilteredProducts(queriedProducts);
-  //   }, [searchQuery]);
+  const handleClick = () => {
+    console.log(products);
+    //  handleClick()
+  };
 
-  //   const fetchTestData = () => {
-  //     fetch("data.json")
-  //       .then((response) => response.json())
-  //       .then((data) => setProducts(data.testProducts));
-  //   };
-
-  //   useEffect(() => {
-  //     fetchTestData();
-  //   }, []);
+  useEffect(() => {
+    fetchTestData();
+  }, [category]);
 
   //   useEffect(() => {
   //     searchProducts();
@@ -58,17 +54,22 @@ function StoreLists() {
 
   return (
     <Container>
-      {/* <StoreListInputs
-        setCategory={setCategory}
-        setSearchQuery={setSearchQuery}
-      /> */}
+      <InputsContainer>
+        <CategoryFilter setCategory={setCategory} />
+        <SearchBox setSearchQuery={setSearchQuery} />
+        <button onClick={() => handleClick()}>Test</button>
+      </InputsContainer>
       <StoresContainer>
-        {storeNames.map((storeName) => (
-          <StoreList storeName={storeName} key={storeName} />
+        {storeTitles.map((storeTitle) => (
+          <StoreList
+            storeTitle={storeTitle}
+            products={products}
+            key={storeTitle}
+          />
         ))}
       </StoresContainer>
     </Container>
   );
-}
+};
 
 export default StoreLists;

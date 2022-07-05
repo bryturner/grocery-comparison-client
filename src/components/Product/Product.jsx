@@ -59,7 +59,7 @@ function Product({
   const [onGroceryList, setOnGroceryList] = useState(false);
 
   //   When product clicked to remove selection -> products revert to default, not products from db
-  const handleProductClicked = () => {
+  const handleCompareClick = () => {
     if (selectedProduct === product) {
       setSelectedProduct(undefined);
     } else {
@@ -87,16 +87,13 @@ function Product({
   );
 
   const checkOnUserFavoritesList = useCallback(() => {
+    //  if (groceryList.length === 0) return;
     if (favoritesList.some((listProduct) => listProduct._id === product._id)) {
       setOnFavoritesList(true);
     } else {
       setOnFavoritesList(false);
     }
   }, [favoritesList, setOnFavoritesList, product._id]);
-
-  useEffect(() => {
-    checkOnUserFavoritesList();
-  }, [checkOnUserFavoritesList]);
 
   // ===== User grocery list =====
   const handleGroceryListClick = useCallback(
@@ -118,6 +115,7 @@ function Product({
   );
 
   const checkOnGroceryList = useCallback(() => {
+    //  if (groceryList.length === 0) return;
     if (groceryList.some((listProduct) => listProduct._id === product._id)) {
       setOnGroceryList(true);
     } else {
@@ -125,17 +123,21 @@ function Product({
     }
   }, [groceryList, setOnGroceryList, product._id]);
 
-  useEffect(() => {
-    checkOnGroceryList();
-  }, [checkOnGroceryList]);
+  //   useEffect(() => {
+  //     checkOnGroceryList();
+  //   }, [checkOnGroceryList]);
 
-  useEffect(() => {
-    localStorage.setItem("favoritesList", JSON.stringify(favoritesList));
-  }, [handleFavoriteClick, favoritesList]);
+  //   useEffect(() => {
+  //     checkOnUserFavoritesList();
+  //   }, [checkOnUserFavoritesList]);
 
-  useEffect(() => {
-    localStorage.setItem("groceryList", JSON.stringify(groceryList));
-  }, [handleGroceryListClick, groceryList]);
+  //   useEffect(() => {
+  //     localStorage.setItem("favoritesList", JSON.stringify(favoritesList));
+  //   }, [handleFavoriteClick, favoritesList]);
+
+  //   useEffect(() => {
+  //     localStorage.setItem("groceryList", JSON.stringify(groceryList));
+  //   }, [handleGroceryListClick, groceryList]);
 
   return (
     <>
@@ -168,7 +170,7 @@ function Product({
             onUserStoreList={onUserStoreList}
             product={product}
             selectedProduct={selectedProduct}
-            handleProductClicked={handleProductClicked}
+            handleCompareClick={handleCompareClick}
           />
         </ButtonContainer>
       </Container>

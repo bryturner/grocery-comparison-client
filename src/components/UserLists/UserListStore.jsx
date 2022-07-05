@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import { List } from "../../constants/styles";
 import Product from "../Product/Product";
@@ -8,7 +9,7 @@ const Container = styled.li`
   gap: 0.5rem;
 `;
 
-const StoreName = styled.h3`
+const StoreTitle = styled.h3`
   border-bottom: 1px solid black;
 `;
 
@@ -20,31 +21,24 @@ const ProductList = styled.ul`
 
 function UserListStore({
   userList,
-  storeName,
+  storeTitle,
   groceryList,
   setGroceryList,
   favoritesList,
   setFavoritesList,
 }) {
+  useEffect(() => {
+    console.log(groceryList);
+  }, []);
   return (
     <Container>
-      <StoreName>{storeName}</StoreName>
+      <StoreTitle>{storeTitle}</StoreTitle>
       <ProductList>
         {userList
-          .filter((product) => product.storeName === storeName)
-          .map((product) => {
-            return (
-              <Product
-                product={product}
-                groceryList={groceryList}
-                setGroceryList={setGroceryList}
-                favoritesList={favoritesList}
-                setFavoritesList={setFavoritesList}
-                onUserStoreList={true}
-                key={product._id}
-              />
-            );
-          })}
+          .filter((product) => product.storeTitle === storeTitle)
+          .map((product) => (
+            <Product product={product} />
+          ))}
       </ProductList>
     </Container>
   );

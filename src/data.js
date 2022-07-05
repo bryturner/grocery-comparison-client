@@ -1,4 +1,4 @@
-export const storeNames = ["Coop", "Migros", "Denner"];
+export const storeTitles = ["Coop", "Migros", "Denner"];
 
 // !!!!!!! WITH NEW DB STRUCTURE
 export const testProducts = [

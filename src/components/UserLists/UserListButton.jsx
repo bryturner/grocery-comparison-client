@@ -3,8 +3,8 @@ import { SecondaryButton } from "../../constants/styles";
 
 export const Button = styled(SecondaryButton)``;
 
-function UserListButton({ handleClick, buttonName }) {
-  return <Button onClick={() => handleClick()}>{buttonName}</Button>;
+function UserListButton({ handleClick, buttonText }) {
+  return <Button onClick={() => handleClick()}>{buttonText}</Button>;
 }
 
 export default UserListButton;

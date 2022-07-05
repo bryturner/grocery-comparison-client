@@ -1,7 +1,5 @@
-import { useRef } from "react";
 import { useEffect } from "react";
 import styled from "styled-components";
-import { ListWithBorder } from "../../constants/styles";
 import Loading from "../Loading/Loading";
 import Product from "../Product/Product";
 
@@ -43,78 +41,17 @@ const ProductList = styled.ul`
   transition: all 0.1s linear;
 `;
 
-function StoreList({
-  storeName,
-  category,
-  filteredProducts,
-  products,
-  favoritesList,
-  setFavoritesList,
-  groceryList,
-  setGroceryList,
-  selectedProduct,
-  setSelectedProduct,
-  isLoading,
-}) {
-  // !!!! Use Ref
-  //   const scrollToTop = () => {
-  //     const storeLists = document.querySelectorAll(".list-container");
-  //     storeLists.forEach((storeList) => {
-  //       if (isLoading) {
-  //         storeList.scrollTo({ top: 0, behavior: "smooth" });
-  //       }
-  //     });
-  //   };
-  //   //   const storeListRef = useRef();
-
-  //   useEffect(() => {
-  //     scrollToTop();
-  //   }, [isLoading]);
-
+function StoreList({ storeTitle, products }) {
   return (
     <Container>
-      <Header>{storeName}</Header>
-      <ListContainer isLoading={isLoading} className="list-container">
-        {/* {isLoading ? (
-          <LoadingWrapper>
-            <Loading type="bars" color="#555" height="64px" width="64px" />
-          </LoadingWrapper>
-        ) : (
-          <></>
-        )} */}
-        <LoadingWrapper isLoading={isLoading}>
-          <Loading type="bars" color="#555" height="64px" width="64px" />
-        </LoadingWrapper>
-        <ProductList isLoading={isLoading}>
-          {category
-            ? filteredProducts
-                .filter((product) => product.storeName === storeName)
-                .map((product) => (
-                  <Product
-                    product={product}
-                    favoritesList={favoritesList}
-                    setFavoritesList={setFavoritesList}
-                    groceryList={groceryList}
-                    setGroceryList={setGroceryList}
-                    selectedProduct={selectedProduct}
-                    setSelectedProduct={setSelectedProduct}
-                    key={product._id}
-                  />
-                ))
-            : products
-                .filter((product) => product.storeName === storeName)
-                .map((product) => (
-                  <Product
-                    product={product}
-                    favoritesList={favoritesList}
-                    setFavoritesList={setFavoritesList}
-                    groceryList={groceryList}
-                    setGroceryList={setGroceryList}
-                    selectedProduct={selectedProduct}
-                    setSelectedProduct={setSelectedProduct}
-                    key={product._id}
-                  />
-                ))}
+      <Header>{storeTitle}</Header>
+      <ListContainer>
+        <ProductList>
+          {products
+            .filter((product) => product.storeTitle === storeTitle)
+            .map((product) => (
+              <Product product={product} key={product._id} />
+            ))}
         </ProductList>
       </ListContainer>
     </Container>
@@ -122,3 +59,83 @@ function StoreList({
 }
 
 export default StoreList;
+
+// function StoreList({
+//   storeName,
+//   category,
+//   filteredProducts,
+//   products,
+//   favoritesList,
+//   setFavoritesList,
+//   groceryList,
+//   setGroceryList,
+//   selectedProduct,
+//   setSelectedProduct,
+//   isLoading,
+// }) {
+//   // !!!! Use Ref
+//   //   const scrollToTop = () => {
+//   //     const storeLists = document.querySelectorAll(".list-container");
+//   //     storeLists.forEach((storeList) => {
+//   //       if (isLoading) {
+//   //         storeList.scrollTo({ top: 0, behavior: "smooth" });
+//   //       }
+//   //     });
+//   //   };
+//   //   //   const storeListRef = useRef();
+
+//   //   useEffect(() => {
+//   //     scrollToTop();
+//   //   }, [isLoading]);
+
+//   return (
+//     <Container>
+//       <Header>{storeName}</Header>
+//       <ListContainer isLoading={isLoading} className="list-container">
+//         {/* {isLoading ? (
+//           <LoadingWrapper>
+//             <Loading type="bars" color="#555" height="64px" width="64px" />
+//           </LoadingWrapper>
+//         ) : (
+//           <></>
+//         )} */}
+//         <LoadingWrapper isLoading={isLoading}>
+//           <Loading type="bars" color="#555" height="64px" width="64px" />
+//         </LoadingWrapper>
+//         <ProductList isLoading={isLoading}>
+//           {category
+//             ? filteredProducts
+//                 .filter((product) => product.storeName === storeName)
+//                 .map((product) => (
+//                   <Product
+//                     product={product}
+//                     favoritesList={favoritesList}
+//                     setFavoritesList={setFavoritesList}
+//                     groceryList={groceryList}
+//                     setGroceryList={setGroceryList}
+//                     selectedProduct={selectedProduct}
+//                     setSelectedProduct={setSelectedProduct}
+//                     key={product._id}
+//                   />
+//                 ))
+//             : products
+//                 .filter((product) => product.storeName === storeName)
+//                 .map((product) => (
+//                   <Product
+//                     product={product}
+//                     favoritesList={favoritesList}
+//                     setFavoritesList={setFavoritesList}
+//                     groceryList={groceryList}
+//                     setGroceryList={setGroceryList}
+//                     selectedProduct={selectedProduct}
+//                     setSelectedProduct={setSelectedProduct}
+//                     key={product._id}
+//                   />
+//                 ))}
+//         </ProductList>
+//       </ListContainer>
+//     </Container>
+//   );
+// }
+
+// export default StoreList;
