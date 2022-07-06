@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -49,4 +50,4 @@ function CategoryFilter({ setCategory }) {
   );
 }
 
-export default CategoryFilter;
+export default React.memo(CategoryFilter);

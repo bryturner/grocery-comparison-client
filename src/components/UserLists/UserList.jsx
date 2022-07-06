@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import { ListWithBorder } from "../../constants/styles";
-import UserListButton from "./UserListButton";
 import UserListStore from "./UserListStore";
+import { storeTitles } from "../../data";
 
-const Container = styled.div`
-  flex: 1;
-`;
+const Container = styled.div``;
 
 const Header = styled.h2`
   text-align: center;
@@ -34,21 +31,10 @@ const Text = styled.p`
   text-align: center;
 `;
 
-function UserList({
-  userList,
-  listTitle,
-  listText,
-  storeTitles,
-  favoritesList,
-  setFavoritesList,
-  groceryList,
-  setGroceryList,
-  handleClearClick,
-  clearButtonName,
-}) {
+function UserList({ userList, listTitle, listText }) {
   return (
     <Container>
-      <Header>{listTitle} List</Header>
+      <Header>{listTitle}</Header>
       <ListContainer>
         <ProductList>
           {userList.length === 0 ? (
@@ -65,10 +51,6 @@ function UserList({
                   <UserListStore
                     userList={userList}
                     storeTitle={storeTitle}
-                    groceryList={groceryList}
-                    setGroceryList={setGroceryList}
-                    favoritesList={favoritesList}
-                    setFavoritesList={setFavoritesList}
                     key={storeTitle}
                   />
                 );
@@ -76,10 +58,6 @@ function UserList({
           )}
         </ProductList>
       </ListContainer>
-      <UserListButton
-        handleClick={handleClearClick}
-        buttonName={clearButtonName}
-      />
     </Container>
   );
 }

@@ -1,5 +1,6 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useContext } from "react";
 import styled from "styled-components";
+import UserListsContext from "../../contexts/UserListsContext";
 import FavoritesButton from "../buttons/FavoritesButton/FavoritesButton";
 import GroceryListButton from "../buttons/GroceryListButton/GroceryListButton";
 import ProductCompareButton from "./ProductCompareButton";
@@ -47,10 +48,6 @@ const ButtonContainer = styled.div`
 
 function Product({
   product,
-  favoritesList,
-  setFavoritesList,
-  groceryList,
-  setGroceryList,
   selectedProduct,
   setSelectedProduct,
   onUserStoreList,
@@ -58,8 +55,11 @@ function Product({
   const [onFavoritesList, setOnFavoritesList] = useState(false);
   const [onGroceryList, setOnGroceryList] = useState(false);
 
+  const { groceryList, setGroceryList, favoritesList, setFavoritesList } =
+    useContext(UserListsContext);
+
   //   When product clicked to remove selection -> products revert to default, not products from db
-  const handleProductClicked = () => {
+  const handleCompareClick = () => {
     if (selectedProduct === product) {
       setSelectedProduct(undefined);
     } else {
@@ -67,7 +67,6 @@ function Product({
     }
   };
 
-  //  ====== User favorites list  ======
   const handleFavoriteClick = useCallback(
     (id) => {
       if (onFavoritesList) {
@@ -86,19 +85,6 @@ function Product({
     [favoritesList, onFavoritesList, product, setFavoritesList]
   );
 
-  const checkOnUserFavoritesList = useCallback(() => {
-    if (favoritesList.some((listProduct) => listProduct._id === product._id)) {
-      setOnFavoritesList(true);
-    } else {
-      setOnFavoritesList(false);
-    }
-  }, [favoritesList, setOnFavoritesList, product._id]);
-
-  useEffect(() => {
-    checkOnUserFavoritesList();
-  }, [checkOnUserFavoritesList]);
-
-  // ===== User grocery list =====
   const handleGroceryListClick = useCallback(
     (id) => {
       if (onGroceryList) {
@@ -117,7 +103,17 @@ function Product({
     [groceryList, onGroceryList, product, setGroceryList]
   );
 
+  const checkOnUserFavoritesList = useCallback(() => {
+    //  if (groceryList.length === 0) return;
+    if (favoritesList.some((listProduct) => listProduct._id === product._id)) {
+      setOnFavoritesList(true);
+    } else {
+      setOnFavoritesList(false);
+    }
+  }, [favoritesList, setOnFavoritesList, product._id]);
+
   const checkOnGroceryList = useCallback(() => {
+    //  if (groceryList.length === 0) return;
     if (groceryList.some((listProduct) => listProduct._id === product._id)) {
       setOnGroceryList(true);
     } else {
@@ -128,6 +124,10 @@ function Product({
   useEffect(() => {
     checkOnGroceryList();
   }, [checkOnGroceryList]);
+
+  useEffect(() => {
+    checkOnUserFavoritesList();
+  }, [checkOnUserFavoritesList]);
 
   useEffect(() => {
     localStorage.setItem("favoritesList", JSON.stringify(favoritesList));
@@ -154,10 +154,9 @@ function Product({
         </ButtonContainer>
         <TextContainer>
           <Title data-testid="product-title">
-            {/* {product.displayTitle.length > 30
-              ? `${product.displayTitle.substring(0, 30)}...`
-              : product.displayTitle} */}
-            {product.title}
+            {product.title.length > 30
+              ? `${product.title.substring(0, 30)}...`
+              : product.title}
           </Title>
           <Increment data-testid="product-increment">
             {product.incrStr}
@@ -169,7 +168,7 @@ function Product({
             onUserStoreList={onUserStoreList}
             product={product}
             selectedProduct={selectedProduct}
-            handleProductClicked={handleProductClicked}
+            handleCompareClick={handleCompareClick}
           />
         </ButtonContainer>
       </Container>
