@@ -1,10 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, lazy, Suspense } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import CategoryFilter from "../CategoryFilter/CategoryFilter";
 import SearchBox from "../SearchBox/SearchBox";
-import StoreList from "./StoreList";
+// import StoreList from "./StoreList";
 import { storeTitles } from "../../data";
+
+const StoreList = lazy(() => import("./StoreList"));
 
 const Container = styled.div`
   margin-bottom: 2rem;
@@ -20,7 +22,7 @@ const InputsContainer = styled.div`
 
 const StoresContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   column-gap: 1rem;
   row-gap: 2rem;
 `;
@@ -31,25 +33,27 @@ const StoreLists = () => {
   const [category, setCategory] = useState("fruechte-gemuese");
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
-  const fetchTestData = () => {
-    fetch("data.json")
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data.categories[category]);
-      });
-  };
+  //   const fetchTestData = () => {
+  //     fetch("data.json")
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         setProducts(data.categories[category]);
+  //       });
+  //   };
 
   const getProducts = async () => {
     try {
       const productResponse = await axios.get(
         `http://localhost:8000/product?category=${category}`
       );
-
       setProducts(productResponse.data);
     } catch (err) {
       console.error(err);
-      return [];
+      setProducts([]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -58,13 +62,13 @@ const StoreLists = () => {
     //  handleClick()
   };
 
-  useEffect(() => {
-    fetchTestData();
-  }, [category]);
-
   //   useEffect(() => {
-  //     getProducts();
+  //     fetchTestData();
   //   }, [category]);
+
+  useEffect(() => {
+    getProducts();
+  }, [category]);
 
   //   useEffect(() => {
   //     searchProducts();
@@ -73,7 +77,7 @@ const StoreLists = () => {
   return (
     <Container>
       <InputsContainer>
-        <CategoryFilter setCategory={setCategory} />
+        <CategoryFilter setCategory={setCategory} setIsLoading={setIsLoading} />
         <SearchBox setSearchQuery={setSearchQuery} />
         <button onClick={() => handleClick()}>Test</button>
       </InputsContainer>
@@ -82,6 +86,7 @@ const StoreLists = () => {
           <StoreList
             storeTitle={storeTitle}
             products={products}
+            isLoading={isLoading}
             key={storeTitle}
           />
         ))}

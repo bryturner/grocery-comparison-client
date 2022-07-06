@@ -121,13 +121,13 @@ function Product({
     }
   }, [groceryList, setOnGroceryList, product._id]);
 
-  useEffect(() => {
-    checkOnGroceryList();
-  }, [checkOnGroceryList]);
+  //   useEffect(() => {
+  //     checkOnGroceryList();
+  //   }, [checkOnGroceryList]);
 
-  useEffect(() => {
-    checkOnUserFavoritesList();
-  }, [checkOnUserFavoritesList]);
+  //   useEffect(() => {
+  //     checkOnUserFavoritesList();
+  //   }, [checkOnUserFavoritesList]);
 
   useEffect(() => {
     localStorage.setItem("favoritesList", JSON.stringify(favoritesList));

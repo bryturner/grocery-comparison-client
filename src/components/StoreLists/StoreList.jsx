@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import Loading from "../Loading/Loading";
-import Product from "../Product/Product";
+// import Product from "../Product/Product";
+import { lazy, Suspense } from "react";
+
+const Product = lazy(() => import("../Product/Product"));
 
 const Container = styled.div``;
 
@@ -40,21 +43,34 @@ const ProductList = styled.ul`
   transition: all 0.1s linear;
 `;
 
-function StoreList({ storeTitle, products }) {
+function StoreList({ storeTitle, products, isLoading }) {
   return (
     <Container>
       <Header>{storeTitle}</Header>
       <ListContainer>
-        <ProductList>
-          {products
-            .filter((product) => product.storeTitle === storeTitle)
-            .map((product) => (
-              <Product product={product} key={product._id} />
-            ))}
-        </ProductList>
+        <LoadingWrapper isLoading={isLoading}>
+          <Loading type="bars" color="#999" />
+        </LoadingWrapper>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ProductList isLoading={isLoading}>
+            {products
+              .filter((product) => product.storeTitle === storeTitle)
+              .map((product) => (
+                <Product product={product} key={product._id} />
+              ))}
+          </ProductList>
+        </Suspense>
       </ListContainer>
     </Container>
   );
 }
 
 export default StoreList;
+
+// <
+//           height="64px"
+//           width="64px"
+//           type="bar"
+//           color="#999"
+//           isLoading={isLoading}
+//         >

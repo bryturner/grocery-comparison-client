@@ -6,11 +6,18 @@ const UserListsContext = createContext();
 function UserListsContextProvider({ children }) {
   const [favoritesList, setFavoritesList] = useState([]);
   const [groceryList, setGroceryList] = useState([]);
+  const [groceryListObj, setGroceryListObj] = useState({});
 
   const getGroceryList = () => {
     const groceryListData = JSON.parse(localStorage.getItem("groceryList"));
     if (!groceryListData) return;
     setGroceryList(groceryListData);
+  };
+
+  const getGroceryListObj = () => {
+    const groceryListData = JSON.parse(localStorage.getItem("groceryListObj"));
+    if (!groceryListData) return;
+    setGroceryListObj(groceryListData);
   };
 
   const getFavoritesList = () => {

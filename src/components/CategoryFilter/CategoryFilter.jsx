@@ -13,7 +13,7 @@ const CategorySelect = styled.select`
 
 const CategoryOption = styled.option``;
 
-function CategoryFilter({ setCategory }) {
+function CategoryFilter({ setCategory, setIsLoading }) {
   return (
     <Container>
       <label htmlFor="category-filter">Category:</label>
@@ -21,6 +21,7 @@ function CategoryFilter({ setCategory }) {
         id="category-filter"
         defaultValue="fruechte-gemuese"
         onChange={(e) => {
+          setIsLoading(true);
           setCategory(e.target.value);
         }}
       >
