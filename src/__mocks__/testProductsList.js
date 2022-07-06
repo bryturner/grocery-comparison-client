@@ -4,14 +4,14 @@ export const testProducts = [
     productId: "6570112coop",
     categories: ["fruechte-gemuese"],
     createdAt: "2022-07-02T20:45:27.818Z",
-    dictionaryTitle: "Planted vegan filets nature",
-    displayTitle: "Planted vegan filets nature",
+
+    title: "Planted vegan filets nature",
     incrStr: "3.40/100g",
     price: 5.95,
     prodLink:
       "https://www.coop.ch/de/lebensmittel/fruechte-gemuese/pflanzliche-alternativen-zu-fleisch/planted-vegan-filets-nature/p/6570112",
     qtyStr: "175g",
-    storeName: "Coop",
+    storeTitle: "Coop",
     updatedAt: "2022-07-02T21:04:50.381Z",
   },
   {
@@ -19,14 +19,14 @@ export const testProducts = [
     productId: "6494628coop",
     categories: ["fruechte-gemuese"],
     createdAt: "2022-07-02T20:45:27.818Z",
-    dictionaryTitle: "Garden Gourmet Vegetarian Balls",
-    displayTitle: "Garden Gourmet Vegetarian Balls",
+
+    title: "Garden Gourmet Vegetarian Balls",
     incrStr: "2.48/100g",
     price: 4.95,
     prodLink:
       "https://www.coop.ch/de/lebensmittel/fruechte-gemuese/pflanzliche-alternativen-zu-fleisch/garden-gourmet-vegetarian-balls/p/6494628",
     qtyStr: "200g",
-    storeName: "Coop",
+    storeTitle: "Coop",
     updatedAt: "2022-07-02T21:04:50.381Z",
   },
   {
@@ -34,14 +34,14 @@ export const testProducts = [
     productId: "4484998coop",
     categories: ["fruechte-gemuese"],
     createdAt: "2022-07-02T20:45:27.818Z",
-    dictionaryTitle: "Bio Crevetten Cocktail",
-    displayTitle: "Naturaplan Bio Crevetten Cocktail",
+
+    title: "Naturaplan Bio Crevetten Cocktail",
     incrStr: "4.63/100g",
     price: 6.95,
     prodLink:
       "https://www.coop.ch/de/lebensmittel/fertiggerichte/frische-fertiggerichte/fertige-salate/naturaplan-bio-crevetten-cocktail/p/4484998",
     qtyStr: "150g",
-    storeName: "Coop",
+    storeTitle: "Coop",
     updatedAt: "2022-07-02T21:04:50.381Z",
   },
   {
@@ -49,14 +49,14 @@ export const testProducts = [
     productId: "5997372coop",
     categories: ["fruechte-gemuese"],
     createdAt: "2022-07-02T20:45:27.818Z",
-    dictionaryTitle: "Délicorn vegan Gehacktes",
-    displayTitle: "Délicorn vegan Gehacktes",
+
+    title: "Délicorn vegan Gehacktes",
     incrStr: "1.72/100g",
     price: 3.95,
     prodLink:
       "https://www.coop.ch/de/lebensmittel/fruechte-gemuese/pflanzliche-alternativen-zu-fleisch/delicorn-vegan-gehacktes/p/5997372",
     qtyStr: "230g",
-    storeName: "Coop",
+    storeTitle: "Coop",
     updatedAt: "2022-07-02T21:04:50.381Z",
   },
   {
@@ -64,13 +64,13 @@ export const testProducts = [
     productId: "271500513200migros",
     categories: ["fruechte-gemuese"],
     createdAt: "2022-07-02T20:37:19.101Z",
-    dictionaryTitle: "Gurke",
-    displayTitle: "Gurke",
+
+    title: "Gurke",
     incrStr: "1.70/1ST",
     price: 1.7,
     prodLink: "https://www.migros.ch/de/product/271500513200",
     qtyStr: "",
-    storeName: "Migros",
+    storeTitle: "Migros",
     updatedAt: "2022-07-02T20:37:19.101Z",
   },
   {
@@ -78,13 +78,13 @@ export const testProducts = [
     productId: "264280101000migros",
     categories: ["fruechte-gemuese"],
     createdAt: "2022-07-02T20:37:19.101Z",
-    dictionaryTitle: "Bio Fairtrade Bananen",
-    displayTitle: "Bio Fairtrade Bananen",
+
+    title: "Bio Fairtrade Bananen",
     incrStr: "2.80/1kg",
     price: 2.8,
     prodLink: "https://www.migros.ch/de/product/264280101000",
     qtyStr: "1kg",
-    storeName: "Migros",
+    storeTitle: "Migros",
     updatedAt: "2022-07-02T20:37:19.101Z",
   },
   {
@@ -92,13 +92,13 @@ export const testProducts = [
     productId: "271580313200migros",
     categories: ["fruechte-gemuese"],
     createdAt: "2022-07-02T20:37:19.101Z",
-    dictionaryTitle: "Bio Gurke",
-    displayTitle: "Bio Gurke",
+
+    title: "Bio Gurke",
     incrStr: "2.30/1ST",
     price: 2.302,
     prodLink: "https://www.migros.ch/de/product/271580313200",
     qtyStr: "",
-    storeName: "Migros",
+    storeTitle: "Migros",
     updatedAt: "2022-07-02T20:37:19.101Z",
   },
   {
@@ -106,13 +106,13 @@ export const testProducts = [
     productId: "274502502400migros",
     categories: ["fruechte-gemuese"],
     createdAt: "2022-07-02T20:37:19.101Z",
-    dictionaryTitle: "Karotten",
-    displayTitle: "Fresca Karotten",
+
+    title: "Fresca Karotten",
     incrStr: "2.20/1kg",
     price: 2.2,
     prodLink: "https://www.migros.ch/de/product/274502502400",
     qtyStr: "1kg",
-    storeName: "Migros",
+    storeTitle: "Migros",
     updatedAt: "2022-07-02T20:37:19.101Z",
   },
 
@@ -121,13 +121,13 @@ export const testProducts = [
     productId: "230500150000migros",
     categories: ["fleisch-fisch"],
     createdAt: "2022-07-02T20:40:26.413Z",
-    dictionaryTitle: "Cervelas",
-    displayTitle: "M-Classic Cervelas",
+
+    title: "M-Classic Cervelas",
     incrStr: "0.97/100g",
     price: 1.95,
     prodLink: "https://www.migros.ch/de/product/230500150000",
     qtyStr: "200g",
-    storeName: "Migros",
+    storeTitle: "Migros",
     updatedAt: "2022-07-02T20:40:26.413Z",
   },
   {
@@ -135,13 +135,13 @@ export const testProducts = [
     productId: "230500251000migros",
     categories: ["fleisch-fisch"],
     createdAt: "2022-07-02T20:40:26.413Z",
-    dictionaryTitle: "Wienerli",
-    displayTitle: "M-Classic Wienerli",
+
+    title: "M-Classic Wienerli",
     incrStr: "1.10/100g",
     price: 2.2,
     prodLink: "https://www.migros.ch/de/product/230500251000",
     qtyStr: "200g",
-    storeName: "Migros",
+    storeTitle: "Migros",
     updatedAt: "2022-07-02T20:40:26.413Z",
   },
   {
@@ -149,13 +149,13 @@ export const testProducts = [
     productId: "231502090010migros",
     categories: ["fleisch-fisch"],
     createdAt: "2022-07-02T20:40:26.413Z",
-    dictionaryTitle: "Hinterschinken",
-    displayTitle: "IP Suisse Hinterschinken",
+
+    title: "IP Suisse Hinterschinken",
     incrStr: "2.55/100g",
     price: 2.55,
     prodLink: "https://www.migros.ch/de/product/231502090010",
     qtyStr: "100g",
-    storeName: "Migros",
+    storeTitle: "Migros",
     updatedAt: "2022-07-02T20:40:26.413Z",
   },
   {
@@ -163,13 +163,13 @@ export const testProducts = [
     productId: "231525083100migros",
     categories: ["fleisch-fisch"],
     createdAt: "2022-07-02T20:40:26.413Z",
-    dictionaryTitle: "Don Pollo Trutenbrustaufschnitt",
-    displayTitle: "Don Pollo Trutenbrustaufschnitt",
+
+    title: "Don Pollo Trutenbrustaufschnitt",
     incrStr: "1.97/100g",
     price: 2.95,
     prodLink: "https://www.migros.ch/de/product/231525083100",
     qtyStr: "150g",
-    storeName: "Migros",
+    storeTitle: "Migros",
     updatedAt: "2022-07-02T20:40:26.413Z",
   },
   {
@@ -177,14 +177,14 @@ export const testProducts = [
     productId: "3066950coop",
     categories: ["fleisch-fisch"],
     createdAt: "2022-07-02T20:45:27.818Z",
-    dictionaryTitle: "Pouletbrust",
-    displayTitle: "Naturafarm Pouletbrust 2 Stück",
+
+    title: "Naturafarm Pouletbrust 2 Stück",
     incrStr: "5.50/100g",
     price: 13.75,
     prodLink:
       "https://www.coop.ch/de/lebensmittel/fleisch-fisch/abgepacktes-frischfleisch/gefluegel/naturafarm-pouletbrust-2-stueck-ca/p/3066950",
     qtyStr: "250g",
-    storeName: "Coop",
+    storeTitle: "Coop",
     updatedAt: "2022-07-02T20:45:27.818Z",
   },
   {
@@ -192,14 +192,14 @@ export const testProducts = [
     productId: "4674091coop",
     categories: ["fleisch-fisch"],
     createdAt: "2022-07-02T20:45:27.818Z",
-    dictionaryTitle: "Hinterschinken",
-    displayTitle: "Naturafarm Hinterschinken",
+
+    title: "Naturafarm Hinterschinken",
     incrStr: "2.88/100g",
     price: 4.6,
     prodLink:
       "https://www.coop.ch/de/lebensmittel/fleisch-fisch/charcuterie-wurstwaren/schinken-aufschnitt/schinken/naturafarm-hinterschinken/p/4674091",
     qtyStr: "160g",
-    storeName: "Coop",
+    storeTitle: "Coop",
     updatedAt: "2022-07-02T20:45:27.818Z",
   },
   {
@@ -207,14 +207,14 @@ export const testProducts = [
     productId: "3699645coop",
     categories: ["fleisch-fisch"],
     createdAt: "2022-07-02T20:45:27.818Z",
-    dictionaryTitle: "Pouletbrust Würfel Premium",
-    displayTitle: "Pouletbrust Würfel Premium",
+
+    title: "Pouletbrust Würfel Premium",
     incrStr: "3.75/100g",
     price: 12,
     prodLink:
       "https://www.coop.ch/de/lebensmittel/fleisch-fisch/abgepacktes-frischfleisch/gefluegel/pouletbrust-wuerfel-premium-ca/p/3699645",
     qtyStr: "320g",
-    storeName: "Coop",
+    storeTitle: "Coop",
     updatedAt: "2022-07-02T20:45:27.818Z",
   },
   {
@@ -222,14 +222,14 @@ export const testProducts = [
     productId: "3061418coop",
     categories: ["fleisch-fisch"],
     createdAt: "2022-07-02T20:45:27.818Z",
-    dictionaryTitle: "Hackfleisch Rind",
-    displayTitle: "Hackfleisch Rind",
+
+    title: "Hackfleisch Rind",
     incrStr: "1.95/100g",
     price: 9.75,
     prodLink:
       "https://www.coop.ch/de/lebensmittel/fleisch-fisch/abgepacktes-frischfleisch/hackfleisch/hackfleisch-rind-ca/p/3061418",
     qtyStr: "500g",
-    storeName: "Coop",
+    storeTitle: "Coop",
     updatedAt: "2022-07-02T20:45:27.818Z",
   },
 ];

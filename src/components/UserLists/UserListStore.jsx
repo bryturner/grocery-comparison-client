@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import styled from "styled-components";
-import { List } from "../../constants/styles";
 import Product from "../Product/Product";
 
 const Container = styled.li`
@@ -19,17 +17,7 @@ const ProductList = styled.ul`
   flex-direction: column;
 `;
 
-function UserListStore({
-  userList,
-  storeTitle,
-  groceryList,
-  setGroceryList,
-  favoritesList,
-  setFavoritesList,
-}) {
-  useEffect(() => {
-    console.log(groceryList);
-  }, []);
+function UserListStore({ userList, storeTitle }) {
   return (
     <Container>
       <StoreTitle>{storeTitle}</StoreTitle>
@@ -37,7 +25,7 @@ function UserListStore({
         {userList
           .filter((product) => product.storeTitle === storeTitle)
           .map((product) => (
-            <Product product={product} />
+            <Product product={product} onUserStoreList key={product._id} />
           ))}
       </ProductList>
     </Container>

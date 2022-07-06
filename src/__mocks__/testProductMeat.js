@@ -3,13 +3,12 @@ export const testProductMeat = {
   productId: "3066950coop",
   categories: ["fleisch-fisch"],
   createdAt: "2022-07-02T20:45:27.818Z",
-  dictionaryTitle: "Pouletbrust",
-  displayTitle: "Naturafarm Pouletbrust 2 Stück",
+  title: "Naturafarm Pouletbrust 2 Stück",
   incrStr: "5.50/100g",
   price: 13.75,
   prodLink:
     "https://www.coop.ch/de/lebensmittel/fleisch-fisch/abgepacktes-frischfleisch/gefluegel/naturafarm-pouletbrust-2-stueck-ca/p/3066950",
   qtyStr: "250g",
-  storeName: "Coop",
+  storeTitle: "Coop",
   updatedAt: "2022-07-02T20:45:27.818Z",
 };

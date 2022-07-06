@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import CategoryFilter from "../CategoryFilter/CategoryFilter";
 import SearchBox from "../SearchBox/SearchBox";
 import StoreList from "./StoreList";
-import { storeTitles, testProducts } from "../../data";
+import { storeTitles } from "../../data";
 
 const Container = styled.div`
   margin-bottom: 2rem;
@@ -39,6 +40,19 @@ const StoreLists = () => {
       });
   };
 
+  const getProducts = async () => {
+    try {
+      const productResponse = await axios.get(
+        `http://localhost:8000/product?category=${category}`
+      );
+
+      setProducts(productResponse.data);
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
+  };
+
   const handleClick = () => {
     console.log(products);
     //  handleClick()
@@ -47,6 +61,10 @@ const StoreLists = () => {
   useEffect(() => {
     fetchTestData();
   }, [category]);
+
+  //   useEffect(() => {
+  //     getProducts();
+  //   }, [category]);
 
   //   useEffect(() => {
   //     searchProducts();
