@@ -5,11 +5,13 @@ import UserListsContext from "../../contexts/UserListsContext";
 import FavoritesButton from "../buttons/FavoritesButton/FavoritesButton";
 import GroceryListButton from "../buttons/GroceryListButton/GroceryListButton";
 import ProductCompareButton from "./ProductCompareButton";
+import ProductDetail from "./ProductDetail";
+import ProductTextTitle from "./ProductDetailTitle";
 
 const Container = styled.li`
   display: flex;
-  padding: 0 1rem;
-  gap: 1rem;
+  padding: 0 1.4rem;
+  gap: 1.4rem;
   align-items: center;
 `;
 
@@ -21,18 +23,17 @@ const Divider = styled.div`
 const TextContainer = styled.div`
   display: flex;
   flex: 5;
-  position: relative;
-  font-size: ${(props) => props.theme.fontSize.md};
-  font-weight: bold;
 `;
 
-const Title = styled.p`
+const Title = styled.span`
   flex: 3;
   width: 50px;
+  align-self: center;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  transition: all 0.3s linear;
+  font-weight: bold;
+  font-size: ${(props) => props.theme.fontSize.md};
 
   &:hover {
     overflow: visible;
@@ -63,14 +64,10 @@ const Link = styled.a`
   }
 `;
 
-const Increment = styled.p`
+const DetailContainer = styled.div`
   flex: 1;
-  text-align: right;
-`;
-
-const Price = styled.p`
-  flex: 1;
-  text-align: center;
+  display: flex;
+  gap: 1rem;
 `;
 
 const ButtonContainer = styled.div`
@@ -86,6 +83,11 @@ function Product({
 }) {
   const [onFavoritesList, setOnFavoritesList] = useState(false);
   const [onGroceryList, setOnGroceryList] = useState(false);
+
+  const productPrice = product.price.toFixed(2);
+  const productIncrement = product.incrStr;
+  const productTitle = product.title;
+  const productLink = product.prodLink;
 
   const { groceryList, setGroceryList, favoritesList, setFavoritesList } =
     useContext(UserListsContext);
@@ -169,14 +171,22 @@ function Product({
         </ButtonContainer>
         <TextContainer>
           <Title data-testid="product-title">
-            <Link href={product.prodLink} target="_blank">
-              {product.title}
+            <Link href={productLink} target="_blank">
+              {productTitle}
             </Link>
           </Title>
-          <Increment data-testid="product-increment">
-            {product.incrStr}
-          </Increment>
-          <Price data-testid="product-price">{product.price.toFixed(2)}</Price>
+          <DetailContainer>
+            <ProductDetail
+              detailText={productPrice}
+              detailTitle="Total"
+              detailType="price"
+            />
+            <ProductDetail
+              detailText={productIncrement}
+              detailTitle="Price/unit"
+              detailType="increment"
+            />
+          </DetailContainer>
         </TextContainer>
         <ButtonContainer>
           <ProductCompareButton

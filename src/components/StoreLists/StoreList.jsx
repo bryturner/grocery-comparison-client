@@ -49,6 +49,7 @@ function StoreList({
   storeTitle,
   products,
   filteredProducts,
+  searchQuery,
   isLoading,
   selectedProduct,
   setSelectedProduct,
@@ -57,12 +58,12 @@ function StoreList({
     <Container>
       <Header>{storeTitle}</Header>
       <ListContainer>
-        <LoadingWrapper isLoading={isLoading}>
+        {/* <LoadingWrapper isLoading={isLoading}>
           <Loading type="bars" color="#999" />
-        </LoadingWrapper>
+        </LoadingWrapper> */}
         {/* <Suspense fallback={<div>Loading...</div>}> */}
         <ProductList isLoading={isLoading}>
-          {filteredProducts.length === 0
+          {filteredProducts.length === 0 && searchQuery.length === 0
             ? products
                 .filter((product) => product.storeTitle === storeTitle)
                 .map((product) => (

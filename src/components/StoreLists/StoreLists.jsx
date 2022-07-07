@@ -11,6 +11,7 @@ import { compareTwoProductTitles } from "../../helpers";
 
 // const StoreList = lazy(() => import("./StoreList"));
 
+// TODO: filteredProducts combines searchQuery & compare
 const Container = styled.div`
   margin-bottom: 2rem;
 `;
@@ -28,12 +29,10 @@ const StoresContainer = styled.div`
   gap: 1rem;
 `;
 
-// get products, filter, search, reset compare, compare
 const StoreLists = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState("fruechte-gemuese");
-  const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [selectedProduct, setSelectedProduct] = useState(undefined);
@@ -63,19 +62,12 @@ const StoreLists = () => {
     }
   };
 
-  const searchProducts = useCallback(() => {
-    const queriedProducts = products.filter((product) => {
-      return product.title.toLowerCase().includes(searchQuery.toLowerCase());
-    });
-    setFilteredProducts(queriedProducts);
-  }, [searchQuery, products]);
-
   const findBestMatch = useCallback(() => {
     if (selectedProduct === undefined) {
       setFilteredProducts(products);
       return;
     }
-    let bestMatchingProducts = [];
+    const bestMatchingProducts = [];
     const selectedProductTitle = selectedProduct.title;
 
     products
@@ -106,10 +98,6 @@ const StoreLists = () => {
   //   }, [category]);
 
   useEffect(() => {
-    searchProducts();
-  }, [searchProducts, searchQuery]);
-
-  useEffect(() => {
     findBestMatch();
   }, [findBestMatch, selectedProduct]);
 
@@ -117,7 +105,12 @@ const StoreLists = () => {
     <Container>
       <InputsContainer>
         <CategoryFilter setCategory={setCategory} setIsLoading={setIsLoading} />
-        <SearchBox setSearchQuery={setSearchQuery} />
+        <SearchBox
+          setSearchQuery={setSearchQuery}
+          searchQuery={searchQuery}
+          setFilteredProducts={setFilteredProducts}
+          products={products}
+        />
         <ResetCompareButton
           setFilteredProducts={setFilteredProducts}
           products={products}
@@ -130,6 +123,7 @@ const StoreLists = () => {
             storeTitle={storeTitle}
             products={products}
             filteredProducts={filteredProducts}
+            searchQuery={searchQuery}
             isLoading={isLoading}
             selectedProduct={selectedProduct}
             setSelectedProduct={setSelectedProduct}

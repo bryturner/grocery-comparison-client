@@ -4,6 +4,7 @@ export const theme = {
   fontSize: {
     sm: "1.2rem",
     md: "1.4rem",
+    mdLg: "1.6rem",
     lg: "2rem",
     hd2: "2.4rem",
     hd1: "4rem",
@@ -23,7 +24,7 @@ export const theme = {
     secondaryText: "#034c99",
   },
   buttonBorder: {
-    primary: "",
+    primary: "none",
     secondary: "1px solid #4c8acc",
   },
 };
