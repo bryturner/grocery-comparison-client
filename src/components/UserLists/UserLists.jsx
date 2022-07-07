@@ -11,10 +11,15 @@ const Container = styled.div`
 
 const ListContainer = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const ButtonContainer = styled.div`
+  align-self: center;
   display: flex;
+  gap: 2rem;
 `;
 
 const UserLists = () => {

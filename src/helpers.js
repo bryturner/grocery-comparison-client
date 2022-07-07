@@ -27,6 +27,32 @@ export const compareTwoProductTitles = (first, second) => {
   return (2.0 * intersectionSize) / (first.length + second.length - 2);
 };
 
+// export const findBestMatch = () => {
+//   if (selectedProduct === undefined) {
+//     setProducts(allProdsInCategory);
+//     return;
+//   }
+//   let bestMatchingProducts = [];
+//   const selectedProductTitle = selectedProduct.title;
+
+//   products
+//     .map((product) => {
+//       const compareProductTitle = product.title;
+
+//       const similarityRating = compareTwoProductTitles(
+//         selectedProductTitle,
+//         compareProductTitle
+//       );
+//       return { similarityRating: similarityRating, product: product };
+//     })
+//     .sort((a, b) => b.similarityRating - a.similarityRating)
+//     .forEach((product) => {
+//       if (product.similarityRating > 0.25) {
+//         bestMatchingProducts.push(product.product);
+//       }
+//     });
+//   setProducts(bestMatchingProducts);
+// };
 // Use to remove unnecessary words from titles
 const formatTitle = (title) => {
   let formattedTitle = title;

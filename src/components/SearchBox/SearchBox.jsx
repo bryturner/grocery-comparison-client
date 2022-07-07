@@ -1,6 +1,7 @@
-import { Search } from "@mui/icons-material";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { MagnifyingGlass } from "phosphor-react";
+import { useEffect } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -22,6 +23,16 @@ const SearchInput = styled.input`
 `;
 
 function SearchBox({ setSearchQuery, searchQuery }) {
+  // 	const searchProducts = useCallback(() => {
+  //       const queriedProducts = products.filter((product) => {
+  //         return product.dictionaryTitle.toLowerCase().includes(searchQuery);
+  //       });
+  //       setFilteredProducts(queriedProducts);
+  //     }, [searchQuery]);
+
+  // 	 useEffect(() => {
+  // searchProducts()
+  // 	 } ,[searchQuery])
   return (
     <Container>
       <label htmlFor="search-box">Find product:</label>
@@ -30,10 +41,11 @@ function SearchBox({ setSearchQuery, searchQuery }) {
           id="search-box"
           type="search"
           placeholder="Search by name"
-          defaultValue={searchQuery}
+          //  defaultValue={searchQuery}
+          defaultValue=""
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <Search style={{ color: "black", fontSize: 16 }} />
+        <MagnifyingGlass size={16} color="#2d2e2d" weight="bold" />
       </Wrapper>
     </Container>
   );

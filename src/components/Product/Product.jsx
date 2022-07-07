@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useState, useCallback, useEffect, useContext } from "react";
 import styled from "styled-components";
 import UserListsContext from "../../contexts/UserListsContext";
@@ -15,8 +16,6 @@ const Container = styled.li`
 const Divider = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.color.lightGray};
   width: 100%;
-  /* height: 0.5rem;
-	padding-bottom: 0.5rem; */
 `;
 
 const TextContainer = styled.div`
@@ -28,7 +27,40 @@ const TextContainer = styled.div`
 `;
 
 const Title = styled.p`
-  flex: 2;
+  flex: 3;
+  width: 50px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  transition: all 0.3s linear;
+
+  &:hover {
+    overflow: visible;
+  }
+`;
+
+const Link = styled.a`
+  text-decoration: none;
+
+  &:link {
+    color: inherit;
+  }
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:focus {
+    border-bottom: 1px solid red;
+  }
+
+  &:hover {
+    border-bottom: 1px solid red;
+  }
+
+  &:active {
+    color: inherit;
+  }
 `;
 
 const Increment = styled.p`
@@ -58,28 +90,16 @@ function Product({
   const { groceryList, setGroceryList, favoritesList, setFavoritesList } =
     useContext(UserListsContext);
 
-  //   When product clicked to remove selection -> products revert to default, not products from db
-  const handleCompareClick = () => {
-    if (selectedProduct === product) {
-      setSelectedProduct(undefined);
-    } else {
-      setSelectedProduct(product);
-    }
-  };
-
   const handleFavoriteClick = useCallback(
     (id) => {
       if (onFavoritesList) {
         setOnFavoritesList(false);
-        setFavoritesList(
-          favoritesList.filter((listProduct) => {
-            return listProduct._id !== id;
-          })
-        );
+        const { [id]: product, ...newFavoritesList } = favoritesList;
+        setFavoritesList(newFavoritesList);
       }
       if (!onFavoritesList) {
         setOnFavoritesList(true);
-        setFavoritesList([...favoritesList, product]);
+        setFavoritesList({ ...favoritesList, [id]: product });
       }
     },
     [favoritesList, onFavoritesList, product, setFavoritesList]
@@ -89,23 +109,19 @@ function Product({
     (id) => {
       if (onGroceryList) {
         setOnGroceryList(false);
-        setGroceryList(
-          groceryList.filter((listProduct) => {
-            return listProduct._id !== id;
-          })
-        );
+        const { [id]: product, ...newGroceryList } = groceryList;
+        setGroceryList(newGroceryList);
       }
       if (!onGroceryList) {
         setOnGroceryList(true);
-        setGroceryList([...groceryList, product]);
+        setGroceryList({ ...groceryList, [id]: product });
       }
     },
     [groceryList, onGroceryList, product, setGroceryList]
   );
 
   const checkOnUserFavoritesList = useCallback(() => {
-    //  if (groceryList.length === 0) return;
-    if (favoritesList.some((listProduct) => listProduct._id === product._id)) {
+    if (favoritesList[product._id]) {
       setOnFavoritesList(true);
     } else {
       setOnFavoritesList(false);
@@ -113,21 +129,20 @@ function Product({
   }, [favoritesList, setOnFavoritesList, product._id]);
 
   const checkOnGroceryList = useCallback(() => {
-    //  if (groceryList.length === 0) return;
-    if (groceryList.some((listProduct) => listProduct._id === product._id)) {
+    if (groceryList[product._id]) {
       setOnGroceryList(true);
     } else {
       setOnGroceryList(false);
     }
   }, [groceryList, setOnGroceryList, product._id]);
 
-  //   useEffect(() => {
-  //     checkOnGroceryList();
-  //   }, [checkOnGroceryList]);
+  useEffect(() => {
+    checkOnGroceryList();
+  }, [checkOnGroceryList]);
 
-  //   useEffect(() => {
-  //     checkOnUserFavoritesList();
-  //   }, [checkOnUserFavoritesList]);
+  useEffect(() => {
+    checkOnUserFavoritesList();
+  }, [checkOnUserFavoritesList]);
 
   useEffect(() => {
     localStorage.setItem("favoritesList", JSON.stringify(favoritesList));
@@ -154,9 +169,9 @@ function Product({
         </ButtonContainer>
         <TextContainer>
           <Title data-testid="product-title">
-            {product.title.length > 30
-              ? `${product.title.substring(0, 30)}...`
-              : product.title}
+            <Link href={product.prodLink} target="_blank">
+              {product.title}
+            </Link>
           </Title>
           <Increment data-testid="product-increment">
             {product.incrStr}
@@ -168,7 +183,7 @@ function Product({
             onUserStoreList={onUserStoreList}
             product={product}
             selectedProduct={selectedProduct}
-            handleCompareClick={handleCompareClick}
+            setSelectedProduct={setSelectedProduct}
           />
         </ButtonContainer>
       </Container>

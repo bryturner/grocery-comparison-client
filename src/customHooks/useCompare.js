@@ -1,31 +1,35 @@
-export const compareTwoProductTitles = (first, second) => {
-  const re = /\s+|denner|coop|migros/gi;
-  first = first.replace(re, "");
-  second = second.replace(re, "");
+import { useCallback, useEffect, useState } from "react";
 
-  if (first === second) return 1;
-  if (first.length < 2 || second.length < 2) return 0;
+// export const compareTwoProductTitles = (firstTitle, secondTitle) => {
+//   //   const re = /\s+|denner|coop|migros/gi;
+//   //   firstTitle = firstTitle.replace(re, "");
+//   //   secondTitle = secondTitle.replace(re, "");
 
-  let firstBigrams = new Map();
-  for (let i = 0; i < first.length - 1; i++) {
-    const bigram = first.substring(i, i + 2);
-    const count = firstBigrams.has(bigram) ? firstBigrams.get(bigram) + 1 : 1;
+//   if (firstTitle === secondTitle) return 1;
+//   if (firstTitle.length < 2 || secondTitle.length < 2) return 0;
 
-    firstBigrams.set(bigram, count);
-  }
+//   let firstBigrams = new Map();
+//   for (let i = 0; i < firstTitle.length - 1; i++) {
+//     const bigram = firstTitle.substring(i, i + 2);
+//     const count = firstBigrams.has(bigram) ? firstBigrams.get(bigram) + 1 : 1;
 
-  let intersectionSize = 0;
-  for (let i = 0; i < second.length - 1; i++) {
-    const bigram = second.substring(i, i + 2);
-    const count = firstBigrams.has(bigram) ? firstBigrams.get(bigram) : 0;
+//     firstBigrams.set(bigram, count);
+//   }
 
-    if (count > 0) {
-      firstBigrams.set(bigram, count - 1);
-      intersectionSize++;
-    }
-  }
-  return (2.0 * intersectionSize) / (first.length + second.length - 2);
-};
+//   let intersectionSize = 0;
+//   for (let i = 0; i < secondTitle.length - 1; i++) {
+//     const bigram = secondTitle.substring(i, i + 2);
+//     const count = firstBigrams.has(bigram) ? firstBigrams.get(bigram) : 0;
+
+//     if (count > 0) {
+//       firstBigrams.set(bigram, count - 1);
+//       intersectionSize++;
+//     }
+//   }
+//   return (
+//     (2.0 * intersectionSize) / (firstTitle.length + secondTitle.length - 2)
+//   );
+// };
 
 //   const findBestMatch = () => {
 //     if (selectedProduct === undefined) {
@@ -34,12 +38,12 @@ export const compareTwoProductTitles = (first, second) => {
 //       return;
 //     }
 //     let bestMatchingProducts = [];
-//     const selectedTitle = selectedProduct.dictionaryTitle;
+//     const selectedProductTitle = selectt;
 
 //     products
 //       .map((product) => {
 //         const similarityRating = compareTwoProductTitles(
-//           selectedTitle,
+//           selectedProductTitle,
 //           product.dictionaryTitle
 //         );
 //         return { similarityRating: similarityRating, product: product };
@@ -52,3 +56,73 @@ export const compareTwoProductTitles = (first, second) => {
 //       });
 //     setProducts(bestMatchingProducts);
 //   };
+function useCompare(selectedProduct, products) {
+  const [comparedProducts, setComparedProducts] = useState(products);
+
+  const compareTwoProductTitles = (firstTitle, secondTitle) => {
+    if (firstTitle === secondTitle) return 1;
+    if (firstTitle.length < 2 || secondTitle.length < 2) return 0;
+
+    let firstBigrams = new Map();
+    let intersectionSize = 0;
+
+    for (let i = 0; i < firstTitle.length - 1; i++) {
+      const bigram = firstTitle.substring(i, i + 2);
+      const count = firstBigrams.has(bigram) ? firstBigrams.get(bigram) + 1 : 1;
+
+      firstBigrams.set(bigram, count);
+    }
+
+    for (let i = 0; i < secondTitle.length - 1; i++) {
+      const bigram = secondTitle.substring(i, i + 2);
+      const count = firstBigrams.has(bigram) ? firstBigrams.get(bigram) : 0;
+
+      if (count > 0) {
+        firstBigrams.set(bigram, count - 1);
+        intersectionSize++;
+      }
+    }
+    return (
+      (2.0 * intersectionSize) / (firstTitle.length + secondTitle.length - 2)
+    );
+  };
+
+  const findBestMatch = useCallback(
+    (selectedProduct, products) => {
+      if (selectedProduct === undefined) {
+        setComparedProducts(products);
+        return;
+      }
+
+      let bestMatchingProducts = [];
+      const selectedProductTitle = selectedProduct.title;
+
+      products
+        .map((product) => {
+          const compareProductTitle = product.title;
+
+          const similarityRating = compareTwoProductTitles(
+            selectedProductTitle,
+            compareProductTitle
+          );
+          return { similarityRating: similarityRating, product: product };
+        })
+        .sort((a, b) => b.similarityRating - a.similarityRating)
+        .forEach((product) => {
+          if (product.similarityRating > 0.25) {
+            bestMatchingProducts.push(product.product);
+          }
+        });
+      setComparedProducts(bestMatchingProducts);
+    },
+    [setComparedProducts]
+  );
+
+  useEffect(() => {
+    findBestMatch(selectedProduct, products);
+  }, [findBestMatch, products, selectedProduct]);
+
+  return comparedProducts;
+}
+
+export default useCompare;

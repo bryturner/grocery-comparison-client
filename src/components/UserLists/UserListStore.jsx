@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Product from "../Product/Product";
+import UserListStoreTitle from "./UserListStoreTitle";
 
 const Container = styled.li`
   display: flex;
@@ -9,20 +10,24 @@ const Container = styled.li`
 
 const StoreTitle = styled.h3`
   border-bottom: 1px solid black;
+  padding: 0 0 0.5rem 1rem;
 `;
 
 const ProductList = styled.ul`
   list-style: none;
   display: flex;
   flex-direction: column;
+  margin-top: 0.5rem;
+  gap: 1rem;
 `;
 
 function UserListStore({ userList, storeTitle }) {
   return (
     <Container>
-      <StoreTitle>{storeTitle}</StoreTitle>
+      {/* <StoreTitle>{storeTitle}</StoreTitle> */}
+      <UserListStoreTitle storeTitle={storeTitle} />
       <ProductList>
-        {userList
+        {Object.values(userList)
           .filter((product) => product.storeTitle === storeTitle)
           .map((product) => (
             <Product product={product} onUserStoreList key={product._id} />

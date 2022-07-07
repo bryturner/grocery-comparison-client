@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import { SecondaryButton } from "../../constants/styles";
+import { Button } from "../ThemeProvider/Theme";
 
-export const Button = styled(SecondaryButton)``;
+const ListButton = styled(Button)`
+  padding: 0.5rem 1.2rem;
+`;
 
 function UserListButton({ handleClick, buttonText }) {
-  return <Button onClick={() => handleClick()}>{buttonText}</Button>;
+  return <ListButton onClick={() => handleClick()}>{buttonText}</ListButton>;
 }
 
 export default UserListButton;

@@ -3,10 +3,13 @@ import axios from "axios";
 import styled from "styled-components";
 import CategoryFilter from "../CategoryFilter/CategoryFilter";
 import SearchBox from "../SearchBox/SearchBox";
-// import StoreList from "./StoreList";
+import StoreList from "./StoreList";
 import { storeTitles } from "../../data";
+import ResetCompareButton from "../buttons/ResetCompareButton/ResetCompareButton";
+import useCompare from "../../customHooks/useCompare";
+import { compareTwoProductTitles } from "../../helpers";
 
-const StoreList = lazy(() => import("./StoreList"));
+// const StoreList = lazy(() => import("./StoreList"));
 
 const Container = styled.div`
   margin-bottom: 2rem;
@@ -21,27 +24,30 @@ const InputsContainer = styled.div`
 `;
 
 const StoresContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 1rem;
-  row-gap: 2rem;
+  display: flex;
+  gap: 1rem;
 `;
 
 // get products, filter, search, reset compare, compare
 const StoreLists = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [category, setCategory] = useState("fruechte-gemuese");
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedProduct, setSelectedProduct] = useState(undefined);
 
-  //   const fetchTestData = () => {
-  //     fetch("data.json")
-  //       .then((response) => response.json())
-  //       .then((data) => {
-  //         setProducts(data.categories[category]);
-  //       });
-  //   };
+  //   const comparedProducts = useCompare(selectedProduct, products);
+
+  const fetchTestData = () => {
+    fetch("data.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data.categories[category]);
+        setIsLoading(false);
+      });
+  };
 
   const getProducts = async () => {
     try {
@@ -57,36 +63,76 @@ const StoreLists = () => {
     }
   };
 
-  const handleClick = () => {
-    console.log(products);
-    //  handleClick()
-  };
+  const searchProducts = useCallback(() => {
+    const queriedProducts = products.filter((product) => {
+      return product.title.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+    setFilteredProducts(queriedProducts);
+  }, [searchQuery, products]);
 
-  //   useEffect(() => {
-  //     fetchTestData();
-  //   }, [category]);
+  const findBestMatch = useCallback(() => {
+    if (selectedProduct === undefined) {
+      setFilteredProducts(products);
+      return;
+    }
+    let bestMatchingProducts = [];
+    const selectedProductTitle = selectedProduct.title;
+
+    products
+      .map((product) => {
+        const compareProductTitle = product.title;
+
+        const similarityRating = compareTwoProductTitles(
+          selectedProductTitle,
+          compareProductTitle
+        );
+        return { similarityRating: similarityRating, product: product };
+      })
+      .sort((a, b) => b.similarityRating - a.similarityRating)
+      .forEach((product) => {
+        if (product.similarityRating > 0.25) {
+          bestMatchingProducts.push(product.product);
+        }
+      });
+    setFilteredProducts(bestMatchingProducts);
+  }, [products, setFilteredProducts, selectedProduct]);
 
   useEffect(() => {
-    getProducts();
+    fetchTestData();
   }, [category]);
 
   //   useEffect(() => {
-  //     searchProducts();
-  //   }, [searchProducts]);
+  //     getProducts();
+  //   }, [category]);
+
+  useEffect(() => {
+    searchProducts();
+  }, [searchProducts, searchQuery]);
+
+  useEffect(() => {
+    findBestMatch();
+  }, [findBestMatch, selectedProduct]);
 
   return (
     <Container>
       <InputsContainer>
         <CategoryFilter setCategory={setCategory} setIsLoading={setIsLoading} />
         <SearchBox setSearchQuery={setSearchQuery} />
-        <button onClick={() => handleClick()}>Test</button>
+        <ResetCompareButton
+          setFilteredProducts={setFilteredProducts}
+          products={products}
+          setSelectedProduct={setSelectedProduct}
+        />
       </InputsContainer>
       <StoresContainer>
         {storeTitles.map((storeTitle) => (
           <StoreList
             storeTitle={storeTitle}
             products={products}
+            filteredProducts={filteredProducts}
             isLoading={isLoading}
+            selectedProduct={selectedProduct}
+            setSelectedProduct={setSelectedProduct}
             key={storeTitle}
           />
         ))}

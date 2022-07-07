@@ -37,12 +37,12 @@ function UserList({ userList, listTitle, listText }) {
       <Header>{listTitle}</Header>
       <ListContainer>
         <ProductList>
-          {userList.length === 0 ? (
+          {Object.keys(userList).length === 0 ? (
             <Text>{listText}</Text>
           ) : (
             storeTitles
               .filter((storeTitle) => {
-                return userList.some(
+                return Object.values(userList).some(
                   (product) => product.storeTitle === storeTitle
                 );
               })
