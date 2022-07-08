@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import UserListsContext from "../../contexts/UserListsContext";
+import { UserListsContext } from "../../contexts/UserListsContext";
 import UserList from "./UserList";
 import UserListButton from "./UserListButton";
 

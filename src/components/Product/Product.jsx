@@ -1,7 +1,6 @@
-import { useMemo } from "react";
 import { useState, useCallback, useEffect, useContext } from "react";
 import styled from "styled-components";
-import UserListsContext from "../../contexts/UserListsContext";
+import { UserListsContext } from "../../contexts/UserListsContext";
 import FavoritesButton from "../buttons/FavoritesButton/FavoritesButton";
 import GroceryListButton from "../buttons/GroceryListButton/GroceryListButton";
 import ProductCompareButton from "./ProductCompareButton";
@@ -75,12 +74,7 @@ const ButtonContainer = styled.div`
   gap: 0.8rem;
 `;
 
-function Product({
-  product,
-  selectedProduct,
-  setSelectedProduct,
-  onUserStoreList,
-}) {
+function Product({ product, dispatchFilter, onUserStoreList }) {
   const [onFavoritesList, setOnFavoritesList] = useState(false);
   const [onGroceryList, setOnGroceryList] = useState(false);
 
@@ -192,8 +186,7 @@ function Product({
           <ProductCompareButton
             onUserStoreList={onUserStoreList}
             product={product}
-            selectedProduct={selectedProduct}
-            setSelectedProduct={setSelectedProduct}
+            dispatchFilter={dispatchFilter}
           />
         </ButtonContainer>
       </Container>

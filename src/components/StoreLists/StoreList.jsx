@@ -45,15 +45,7 @@ const ProductList = styled.ul`
   transition: all 0.1s linear;
 `;
 
-function StoreList({
-  storeTitle,
-  products,
-  filteredProducts,
-  searchQuery,
-  isLoading,
-  selectedProduct,
-  setSelectedProduct,
-}) {
+function StoreList({ storeTitle, products, dispatchFilter }) {
   return (
     <Container>
       <Header>{storeTitle}</Header>
@@ -62,28 +54,16 @@ function StoreList({
           <Loading type="bars" color="#999" />
         </LoadingWrapper> */}
         {/* <Suspense fallback={<div>Loading...</div>}> */}
-        <ProductList isLoading={isLoading}>
-          {filteredProducts.length === 0 && searchQuery.length === 0
-            ? products
-                .filter((product) => product.storeTitle === storeTitle)
-                .map((product) => (
-                  <Product
-                    product={product}
-                    selectedProduct={selectedProduct}
-                    setSelectedProduct={setSelectedProduct}
-                    key={product._id}
-                  />
-                ))
-            : filteredProducts
-                .filter((product) => product.storeTitle === storeTitle)
-                .map((product) => (
-                  <Product
-                    product={product}
-                    selectedProduct={selectedProduct}
-                    setSelectedProduct={setSelectedProduct}
-                    key={product._id}
-                  />
-                ))}
+        <ProductList>
+          {products
+            .filter((product) => product.storeTitle === storeTitle)
+            .map((product) => (
+              <Product
+                product={product}
+                dispatchFilter={dispatchFilter}
+                key={product._id}
+              />
+            ))}
         </ProductList>
         {/* </Suspense> */}
       </ListContainer>

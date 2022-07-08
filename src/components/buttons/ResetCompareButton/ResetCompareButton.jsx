@@ -19,19 +19,10 @@ const ResetButton = styled.button`
   }
 `;
 
-function ResetCompareButton({
-  setFilteredProducts,
-  products,
-  setSelectedProduct,
-}) {
-  const handleResetClick = () => {
-    setFilteredProducts(products);
-    setSelectedProduct(undefined);
-  };
-
+function ResetCompareButton({ dispatchFilter }) {
   return (
     <Container>
-      <ResetButton onClick={() => handleResetClick()}>
+      <ResetButton onClick={() => dispatchFilter({ type: "reset" })}>
         Reset Comparison
       </ResetButton>
     </Container>

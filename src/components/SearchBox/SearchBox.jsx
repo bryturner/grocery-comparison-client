@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 import { MagnifyingGlass } from "phosphor-react";
 
@@ -22,27 +22,7 @@ const SearchInput = styled.input`
   border: none;
 `;
 
-function SearchBox({
-  setSearchQuery,
-  searchQuery,
-  products,
-  setFilteredProducts,
-}) {
-  const searchProducts = useCallback(() => {
-    const queriedProducts = products.filter((product) => {
-      return product.title.toLowerCase().includes(searchQuery.toLowerCase());
-    });
-
-    if (queriedProducts.length > 0) {
-      setFilteredProducts(queriedProducts);
-    } else {
-      setFilteredProducts([]);
-    }
-  }, [searchQuery, products]);
-
-  useEffect(() => {
-    searchProducts();
-  }, [searchProducts, searchQuery]);
+function SearchBox({ state, dispatchFilter }) {
   return (
     <Container>
       <label htmlFor="search-box">Find product:</label>
@@ -51,8 +31,13 @@ function SearchBox({
           id="search-box"
           type="search"
           placeholder="Search by name"
-          defaultValue=""
-          onChange={(e) => setSearchQuery(e.target.value)}
+          value={state.query}
+          onChange={(e) =>
+            dispatchFilter({
+              type: "query",
+              payload: { searchQuery: e.target.value },
+            })
+          }
         />
         {/* <MagnifyingGlass size={16} color="#2d2e2d" weight="bold" /> */}
       </Wrapper>

@@ -32,7 +32,6 @@ function UserListsContextProvider({ children }) {
   );
 }
 
-export default UserListsContext;
-export { UserListsContextProvider };
+export { UserListsContextProvider, UserListsContext };
 
 // groceryList: {id : {product}, id: {product}}

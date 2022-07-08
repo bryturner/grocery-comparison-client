@@ -10,8 +10,7 @@ export const CompareButton = styled.button`
   /* border: ${(props) =>
     props.selectedBorder ? "1px solid purple" : "1px solid black"}; */
   border: ${(props) => props.theme.buttonBorder.primary};
-  background-color: ${(props) =>
-    props.selectedBorder ? "green" : props.theme.buttonColor.primary};
+  background-color: ${(props) => props.theme.buttonColor.primary};
   display: ${(props) => (props.onUserStoreList ? "none" : "block")};
 
   &:hover {
@@ -23,26 +22,16 @@ export const CompareButton = styled.button`
   }
 `;
 
-function ProductCompareButton({
-  product,
-  selectedProduct,
-  setSelectedProduct,
-  onUserStoreList,
-}) {
-  const handleCompareClick = () => {
-    if (selectedProduct === product) {
-      setSelectedProduct(undefined);
-    } else {
-      setSelectedProduct(product);
-    }
-  };
+function ProductCompareButton({ product, dispatchFilter, onUserStoreList }) {
   return (
     <CompareButton
       onUserStoreList={onUserStoreList}
       aria-label="select-for-comparison"
-      selectedBorder={selectedProduct && selectedProduct._id === product._id}
       onClick={() => {
-        handleCompareClick();
+        dispatchFilter({
+          type: "compare",
+          payload: { selectedProduct: product },
+        });
       }}
     >
       Compare
