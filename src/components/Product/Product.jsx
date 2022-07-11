@@ -3,25 +3,21 @@ import styled from "styled-components";
 import { UserListsContext } from "../../contexts/UserListsContext";
 import FavoritesButton from "../buttons/FavoritesButton/FavoritesButton";
 import GroceryListButton from "../buttons/GroceryListButton/GroceryListButton";
+import ProductDivider from "../Utils/ProductDivider";
 import ProductCompareButton from "./ProductCompareButton";
 import ProductDetail from "./ProductDetail";
-import ProductTextTitle from "./ProductDetailTitle";
 
 const Container = styled.li`
   display: flex;
-  padding: 0 1.4rem;
+  padding: 0 1.6rem;
   gap: 1.4rem;
   align-items: center;
 `;
 
-const Divider = styled.div`
-  border-bottom: 1px solid ${(props) => props.theme.color.lightGray};
-  width: 100%;
-`;
-
 const TextContainer = styled.div`
-  display: flex;
   flex: 5;
+  display: flex;
+  gap: 1rem;
 `;
 
 const Title = styled.span`
@@ -30,13 +26,19 @@ const Title = styled.span`
   align-self: center;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
-  font-weight: bold;
-  font-size: ${(props) => props.theme.fontSize.md};
+  overflow-y: hidden;
+  /* font-weight: bold; */
+  font-size: ${(props) => props.theme.fontSize.mdLg};
 
   &:hover {
     overflow: visible;
   }
+`;
+
+const DetailContainer = styled.div`
+  flex: 1;
+  display: flex;
+  gap: 1.2rem;
 `;
 
 const Link = styled.a`
@@ -63,18 +65,12 @@ const Link = styled.a`
   }
 `;
 
-const DetailContainer = styled.div`
-  flex: 1;
-  display: flex;
-  gap: 1rem;
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
   gap: 0.8rem;
 `;
 
-function Product({ product, dispatchFilter, onUserStoreList }) {
+function Product({ product, dispatchFilter, listType }) {
   const [onFavoritesList, setOnFavoritesList] = useState(false);
   const [onGroceryList, setOnGroceryList] = useState(false);
 
@@ -184,13 +180,13 @@ function Product({ product, dispatchFilter, onUserStoreList }) {
         </TextContainer>
         <ButtonContainer>
           <ProductCompareButton
-            onUserStoreList={onUserStoreList}
+            listType={listType}
             product={product}
             dispatchFilter={dispatchFilter}
           />
         </ButtonContainer>
       </Container>
-      <Divider />
+      <ProductDivider listType={listType} />
     </>
   );
 }

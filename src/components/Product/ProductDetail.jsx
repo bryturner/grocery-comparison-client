@@ -10,7 +10,7 @@ const DetailText = styled.span`
   flex: 1;
   text-align: center;
   color: ${(props) => props.theme.color.darkGray};
-  font-size: 1.4rem;
+  font-size: ${(props) => props.theme.fontSize.md};
 `;
 
 function ProductDetail({ detailText, detailTitle, detailType }) {

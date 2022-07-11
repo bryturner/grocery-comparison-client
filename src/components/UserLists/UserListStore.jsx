@@ -21,7 +21,7 @@ const ProductList = styled.ul`
   gap: 1rem;
 `;
 
-function UserListStore({ userList, storeTitle }) {
+function UserListStore({ userList, storeTitle, listType }) {
   return (
     <Container>
       {/* <StoreTitle>{storeTitle}</StoreTitle> */}
@@ -30,7 +30,7 @@ function UserListStore({ userList, storeTitle }) {
         {Object.values(userList)
           .filter((product) => product.storeTitle === storeTitle)
           .map((product) => (
-            <Product product={product} onUserStoreList key={product._id} />
+            <Product product={product} listType={listType} key={product._id} />
           ))}
       </ProductList>
     </Container>

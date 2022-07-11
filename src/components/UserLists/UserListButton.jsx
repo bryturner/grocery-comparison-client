@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import { Button } from "../ThemeProvider/Theme";
+import { SecondaryButton } from "../ThemeProvider/Theme";
 
-const ListButton = styled(Button)`
+const ListButton = styled(SecondaryButton)`
+  font-size: ${(props) => props.theme.fontSize.md};
   padding: 0.5rem 1.2rem;
+  border: ${(props) => props.theme.border.userListButton};
 `;
 
 function UserListButton({ handleClick, buttonText }) {

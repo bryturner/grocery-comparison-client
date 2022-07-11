@@ -1,22 +1,16 @@
 import styled from "styled-components";
 import React from "react";
+import { SecondaryButton } from "../../ThemeProvider/Theme";
 
 const Container = styled.div`
-  padding-left: 2rem;
+  padding-left: 1rem;
 `;
 
-const ResetButton = styled.button`
-  background: none;
-  cursor: pointer;
-  padding: 0.6rem 2rem;
-  border-radius: 5px;
-  transition: all 0.1s linear;
-  border: 2px solid ${(props) => props.theme.buttonColor.primary};
-  color: ${(props) => props.theme.buttonColor.secondaryText};
-
-  &:hover {
-    background: ${(props) => props.theme.buttonColor.secondaryHover};
-  }
+const ResetButton = styled(SecondaryButton)`
+  font-size: ${(props) => props.theme.fontSize.smMd};
+  height: 32.5px;
+  padding: 0.65rem 2rem;
+  border: 1px solid ${(props) => props.theme.color.medGray};
 `;
 
 function ResetCompareButton({ dispatchFilter }) {

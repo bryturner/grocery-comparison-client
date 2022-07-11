@@ -1,44 +1,75 @@
 import styled, { ThemeProvider } from "styled-components";
 
+/* font-family: 'Comic Neue', cursive;
+font-family: 'Delius Swash Caps', cursive;
+font-family: 'IBM Plex Sans', sans-serif;
+font-family: 'Mali', cursive;
+font-family: 'Roboto', sans-serif; */
+
+// ${props => props.theme.}
+
 export const theme = {
   fontSize: {
     sm: "1.2rem",
-    md: "1.4rem",
+    smMd: "1.4rem",
+    md: "1.5rem",
     mdLg: "1.6rem",
     lg: "2rem",
-    hd2: "2.4rem",
-    hd1: "4rem",
+    hd1: "5rem",
+    hd2: "2.8rem",
+    hd3: "2.2rem",
+  },
+  fontFamily: {
+    hd1: "'Mali', cursive",
+    hd2: "'Delius Swash Caps', cursive",
+    hd3: "'IBM Plex Sans', sans-serif",
+    hd4: "'Comic Neue', cursive",
   },
   color: {
     white: "#fff",
     black: "#000",
     lightGray: "#ccc",
-    medGray: "#999",
-    darkGray: "#333",
+    medGray: "#777",
+    darkGray: "#222",
+    lightBlue: "#edf0fe",
+    medBlue: "#6b88fa",
+    medDarkBlue: "#3f5fe0",
+    darkBlue: "#23357d",
+    lightOrange: "#ffecd2",
+    medOrange: "#ffa933",
+    storeListsBackground: "#f3f4f9",
+    userListsBackground: "#fff9ef",
+    storeListDivider: "rgba(204, 128, 22, 0.5)", //#b36f14
+    userListDivider: "rgba(63, 95, 224, 0.5)",
+    detailTitle: "rgba(51, 51, 51, 0.75)",
   },
-  buttonColor: {
-    primary: "#4c8acc",
-    primaryHover: "#56a0ee",
-    secondary: "",
-    secondaryHover: "#f1f8ff",
-    secondaryText: "#034c99",
+  border: {
+    userListStoreTitle: "2px solid rgba(63, 95, 224, 0.75)",
+    userListButton: "2px solid #6b88fa",
+    listInput: "1px solid #777",
+    listInputFocus: "2px solid #3f5fe0",
   },
-  buttonBorder: {
-    primary: "none",
-    secondary: "1px solid #4c8acc",
+  padding: {
+    listsPadding: "2rem 4.8rem",
   },
 };
 
-export const Button = styled.button`
+// #3e1cff
+// #1cb7ff
+// #ffa933
+// #ffd9a4
+
+export const SecondaryButton = styled.button`
+  font-family: inherit;
   cursor: pointer;
   border-radius: 5px;
   transition: all 0.1s linear;
   background: none;
-  border: 2px solid #4c8acc;
-  color: ${theme.buttonColor.secondaryText};
+  color: ${theme.color.darkBlue};
 
   &:hover {
-    background: ${theme.buttonColor.secondaryHover};
+    background: ${theme.color.medBlue};
+    color: white;
   }
 `;
 

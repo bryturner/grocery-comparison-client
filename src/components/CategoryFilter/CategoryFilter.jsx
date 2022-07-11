@@ -9,19 +9,33 @@ const Container = styled.div`
 
 const CategorySelect = styled.select`
   padding: 0.5rem;
+  font-family: inherit;
+  font-size: ${(props) => props.theme.fontSize.md};
+  border: ${(props) => props.theme.border.listInput};
+  border-radius: 5px;
+  color: ${(props) => props.theme.color.darkGray};
+
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    outline: none;
+    border: ${(props) => props.theme.border.listInputFocus};
+    margin: -1px;
+  }
 `;
 
-const CategoryOption = styled.option``;
+const CategoryOption = styled.option`
+  font-family: inherit;
+`;
 
-function CategoryFilter({ setCategory, setIsLoading }) {
+function CategoryFilter({ category, setCategory }) {
   return (
     <Container>
       <label htmlFor="category-filter">Category:</label>
       <CategorySelect
         id="category-filter"
-        defaultValue="fruechte-gemuese"
+        defaultValue={category}
         onChange={(e) => {
-          setIsLoading(true);
           setCategory(e.target.value);
         }}
       >

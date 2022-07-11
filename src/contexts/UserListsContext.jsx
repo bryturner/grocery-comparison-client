@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from "react";
-import { testProducts } from "../data";
 
 const UserListsContext = createContext();
 
@@ -33,5 +32,3 @@ function UserListsContextProvider({ children }) {
 }
 
 export { UserListsContextProvider, UserListsContext };
-
-// groceryList: {id : {product}, id: {product}}

@@ -1,17 +1,15 @@
 import styled from "styled-components";
 import UserListStore from "./UserListStore";
 import { storeTitles } from "../../data";
+import ListHeading from "../Headings/ListHeading";
 
-const Container = styled.div``;
-
-const Header = styled.h2`
-  text-align: center;
-  margin-bottom: 1.2rem;
+const Container = styled.div`
+  background-color: ${(props) => props.theme.color.lightBlue};
+  border-radius: 8px;
+  overflow: hidden;
 `;
 
 const ListContainer = styled.div`
-  border: 2px solid ${(props) => props.theme.color.medGray};
-  border-radius: 8px;
   padding: 1rem 0;
   height: 25rem;
   overflow-y: scroll;
@@ -31,10 +29,12 @@ const Text = styled.p`
   text-align: center;
 `;
 
-function UserList({ userList, listTitle, listText }) {
+const listType = "userList";
+
+function UserList({ userList, listHeading, listText }) {
   return (
     <Container>
-      <Header>{listTitle}</Header>
+      <ListHeading heading={listHeading} listType={listType} />
       <ListContainer>
         <ProductList>
           {Object.keys(userList).length === 0 ? (
@@ -51,6 +51,7 @@ function UserList({ userList, listTitle, listText }) {
                   <UserListStore
                     userList={userList}
                     storeTitle={storeTitle}
+                    listType={listType}
                     key={storeTitle}
                   />
                 );

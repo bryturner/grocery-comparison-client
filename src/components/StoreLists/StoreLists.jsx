@@ -1,12 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-  useReducer,
-  useRef,
-  lazy,
-  Suspense,
-} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import CategoryFilter from "../CategoryFilter/CategoryFilter";
@@ -16,11 +8,14 @@ import { storeTitles } from "../../data";
 import ResetCompareButton from "../buttons/ResetCompareButton/ResetCompareButton";
 
 import { useFilterReducer } from "../../customHooks/useFilterReducer";
+import { useFetchProducts } from "../../customHooks/useAxiosFetch";
 
 // const StoreList = lazy(() => import("./StoreList"));
 
 const Container = styled.div`
-  margin-bottom: 2rem;
+  /* background-color: ${(props) => props.theme.color.storeListsBackground}; */
+  background-color: white;
+  padding: 2rem 4.8rem 4rem 4.8rem;
 `;
 
 const InputsContainer = styled.div`
@@ -28,7 +23,7 @@ const InputsContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding: 2rem 0;
+  margin-bottom: 2rem;
 `;
 
 const StoresContainer = styled.div`
@@ -38,8 +33,9 @@ const StoresContainer = styled.div`
 
 const StoreLists = () => {
   const [products, setProducts] = useState([]);
+  //   const [category, setCategory] = useState("suesses-snacks");
   const [category, setCategory] = useState("fruechte-gemuese");
-
+  const [loading, setLoading] = useState(false);
   const [state, dispatchFilter] = useFilterReducer({ products: products });
 
   const fetchTestData = () => {
@@ -51,23 +47,23 @@ const StoreLists = () => {
       });
   };
 
-  const getProducts = async () => {
-    try {
-      const productResponse = await axios.get(
-        `http://localhost:8000/product?category=${category}`
-      );
-      setProducts(productResponse.data);
-    } catch (err) {
-      console.error(err);
-      setProducts([]);
-    } finally {
-      // setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
     fetchTestData();
   }, [category]);
+
+  //   const getProducts = async () => {
+  //     setLoading(true);
+  //     try {
+  //       const productResponse = await axios.get(
+  //         `http://localhost:8000/product?category=${category}`
+  //       );
+  //       setProducts(productResponse.data);
+  //     } catch (err) {
+  //       console.error(err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
   //   useEffect(() => {
   //     getProducts();
@@ -80,7 +76,7 @@ const StoreLists = () => {
   return (
     <Container>
       <InputsContainer>
-        <CategoryFilter setCategory={setCategory} />
+        <CategoryFilter category={category} setCategory={setCategory} />
         <SearchBox state={state} dispatchFilter={dispatchFilter} />
         <ResetCompareButton dispatchFilter={dispatchFilter} />
       </InputsContainer>
@@ -90,6 +86,7 @@ const StoreLists = () => {
             storeTitle={storeTitle}
             products={state.products}
             dispatchFilter={dispatchFilter}
+            loading={loading}
             key={storeTitle}
           />
         ))}

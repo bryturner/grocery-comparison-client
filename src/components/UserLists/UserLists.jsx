@@ -7,19 +7,21 @@ import UserListButton from "./UserListButton";
 const Container = styled.div`
   display: flex;
   gap: 1rem;
+  background-color: ${(props) => props.theme.color.userListsBackground};
+  padding: 4rem 4.8rem 4rem 4.8rem;
 `;
 
 const ListContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 `;
 
 const ButtonContainer = styled.div`
   align-self: center;
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
 `;
 
 const UserLists = () => {
@@ -29,7 +31,7 @@ const UserLists = () => {
     <Container>
       <ListContainer>
         <UserList
-          listTitle="Grocery List"
+          listHeading="My Grocery List"
           listText="Click the plus icon to add to your grocery list"
           userList={groceryList}
         />
@@ -40,7 +42,7 @@ const UserLists = () => {
       </ListContainer>
       <ListContainer>
         <UserList
-          listTitle="Favorites List"
+          listHeading="My Favorites List"
           listText="Click the heart icon to add to your favorites list"
           userList={favoritesList}
         />

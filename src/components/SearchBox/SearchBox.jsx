@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { MagnifyingGlass } from "phosphor-react";
 
-// TODO: Style on input focus, on focus-> hide icon
 const Container = styled.div`
   display: flex;
   gap: 0.5rem;
@@ -10,16 +8,34 @@ const Container = styled.div`
 `;
 const Wrapper = styled.div`
   display: flex;
-  gap: 0.5rem;
-  border: 0.5px solid black;
-  border-radius: 2px;
-  align-items: center;
-  padding: 0.5rem;
+  position: relative;
+  min-width: 10rem;
 `;
 
 const SearchInput = styled.input`
-  padding: 0.2rem;
-  border: none;
+  font-family: inherit;
+  width: 100%;
+  height: 32.5px;
+  padding: 0.5rem 3rem 0.5rem 1rem;
+  font-size: ${(props) => props.theme.fontSize.md};
+  border: ${(props) => props.theme.border.listInput};
+  border-radius: 5px;
+  outline: 0;
+  background-color: white;
+  overflow: hidden;
+  ::-webkit-search-decoration,
+  ::-webkit-search-cancel-button,
+  ::-webkit-search-results-button,
+  ::-webkit-search-results-decoration {
+    display: none;
+  }
+  transition: all 0.1s linear;
+
+  &:hover,
+  &:focus {
+    border: ${(props) => props.theme.border.listInputFocus};
+    margin: -1px;
+  }
 `;
 
 function SearchBox({ state, dispatchFilter }) {
@@ -31,7 +47,8 @@ function SearchBox({ state, dispatchFilter }) {
           id="search-box"
           type="search"
           placeholder="Search by name"
-          value={state.query}
+          maxLength="20"
+          value={state.searchQuery}
           onChange={(e) =>
             dispatchFilter({
               type: "query",
@@ -39,7 +56,6 @@ function SearchBox({ state, dispatchFilter }) {
             })
           }
         />
-        {/* <MagnifyingGlass size={16} color="#2d2e2d" weight="bold" /> */}
       </Wrapper>
     </Container>
   );

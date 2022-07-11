@@ -28,7 +28,7 @@ function FavoritesButton({ product, handleFavoriteClick, onFavoritesList }) {
       {onFavoritesList ? (
         <HeartStraight size={20} color="#df4646" weight="fill" />
       ) : (
-        <HeartStraight size={20} color="#484342" weight="bold" />
+        <HeartStraight size={20} color="#333" />
       )}
     </FavoritesButtonStyled>
   );
