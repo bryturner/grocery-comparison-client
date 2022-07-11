@@ -23,7 +23,7 @@ Due to the rising cost of groceries and overall high prices for groceries in Swi
 ## More About the Project
 I built this project using modern React hooks: useState, useCallback, useReducer, useContext, and useEffect. I practiced handling errors and testing front-end functionality as well as fetching data from a relational database (MongoDB). While structuring the database schema, I learned about storage effeciency best practices and indexing for quicker document lookup. 
 
-In order to collect the grocery data, I used the Puppeteer headless browser to gather, format and save the data into a MongoDB database. To do this I had to use a lot of boilerplate code due to the different structures of the various grocery store websites. To check out the not so pretty code that is on occassion error prone, [click here](https://github.com/bryturner/ch-grocery-web-scraper)
+In order to collect the grocery data, I used the Puppeteer headless browser to gather, format and save the data into a MongoDB database. To do this I had to use a lot of boilerplate code due to the different structures of the various grocery store websites. To check out the not so pretty code that is on occassion error prone, [click here](https://github.com/bryturner/ch-grocery-web-scraper).
 
 ## Possible Future Features
 - User can share the list with another person or save to their phone for reference while in the grocery store.
