@@ -1,5 +1,5 @@
 # Compare Grocery Prices in Switzerland
-This app lets the user compare grocery prices from several of the primary grocery stores in Switzerland. The products are displayed by category and the store in which they can be found. Users can also save products on a grocery list or favorites list. 
+This app lets the user compare grocery prices from several of the primary grocery stores in Switzerland. The products are displayed and filtered by category and by the store in which they can be purchased. Users can also save products on a grocery list or favorites list. 
 
 ## Features
 The user has the choice of selecting a category of grocery after which the products are sorted and displayed based on the store in which they can be found. They can then use a search input to filter groceries based on the product title. They may also choose to click a compare button on a particular product which matches that product title with other products titles based on similarity and filters out anything that doesn't match.  
