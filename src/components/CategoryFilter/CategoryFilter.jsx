@@ -28,7 +28,7 @@ const CategoryOption = styled.option`
   font-family: inherit;
 `;
 
-function CategoryFilter({ category, setCategory }) {
+function CategoryFilter({ category, setCategory, errorFetchProducts }) {
   return (
     <Container>
       <label htmlFor="category-filter">Category:</label>
@@ -48,18 +48,27 @@ function CategoryFilter({ category, setCategory }) {
         <CategoryOption value="fleisch-fisch">
           Fleisch &amp; Fisch
         </CategoryOption>
-        <CategoryOption value="brot-backwaren">
+        <CategoryOption disabled={errorFetchProducts} value="brot-backwaren">
           Brot &amp; Backwaren
         </CategoryOption>
-        <CategoryOption value="getraenke">Getr&auml;nke</CategoryOption>
-        <CategoryOption value="vorraete">Vorr&auml;te</CategoryOption>
-        <CategoryOption value="suesses-snacks">
+        <CategoryOption disabled={errorFetchProducts} value="getraenke">
+          Getr&auml;nke
+        </CategoryOption>
+        <CategoryOption disabled={errorFetchProducts} value="vorraete">
+          Vorr&auml;te
+        </CategoryOption>
+        <CategoryOption disabled={errorFetchProducts} value="suesses-snacks">
           S&uuml;sses &amp; Snacks
         </CategoryOption>
-        <CategoryOption value="tiefgekuehlte-produkte">
+        <CategoryOption
+          disabled={errorFetchProducts}
+          value="tiefgekuehlte-produkte"
+        >
           Tiefgek&uuml;hlte &amp; Produkte
         </CategoryOption>
-        <CategoryOption value="fertiggerichte">Fertiggerichte</CategoryOption>
+        <CategoryOption disabled={errorFetchProducts} value="fertiggerichte">
+          Fertiggerichte
+        </CategoryOption>
       </CategorySelect>
     </Container>
   );

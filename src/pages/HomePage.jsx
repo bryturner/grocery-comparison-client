@@ -1,21 +1,14 @@
 import styled from "styled-components";
+import Footer from "../components/Footer/Footer";
 import Header from "../components/Headings/Header";
 import StoreLists from "../components/StoreLists/StoreLists";
 import UserLists from "../components/UserLists/UserLists";
 import { UserListsContextProvider } from "../contexts/UserListsContext";
 import allGroceries from "../images/allGroceries.jpg";
 
-const storeTitles = ["Coop", "Migros"];
-
 const Container = styled.div`
-  padding-top: 3.2rem;
+  /* padding: 3.2rem 0; */
   position: relative;
-`;
-
-const ListsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 `;
 
 const BackgroundImage = styled.div`
@@ -31,7 +24,6 @@ const BackgroundImage = styled.div`
   z-index: -5;
 `;
 
-// Make header component separate from storelists
 const HomePage = () => {
   return (
     <Container>
@@ -40,6 +32,7 @@ const HomePage = () => {
         <StoreLists />
         <UserLists />
       </UserListsContextProvider>
+      <Footer />
       <BackgroundImage />
     </Container>
   );

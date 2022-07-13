@@ -1,6 +1,6 @@
 import axios from "axios";
 import Theme from "./components/ThemeProvider/Theme";
-import GlobalStyles from "./GlobalStyles";
+import GlobalStyles from "./constants/GlobalStyles";
 import HomePage from "./pages/HomePage";
 
 axios.defaults.withCredentials = true;

@@ -25,7 +25,18 @@ const ButtonContainer = styled.div`
 `;
 
 const UserLists = () => {
-  const { groceryList, favoritesList } = useContext(UserListsContext);
+  const { groceryList, setGroceryList, favoritesList, setFavoritesList } =
+    useContext(UserListsContext);
+
+  const handleClearGroceryClick = () => {
+    localStorage.removeItem("groceryList");
+    setGroceryList({});
+  };
+
+  const handleClearFavoritesClick = () => {
+    localStorage.removeItem("favoritesList");
+    setFavoritesList({});
+  };
 
   return (
     <Container>
@@ -37,7 +48,10 @@ const UserLists = () => {
         />
         <ButtonContainer>
           <UserListButton buttonText="Share grocery list" />
-          <UserListButton buttonText="Clear grocery list" />
+          <UserListButton
+            handleClick={handleClearGroceryClick}
+            buttonText="Clear grocery list"
+          />
         </ButtonContainer>
       </ListContainer>
       <ListContainer>
@@ -48,7 +62,10 @@ const UserLists = () => {
         />
         <ButtonContainer>
           <UserListButton buttonText="Share favorites list" />
-          <UserListButton buttonText="Clear favorites list" />
+          <UserListButton
+            handleClick={handleClearFavoritesClick}
+            buttonText="Clear favorites list"
+          />
         </ButtonContainer>
       </ListContainer>
     </Container>

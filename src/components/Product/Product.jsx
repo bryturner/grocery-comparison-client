@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { UserListsContext } from "../../contexts/UserListsContext";
-import FavoritesButton from "../buttons/FavoritesButton/FavoritesButton";
-import GroceryListButton from "../buttons/GroceryListButton/GroceryListButton";
+import FavoritesButton from "./ProductButtons/FavoritesButton";
+import GroceryButton from "./ProductButtons/GroceryButton";
 import ProductDivider from "../Utils/ProductDivider";
-import ProductCompareButton from "./ProductCompareButton";
+import ProductCompareButton from "./ProductButtons/ProductCompareButton";
 import ProductDetail from "./ProductDetail";
 
 const Container = styled.li`
@@ -16,33 +16,49 @@ const Container = styled.li`
 
 const TextContainer = styled.div`
   flex: 5;
-  display: flex;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 72fr 28fr;
+  gap: 2rem;
+  overflow-y: hidden;
+  white-space: nowrap;
 `;
 
-const Title = styled.span`
-  flex: 3;
-  width: 50px;
+const TitleWrapper = styled.div`
+  position: relative;
+  height: 100%;
+  width: 100%;
   align-self: center;
-  text-overflow: ellipsis;
   white-space: nowrap;
   overflow-y: hidden;
-  /* font-weight: bold; */
-  font-size: ${(props) => props.theme.fontSize.mdLg};
 
   &:hover {
     overflow: visible;
   }
 `;
 
-const DetailContainer = styled.div`
-  flex: 1;
+const Title = styled.div`
   display: flex;
-  gap: 1.2rem;
+  align-items: center;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+
+  &:hover {
+    padding-right: 3rem;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 236, 210, 1) 92%,
+      rgba(255, 236, 210, 0.5) 100%
+    );
+  }
 `;
 
 const Link = styled.a`
+  font-size: ${(props) => props.theme.fontSize.mdLg};
   text-decoration: none;
+  transition: all 0.1s linear;
 
   &:link {
     color: inherit;
@@ -52,17 +68,14 @@ const Link = styled.a`
     color: inherit;
   }
 
-  &:focus {
-    border-bottom: 1px solid red;
-  }
-
   &:hover {
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid black;
   }
+`;
 
-  &:active {
-    color: inherit;
-  }
+const DetailContainer = styled.div`
+  display: flex;
+  gap: 1.4rem;
 `;
 
 const ButtonContainer = styled.div`
@@ -148,7 +161,7 @@ function Product({ product, dispatchFilter, listType }) {
     <>
       <Container>
         <ButtonContainer>
-          <GroceryListButton
+          <GroceryButton
             product={product}
             handleGroceryListClick={handleGroceryListClick}
             onGroceryList={onGroceryList}
@@ -160,11 +173,13 @@ function Product({ product, dispatchFilter, listType }) {
           />
         </ButtonContainer>
         <TextContainer>
-          <Title data-testid="product-title">
-            <Link href={productLink} target="_blank">
-              {productTitle}
-            </Link>
-          </Title>
+          <TitleWrapper>
+            <Title data-testid="product-title">
+              <Link href={productLink} target="_blank">
+                {productTitle}
+              </Link>
+            </Title>
+          </TitleWrapper>
           <DetailContainer>
             <ProductDetail
               detailText={productPrice}

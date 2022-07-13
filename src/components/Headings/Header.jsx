@@ -5,7 +5,7 @@ import PageHeading from "./PageHeading";
 const HeaderStyled = styled.header`
   /* display: inline-block; */
   /* background-color: ${(props) => props.theme.color.e4}; */
-  margin: 0 8rem 2rem 8rem;
+  margin: 0rem 8rem 2rem 8rem;
   padding: 2rem;
   border-radius: 8px;
   /* display: flex;

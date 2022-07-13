@@ -30,7 +30,7 @@ const GroceryButtonStyled = styled.button`
   }
 `;
 
-function GroceryListButton({ product, handleGroceryListClick, onGroceryList }) {
+function GroceryButton({ product, handleGroceryListClick, onGroceryList }) {
   return (
     <GroceryButtonStyled
       onGroceryList={onGroceryList}
@@ -46,4 +46,4 @@ function GroceryListButton({ product, handleGroceryListClick, onGroceryList }) {
   );
 }
 
-export default GroceryListButton;
+export default GroceryButton;

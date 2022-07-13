@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 
 const DetailText = styled.span`
   flex: 1;
-  text-align: center;
+  text-align: left;
   color: ${(props) => props.theme.color.darkGray};
   font-size: ${(props) => props.theme.fontSize.md};
 `;

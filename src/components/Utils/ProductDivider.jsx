@@ -4,9 +4,9 @@ const Divider = styled.div`
   border-bottom: 1px solid
     ${(props) =>
       props.listType === "userList"
-        ? props.theme.color.userListDivider
+        ? props.theme.color.darkBlueWithOp
         : props.listType === "storeList"
-        ? props.theme.color.storeListDivider
+        ? props.theme.color.darkOrangeWithOp
         : "#333"};
   width: 100%;
 `;

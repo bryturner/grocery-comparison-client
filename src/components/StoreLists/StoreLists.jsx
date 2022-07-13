@@ -4,18 +4,19 @@ import styled from "styled-components";
 import CategoryFilter from "../CategoryFilter/CategoryFilter";
 import SearchBox from "../SearchBox/SearchBox";
 import StoreList from "./StoreList";
-import { storeTitles } from "../../data";
-import ResetCompareButton from "../buttons/ResetCompareButton/ResetCompareButton";
+import { $storeTitles, ERROR_MSG } from "../../constants/GlobalVariables";
+import ResetCompareButton from "../Button/ResetCompareButton/ResetCompareButton";
 
 import { useFilterReducer } from "../../customHooks/useFilterReducer";
 import { useFetchProducts } from "../../customHooks/useAxiosFetch";
+import ErrorMessage from "../Error/ErrorMessage";
 
 // const StoreList = lazy(() => import("./StoreList"));
 
 const Container = styled.div`
   /* background-color: ${(props) => props.theme.color.storeListsBackground}; */
   background-color: white;
-  padding: 2rem 4.8rem 4rem 4.8rem;
+  padding: 3.2rem 4.8rem 4rem 4.8rem;
 `;
 
 const InputsContainer = styled.div`
@@ -23,7 +24,10 @@ const InputsContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  margin-bottom: 2rem;
+`;
+
+const ErrorWrapper = styled.div`
+  padding: 0.4rem 0 0.6rem 0;
 `;
 
 const StoresContainer = styled.div`
@@ -33,17 +37,17 @@ const StoresContainer = styled.div`
 
 const StoreLists = () => {
   const [products, setProducts] = useState([]);
-  //   const [category, setCategory] = useState("suesses-snacks");
   const [category, setCategory] = useState("fruechte-gemuese");
   const [loading, setLoading] = useState(false);
+  const [errorFetchProducts, setErrorFetchProducts] = useState(false);
+
   const [state, dispatchFilter] = useFilterReducer({ products: products });
 
   const fetchTestData = () => {
-    fetch("data.json")
+    fetch("defaultProductData.json")
       .then((response) => response.json())
       .then((data) => {
         setProducts(data.categories[category]);
-        //   setIsLoading(false);
       });
   };
 
@@ -60,6 +64,8 @@ const StoreLists = () => {
   //       setProducts(productResponse.data);
   //     } catch (err) {
   //       console.error(err);
+  //   setErrorFetchProducts(true);
+  //       fetchTestData();
   //     } finally {
   //       setLoading(false);
   //     }
@@ -76,12 +82,22 @@ const StoreLists = () => {
   return (
     <Container>
       <InputsContainer>
-        <CategoryFilter category={category} setCategory={setCategory} />
+        <CategoryFilter
+          category={category}
+          setCategory={setCategory}
+          errorFetchProducts={errorFetchProducts}
+        />
         <SearchBox state={state} dispatchFilter={dispatchFilter} />
         <ResetCompareButton dispatchFilter={dispatchFilter} />
       </InputsContainer>
+      <ErrorWrapper>
+        <ErrorMessage
+          errorMsg={ERROR_MSG.ERR_FETCH_PROD}
+          isError={errorFetchProducts}
+        />
+      </ErrorWrapper>
       <StoresContainer>
-        {storeTitles.map((storeTitle) => (
+        {$storeTitles.map((storeTitle) => (
           <StoreList
             storeTitle={storeTitle}
             products={state.products}

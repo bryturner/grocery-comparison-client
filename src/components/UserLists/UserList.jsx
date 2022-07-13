@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import UserListStore from "./UserListStore";
-import { storeTitles } from "../../data";
+import { $storeTitles, LIST_TYPE } from "../../constants/GlobalVariables";
 import ListHeading from "../Headings/ListHeading";
 
 const Container = styled.div`
@@ -16,6 +16,9 @@ const ListContainer = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+  border: 1px solid ${(props) => props.theme.color.darkBlueWithOp};
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 `;
 
 const ProductList = styled.ul`
@@ -29,18 +32,16 @@ const Text = styled.p`
   text-align: center;
 `;
 
-const listType = "userList";
-
 function UserList({ userList, listHeading, listText }) {
   return (
     <Container>
-      <ListHeading heading={listHeading} listType={listType} />
+      <ListHeading heading={listHeading} listType={LIST_TYPE.USER} />
       <ListContainer>
         <ProductList>
           {Object.keys(userList).length === 0 ? (
             <Text>{listText}</Text>
           ) : (
-            storeTitles
+            $storeTitles
               .filter((storeTitle) => {
                 return Object.values(userList).some(
                   (product) => product.storeTitle === storeTitle
@@ -51,7 +52,7 @@ function UserList({ userList, listHeading, listText }) {
                   <UserListStore
                     userList={userList}
                     storeTitle={storeTitle}
-                    listType={listType}
+                    listType={LIST_TYPE.USER}
                     key={storeTitle}
                   />
                 );

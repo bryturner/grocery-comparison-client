@@ -26,6 +26,7 @@ export const theme = {
     hd4: "'Comic Neue', cursive",
   },
   color: {
+    red: "#f20707",
     white: "#fff",
     black: "#000",
     lightGray: "#ccc",
@@ -35,12 +36,12 @@ export const theme = {
     medBlue: "#6b88fa",
     medDarkBlue: "#3f5fe0",
     darkBlue: "#23357d",
+    darkBlueWithOp: "rgba(63, 95, 224, 0.5)",
     lightOrange: "#ffecd2",
     medOrange: "#ffa933",
+    darkOrangeWithOp: "rgba(204, 128, 22, 0.5)",
     storeListsBackground: "#f3f4f9",
     userListsBackground: "#fff9ef",
-    storeListDivider: "rgba(204, 128, 22, 0.5)", //#b36f14
-    userListDivider: "rgba(63, 95, 224, 0.5)",
     detailTitle: "rgba(51, 51, 51, 0.75)",
   },
   border: {
@@ -64,7 +65,7 @@ export const SecondaryButton = styled.button`
   cursor: pointer;
   border-radius: 5px;
   transition: all 0.1s linear;
-  background: none;
+  background: ${theme.color.storeListsBackground};
   color: ${theme.color.darkBlue};
 
   &:hover {

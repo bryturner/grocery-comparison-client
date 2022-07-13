@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { LIST_TYPE } from "../../constants/GlobalVariables";
 import Loading from "../Loading/Loading";
 import Product from "../Product/Product";
 import { lazy, Suspense } from "react";
@@ -20,6 +21,9 @@ const ListContainer = styled.div`
     display: none;
   }
   position: relative;
+  border: 1px solid ${(props) => props.theme.color.darkOrangeWithOp};
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 `;
 
 const LoadingWrapper = styled.div`
@@ -36,17 +40,19 @@ const ProductList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1rem 0;
+  padding-top: 1rem;
   filter: ${(props) => (props.loading ? "blur(3px)" : "none")};
   transition: all 0.1s linear;
 `;
 
-const listType = "storeList";
+const Text = styled.p`
+  text-align: center;
+`;
 
 function StoreList({ storeTitle, products, dispatchFilter, loading }) {
   return (
     <Container storeTitle={storeTitle}>
-      <ListHeading heading={storeTitle} listType={listType} />
+      <ListHeading heading={storeTitle} listType={LIST_TYPE.STORE} />
       <ListContainer>
         <LoadingWrapper loading={loading}>
           <Loading type="bars" color="#999" />
@@ -54,7 +60,7 @@ function StoreList({ storeTitle, products, dispatchFilter, loading }) {
         <Suspense fallback={<div>Loading...</div>}>
           <ProductList loading={loading}>
             {products.length === 0 ? (
-              <></>
+              <Text>No products found in this store</Text>
             ) : (
               products
                 .filter((product) => product.storeTitle === storeTitle)
@@ -62,7 +68,7 @@ function StoreList({ storeTitle, products, dispatchFilter, loading }) {
                   <Product
                     product={product}
                     dispatchFilter={dispatchFilter}
-                    listType={listType}
+                    listType={LIST_TYPE.STORE}
                     key={product._id}
                   />
                 ))
